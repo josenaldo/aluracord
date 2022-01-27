@@ -1,13 +1,17 @@
 function Titulo(props) {
+
+    const Tag = props.tag;
     return (
-        <div>
-            <h1>{props.children}</h1>
+        <>
+            <Tag>{props.children}</Tag>
             <style jsx>{`
-                h1 {
+                ${Tag} {
                     color: red;
+                    font-size: 48px;
+                    font-weight: 600;
                 }
             `}</style>
-        </div>
+        </>
     );
 }
 
@@ -16,7 +20,7 @@ function HomePage() {
     // JSX
     return (
         <div>
-            <Titulo>Boas vindas de volta!</Titulo>
+            <Titulo tag="h1">Boas vindas de volta!</Titulo>
             <h2>Discord - Alura MAtrix</h2>
 
            
