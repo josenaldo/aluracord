@@ -23,6 +23,7 @@
 - [ ] [Mario Souto - Configurando ambiente JavaScript/NodeJS/Yarn](https://www.youtube.com/watch?v=GIz71YGzwP4)
 - [ ] [Documentação interativa com Storybook do SkynexUI](https://storybook.skynexui.dev/?path=/story/components-box--box-component)
 - [ ] [Transcrição da aula](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula01.md)
+- [ ] [Vercel](https://vercel.com/)
 
 ## Lives
 
@@ -52,9 +53,9 @@
 - [Coolors.co - Gerador de Paletas](https://coolors.co/)
 - [Figma](https://www.figma.com/)
 - [Supabase](https://app.supabase.io/#)
-- [skynexui/components](https://github.com/skynexui/components)
 - [React JS](https://pt-br.reactjs.org/)
 - [Next JS](https://nextjs.org/)
+- [skynexui/components](https://github.com/skynexui/components)
 - [MUI](https://mui.com/pt/)
 - [NPM](https://www.npmjs.com/)
 - [Yarn](https://yarnpkg.com/)
