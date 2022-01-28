@@ -39,6 +39,7 @@
 - [ ] [Como fazer AJAX? E pegar os dados da API do GitHub](https://www.youtube.com/watch?v=85vJXFpXLQw)
 - [ ] [Mario Souto - Github Pro + Eslint](https://www.youtube.com/watch?v=yMRSDdifGW8&t=2s)
 - [ ] [Criando Flappy Bird com JavaScript - Mario Souto](https://www.youtube.com/watch?v=jOAU81jdi-c&list=PLTcmLKdIkOWmeNferJ292VYKBXydGeDej)
+- [ ] [Usando a função Fetch](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API/Using_Fetch)
 
 ### Aula 03
 
@@ -94,6 +95,7 @@
 - Paletas do projeto
     - [Primária](https://maketintsandshades.com/#55059A)
     - [Neutra](https://maketintsandshades.com/#444444)
+    - [Loading do projeto](https://loading.io/asset/545799)
 - [Otimizador de imagens](https://png2jpg.com/)
 - [Vercel](https://vercel.com/)
 - [React JS](https://pt-br.reactjs.org/)

@@ -27,9 +27,12 @@ function Photo(props) {
                 styleSheet={{
                     borderRadius: "50%",
                     marginBottom: "16px",
+                    border: '5px solid',
+                    borderColor: appConfig.theme.colors.primary[800],
                 }}
-                src={`https://github.com/${username}.png`}
-                alt={username}
+
+                src={props.avatarUrl}
+                alt={props.fullname}
             />
             <Text
                 variant="body4"
@@ -37,11 +40,12 @@ function Photo(props) {
                     color: appConfig.theme.colors.neutrals["000"],
                     backgroundColor:
                         appConfig.theme.colors.primary["700"],
-                    padding: "5px 10px",
+                    padding: "10px 15px",
                     borderRadius: "1000px",
+                    textAlign: "center"
                 }}
             >
-                {username}
+                {props.fullname || props.login}
             </Text>
         </>
     )
@@ -61,9 +65,12 @@ function Photo(props) {
 
 export default function PaginaInicial() {
     // const username = "josenaldo";
-    const [username, setUsername] = React.useState('josenaldo')
+    const [username, setUsername] = React.useState("");
+    const [showAvatar, setShowAvatar] = React.useState(false);
+    const [avatarURL, setAvatarURL] = React.useState(false);
+    const [fullname, setFullname] = React.useState("");
+    const [login, setLogin] = React.useState("");
     const roteamento = useRouter();
-    const [showAvatar, setShowAvatar] = React.useState(false)
 
     return (
         <>
@@ -135,9 +142,47 @@ export default function PaginaInicial() {
                                 // Onde está o valor
                                 const valor = event.target.value;
                                 // Trocar o valor da variável através do react e avisa quem precisa
-
                                 setUsername(valor)
-                                setShowAvatar(valor.length >= 3)
+
+                                if(valor.length >= 3) {
+                                    const url = "https://api.github.com/users/" + valor
+                                    fetch(url)
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            console.log(response);
+                                            throw new Error(response.status);
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        console.log(data);
+                                        setAvatarURL(data.avatar_url);
+                                        setLogin(data.login);
+                                        setFullname(data.name);
+                                        setShowAvatar(true);
+                                    }).catch(error => {
+                                            console.log(error);
+                                            if(error.message === "403") {
+                                                setAvatarURL('/images/load.svg');
+                                                setLogin('Aguarde');
+                                                setFullname("Github não quer falar com você agora. Volta mais tarde.");
+                                            }else if(error.message  === "404") {
+                                                setAvatarURL('/images/blank.svg');
+                                                setLogin('Não Encontrado');
+                                                setFullname("Nem sei de quem você tá falando.");
+                                            }else {
+                                                setAvatarURL('/images/error.svg');
+                                                setLogin('ERRO');
+                                                setFullname("Pronto. Ferrou com tudo. Tá satisfeito?");
+                                            }
+                                            setShowAvatar(true);
+                                        }
+                                    );
+                                }else{
+                                    setShowAvatar(false)
+                                }
+
+
                             }}
                             fullWidth
                             textFieldColors={{
@@ -186,7 +231,7 @@ export default function PaginaInicial() {
                             minHeight: "240px",
                         }}
                     >
-                        {showAvatar ? <Photo>{username}</Photo> : ""}
+                        {showAvatar ? <Photo avatarUrl={avatarURL} fullname={fullname} login={login}/> : ""}
                     </Box>
                     {/* Photo Area */}
                 </Box>
