@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from 'next/router'
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
 import appConfig from "../config.json";
 
@@ -64,6 +65,7 @@ function Titulo(props) {
 export default function PaginaInicial() {
     // const username = "josenaldo";
     const [username, setUsername] = React.useState('josenaldo')
+    const roteamento = useRouter();
     return (
         <>
             <GlobalStyle />
@@ -103,6 +105,8 @@ export default function PaginaInicial() {
                         onSubmit={function(event){
                             event.preventDefault();
                             console.log('Alguém submeteu o form')
+                            // Ativando o roteamento
+                            roteamento.push('/chat')
                         }}
                         styleSheet={{
                             display: "flex",
