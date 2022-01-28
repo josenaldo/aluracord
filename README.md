@@ -2,12 +2,14 @@
 
 ## Aulas
 
+- [x] [Repositório do curso](https://github.com/alura-challenges/aluracord-matrix)
+- [x] [Figma](https://www.figma.com/file/X5kVg1hNCajiV73ah7iyPz/Imers%C3%A3o-React---Aluracord---Matrix?node-id=2%3A169)
+
 ### Aula 01
 
 - [x] [Vídeo da aula](https://www.alura.com.br/imersao-react/aula01-react-aluracord)
-- [x] [Repositório do curso](https://github.com/alura-challenges/aluracord-matrix)
-- [x] [Arquivos da aula 1](https://github.com/alura-challenges/aluracord-matrix/pull/1/files)
-- [x] [Figma](https://www.figma.com/file/X5kVg1hNCajiV73ah7iyPz/Imers%C3%A3o-React---Aluracord---Matrix?node-id=2%3A169)
+- [x] [Arquivos da aula 01](https://github.com/alura-challenges/aluracord-matrix/pull/1/files)
+- [ ] [Transcrição da aula](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula01.md)
 
 #### Links citados na aula 01
 
@@ -22,16 +24,21 @@
 - [ ] [Mario Souto - Storybook na prática](https://www.youtube.com/watch?v=R41_Qedrzik&t=7s)
 - [ ] [Mario Souto - Configurando ambiente JavaScript/NodeJS/Yarn](https://www.youtube.com/watch?v=GIz71YGzwP4)
 - [ ] [Documentação interativa com Storybook do SkynexUI](https://storybook.skynexui.dev/?path=/story/components-box--box-component)
-- [ ] [Transcrição da aula](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula01.md)
-- [ ]
 
 ### Aula 02
 
 - [ ] [Vídeo da aula](https://www.alura.com.br/imersao-react/aula02-react-state-form)
+- [ ] [Arquivos da aula 02](https://github.com/alura-challenges/aluracord-matrix/pull/3/files)
+- [ ] [Transcrição da aula](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula02.md)
 
 #### Links citados na aula 02
 
-- [ ]
+- [ ] [Nextjs Custom App](https://nextjs.org/docs/advanced-features/custom-app)
+- [ ] [Aprender forEach e map - Mario Souto](https://www.youtube.com/watch?v=JbzcLKiTThk)
+- [ ] [Mario Souto - Validando Formulários com React](https://www.youtube.com/watch?v=cMq6k7ymv2s)
+- [ ] [Como fazer AJAX? E pegar os dados da API do GitHub](https://www.youtube.com/watch?v=85vJXFpXLQw)
+- [ ] [Mario Souto - Github Pro + Eslint](https://www.youtube.com/watch?v=yMRSDdifGW8&t=2s)
+- [ ] [Criando Flappy Bird com JavaScript - Mario Souto](https://www.youtube.com/watch?v=jOAU81jdi-c&list=PLTcmLKdIkOWmeNferJ292VYKBXydGeDej)
 
 ### Aula 03
 
