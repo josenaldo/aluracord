@@ -1,5 +1,6 @@
 {
-    "name": "Aluracord - Matrix (josenaldo)",
+    "name": "Vuducord",
+
     "stickers": [
         "http://2.bp.blogspot.com/-d21tffsTIQo/U_H9QjC69gI/AAAAAAAAKqM/wnvOyUr6a_I/s1600/Pikachu%2B2.gif",
         "https://media1.giphy.com/media/BdghqxNFV4efm/200.gif",
@@ -9,32 +10,34 @@
         "https://i.pinimg.com/originals/96/34/c5/9634c520c9a3cd4e7f23190bb2c96500.gif"
     ],
     "theme": {
+        "background-commented": "https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg",
+        "background": "/images/bg.jpg",
         "colors": {
             "primary": {
-                "050": "#E3F9E5",
-                "100": "#C1EAC5",
-                "200": "#A3D9A5",
-                "300": "#7BC47F",
-                "400": "#57AE5B",
-                "500": "#3F9142",
-                "600": "#2F8132",
-                "700": "#207227",
-                "800": "#0E5814",
-                "900": "#05400A"
+                "050": "#eee6f5",
+                "100": "#ddcdeb",
+                "200": "#bb9bd7",
+                "300": "#9969c2",
+                "400": "#7737ae",
+                "500": "#55059A",
+                "600": "#44047b",
+                "700": "#33035c",
+                "800": "#22023e",
+                "900": "#11011f"
             },
             "neutrals": {
-                "000": "#FFFFFF",
-                "050": "#F5F7FA",
-                "100": "#E4E7EB",
-                "200": "#CBD2D9",
-                "300": "#9AA5B1",
-                "400": "#52667A",
-                "500": "#313D49",
-                "600": "#29333D",
-                "700": "#212931",
-                "800": "#181F25",
-                "900": "#101418",
-                "999": "#080A0C"
+                "000": "#ffffff",
+                "050": "#ececec",
+                "100": "#dadada",
+                "200": "#b4b4b4",
+                "300": "#8f8f8f",
+                "400": "#696969",
+                "500": "#444444",
+                "600": "#363636",
+                "700": "#292929",
+                "800": "#1b1b1b",
+                "900": "#0e0e0e",
+                "999": "#000000"
             }
         }
     }
