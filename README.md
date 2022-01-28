@@ -36,10 +36,12 @@
 - [ ] [Nextjs Custom App](https://nextjs.org/docs/advanced-features/custom-app)
 - [ ] [Aprender forEach e map - Mario Souto](https://www.youtube.com/watch?v=JbzcLKiTThk)
 - [ ] [Mario Souto - Validando Formulários com React](https://www.youtube.com/watch?v=cMq6k7ymv2s)
-- [ ] [Como fazer AJAX? E pegar os dados da API do GitHub](https://www.youtube.com/watch?v=85vJXFpXLQw)
+- [x] [Como fazer AJAX? E pegar os dados da API do GitHub](https://www.youtube.com/watch?v=85vJXFpXLQw)
+- [ ] [Entendendo como fazer AJAX com a FetchAPI](https://medium.com/@omariosouto/entendendo-como-fazer-ajax-com-a-fetchapi-977ff20da3c6)
+- [ ] [Usando a função Fetch](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API/Using_Fetch)
 - [ ] [Mario Souto - Github Pro + Eslint](https://www.youtube.com/watch?v=yMRSDdifGW8&t=2s)
 - [ ] [Criando Flappy Bird com JavaScript - Mario Souto](https://www.youtube.com/watch?v=jOAU81jdi-c&list=PLTcmLKdIkOWmeNferJ292VYKBXydGeDej)
-- [ ] [Usando a função Fetch](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API/Using_Fetch)
+- [ ] [Guia da Performance Front-end](https://cursos.alura.com.br/guia-da-performance-front-end-sergiolopes-p1730)
 
 ### Aula 03
 
@@ -109,4 +111,8 @@
 - [NPM](https://www.npmjs.com/)
 - [Yarn](https://yarnpkg.com/)
 - [Storybook.js.org](https://storybook.js.org/)
+
+### Extensões do Chrome
+
 - [React Developer Dev Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi/)
+- [RESTED](https://chrome.google.com/webstore/detail/rested/eelcnbccaccipfolokglfhhmapdchbfg)
