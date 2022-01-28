@@ -19,6 +19,34 @@ function Titulo(props) {
     );
 }
 
+function Photo(props) {
+    const username = props.children;
+    return (
+        <>
+            <Image
+                styleSheet={{
+                    borderRadius: "50%",
+                    marginBottom: "16px",
+                }}
+                src={`https://github.com/${username}.png`}
+                alt={username}
+            />
+            <Text
+                variant="body4"
+                styleSheet={{
+                    color: appConfig.theme.colors.neutrals["000"],
+                    backgroundColor:
+                        appConfig.theme.colors.primary["700"],
+                    padding: "5px 10px",
+                    borderRadius: "1000px",
+                }}
+            >
+                {username}
+            </Text>
+        </>
+    )
+}
+
 // Componente React
 // function HomePage() {
 //     // JSX
@@ -35,9 +63,11 @@ export default function PaginaInicial() {
     // const username = "josenaldo";
     const [username, setUsername] = React.useState('josenaldo')
     const roteamento = useRouter();
+    const [showAvatar, setShowAvatar] = React.useState(false)
+
     return (
         <>
-            
+
             <Box
                 styleSheet={{
                     display: "flex",
@@ -105,7 +135,9 @@ export default function PaginaInicial() {
                                 // Onde está o valor
                                 const valor = event.target.value;
                                 // Trocar o valor da variável através do react e avisa quem precisa
+
                                 setUsername(valor)
+                                setShowAvatar(valor.length >= 3)
                             }}
                             fullWidth
                             textFieldColors={{
@@ -154,25 +186,7 @@ export default function PaginaInicial() {
                             minHeight: "240px",
                         }}
                     >
-                        <Image
-                            styleSheet={{
-                                borderRadius: "50%",
-                                marginBottom: "16px",
-                            }}
-                            src={`https://github.com/${username}.png`}
-                        />
-                        <Text
-                            variant="body4"
-                            styleSheet={{
-                                color: appConfig.theme.colors.neutrals["000"],
-                                backgroundColor:
-                                    appConfig.theme.colors.primary["700"],
-                                padding: "5px 10px",
-                                borderRadius: "1000px",
-                            }}
-                        >
-                            {username}
-                        </Text>
+                        {showAvatar ? <Photo>{username}</Photo> : ""}
                     </Box>
                     {/* Photo Area */}
                 </Box>
