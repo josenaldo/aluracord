@@ -84,7 +84,9 @@
 
 - [Figma](https://www.figma.com/)
 - [Coolors.co - Gerador de Paletas](https://coolors.co/)
-- [Paleta do projeto](https://maketintsandshades.com/#55059A)
+- Paletas do projeto
+    - [Primária](https://maketintsandshades.com/#55059A)
+    - [Neutra](https://maketintsandshades.com/#444444)
 - [Otimizador de imagens](https://png2jpg.com/)
 - [Vercel](https://vercel.com/)
 - [React JS](https://pt-br.reactjs.org/)
