@@ -1,3 +1,4 @@
+import React from 'react';
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
 import appConfig from "../config.json";
 
@@ -61,7 +62,8 @@ function Titulo(props) {
 // }
 
 export default function PaginaInicial() {
-    const username = "josenaldo";
+    // const username = "josenaldo";
+    const [username, setUsername] = React.useState('josenaldo')
     return (
         <>
             <GlobalStyle />
@@ -98,6 +100,10 @@ export default function PaginaInicial() {
                     {/* Formulário */}
                     <Box
                         as="form"
+                        onSubmit={function(event){
+                            event.preventDefault();
+                            console.log('Alguém submeteu o form')
+                        }}
                         styleSheet={{
                             display: "flex",
                             flexDirection: "column",
@@ -120,6 +126,14 @@ export default function PaginaInicial() {
                         </Text>
 
                         <TextField
+                            value={username}
+                            onChange={function (event) {
+                                console.log('usuario digitou', event.target.value);
+                                // Onde está o valor
+                                const valor = event.target.value;
+                                // Trocar o valor da variável através do react e avisa quem precisa
+                                setUsername(valor)
+                            }}
                             fullWidth
                             textFieldColors={{
                                 neutral: {
