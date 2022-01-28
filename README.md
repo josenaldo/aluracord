@@ -111,6 +111,7 @@
 - [NPM](https://www.npmjs.com/)
 - [Yarn](https://yarnpkg.com/)
 - [Storybook.js.org](https://storybook.js.org/)
+- [Youtube Downloader](https://yt5s.com/)
 
 ### Extensões do Chrome
 

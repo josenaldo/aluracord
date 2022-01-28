@@ -51,20 +51,7 @@ function Photo(props) {
     )
 }
 
-// Componente React
-// function HomePage() {
-//     // JSX
-//     return (
-//         <div>
-//             <GlobalStyle />
-//             <Titulo tag="h1">Boas vindas de volta!</Titulo>
-//             <h2>Discord - Alura MAtrix</h2>
-//         </div>
-//     );
-// }
-
 export default function PaginaInicial() {
-    // const username = "josenaldo";
     const [username, setUsername] = React.useState("");
     const [showAvatar, setShowAvatar] = React.useState(false);
     const [avatarURL, setAvatarURL] = React.useState(false);
@@ -124,7 +111,7 @@ export default function PaginaInicial() {
                             marginBottom: "32px",
                         }}
                     >
-                        <Titulo tag="h2">Boas vindas de volta!</Titulo>
+                        <Titulo tag="h2">{appConfig.name}</Titulo>
                         <Text
                             variant="body3"
                             styleSheet={{
@@ -132,7 +119,7 @@ export default function PaginaInicial() {
                                 color: appConfig.theme.colors.primary[700],
                             }}
                         >
-                            {appConfig.name}
+                            {appConfig.description}
                         </Text>
 
                         <TextField
