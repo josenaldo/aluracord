@@ -1,5 +1,6 @@
 import React from 'react';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
 import appConfig from "../config.json";
 
@@ -61,6 +62,9 @@ export default function PaginaInicial() {
 
     return (
         <>
+            <Head>
+                <title>{appConfig.name}</title>
+            </Head>
 
             <Box
                 styleSheet={{

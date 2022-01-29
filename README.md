@@ -46,10 +46,16 @@
 ### Aula 03
 
 - [ ] [Vídeo da aula](https://www.alura.com.br/imersao-react/aula03-chat-offline)
+- [ ] [Arquivos da aula 03](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
+- [ ] [Template base da página do Chat usado no começo da aula](https://gist.github.com/omariosouto/8517c711f36770b73371185e4aed92d6)
+- [ ] Transcrição
 
 #### Links citados na aula 03
 
-- [ ]
+- [ ] Código da Aula completo com tudo o que fizemos na aula
+- [ ] Lembre-se de se inscrever no canal do DevSoutinho
+- [ ] Dar uma star no repositório da imersão
+- [ ] Dar uma star no repositório da biblioteca @skynexui/components
 
 ### Aula 04
 
@@ -70,7 +76,7 @@
 ## Lives
 
 - [x] [Imersão React | Carreira Front-End em 2022](https://www.youtube.com/watch?v=HXkDb5pnMRQ)
-- [ ] [Imersão React | CSS em JavaScript](https://www.youtube.com/watch?v=f_i3pEna5xU)
+- [x] [Imersão React | CSS em JavaScript](https://www.youtube.com/watch?v=f_i3pEna5xU)
 
 ## Extras
 
@@ -80,6 +86,7 @@
 - [ ] [Tour pelo meu setup: Como configurar ambiente JavaScript/NodeJS para trabalhar? DO JEITO CERTO](https://www.youtube.com/watch?v=GIz71YGzwP4)
 - [ ] [Next.JS e React: Curso Intensivo - Masterclass #01 [2021]](https://www.youtube.com/watch?v=PHKaJlAeNLk)
 - [ ] [Next.JS e React: Curso Intensivo: Aplicação Completa - Masterclass #02 [2021]](https://www.youtube.com/watch?v=HJN5rX-3SDM)
+- [ ] [Web Vitals](https://web.dev/vitals/)
 
 ## Documentação do React
 
