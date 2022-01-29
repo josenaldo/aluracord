@@ -1,3 +1,5 @@
+import appConfig from "../config.json";
+
 function GlobalStyle() {
     return (
         <style global jsx>{`
@@ -24,17 +26,33 @@ function GlobalStyle() {
             #__next > * {
                 flex: 1;
             }
+            ::-webkit-scrollbar {
+                width: 20px;
+            }
+
+            /* Track */
+            ::-webkit-scrollbar-track {
+                background: ${appConfig.theme.colors.neutrals["400"]};
+                border-radius: 5px;
+            }
+
+            /* Handle */
+            ::-webkit-scrollbar-thumb {
+                background: ${appConfig.theme.colors.neutrals["700"]};
+                border-radius: 5px;
+            }
+
             /* ./App fit Height */
         `}</style>
     );
 }
 
-export default function CustomApp({Component, pageProps }) {
-    console.log("Roda em todas as páginas")
-    return(
+export default function CustomApp({ Component, pageProps }) {
+    console.log("Roda em todas as páginas");
+    return (
         <>
             <GlobalStyle />
             <Component {...pageProps} />
         </>
-    )
+    );
 }

@@ -48,22 +48,27 @@
 - [ ] [Vídeo da aula](https://www.alura.com.br/imersao-react/aula03-chat-offline)
 - [ ] [Arquivos da aula 03](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
 - [ ] [Template base da página do Chat usado no começo da aula](https://gist.github.com/omariosouto/8517c711f36770b73371185e4aed92d6)
-- [ ] Transcrição
+- [ ] [Código da aula completo com tudo o que fizemos na aula](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
+- [ ] [Transcrição](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula03.md)
 
 #### Links citados na aula 03
 
-- [ ] Código da Aula completo com tudo o que fizemos na aula
-- [ ] Lembre-se de se inscrever no canal do DevSoutinho
-- [ ] Dar uma star no repositório da imersão
-- [ ] Dar uma star no repositório da biblioteca @skynexui/components
+- [ ] [Como usar imagens no Next.js?](https://www.youtube.com/watch?v=LQqliNavVYQ)
 
 ### Aula 04
 
 - [ ] [Vídeo da Aula](https://www.alura.com.br/imersao-react/aula04-supabase-e-ajax)
+- [ ] [Arquivos da aula 04](https://github.com/alura-challenges/aluracord-matrix/pull/5/files)
+- [ ] [Transcrição](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula04.md)
 
 #### Links citados na aula 04
 
-- [ ]
+- [ ] [Mario Souto - Latência](https://www.youtube.com/watch?v=x4eyf5L5caY)
+- [ ] [Mario Souto - Como fazer AJAX](https://medium.com/@omariosouto/entendendo-como-fazer-ajax-com-a-fetchapi-977ff20da3c6)
+- [ ] [Http Status Dogs](https://httpstatusdogs.com/)
+- [ ] [API do GitHub](https://api.github.com/users/omariosouto)
+- [ ] [Dev em T](https://www.alura.com.br/dev-em-t)
+- [ ] [Pacote de stickers da Alura](https://www.alura.com.br/artigos/stickers-dev-aluraverso-whatsapp-telegram)
 
 ### Aula 05
 
@@ -77,6 +82,8 @@
 
 - [x] [Imersão React | Carreira Front-End em 2022](https://www.youtube.com/watch?v=HXkDb5pnMRQ)
 - [x] [Imersão React | CSS em JavaScript](https://www.youtube.com/watch?v=f_i3pEna5xU)
+- [x] [Imersão React | Mergulhando em TypeScript e React](https://www.youtube.com/watch?v=-ofs-sbJZC8)
+- [ ] [Imersão React | Projetos em destaque e encerramento](https://www.youtube.com/watch?v=eiORX8iLEj4)
 
 ## Extras
 
