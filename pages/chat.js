@@ -12,7 +12,6 @@ import appConfig from "../config.json";
 import ScrollableFeed from "react-scrollable-feed";
 import { createClient } from "@supabase/supabase-js";
 
-
 /*
 DESAFIOS:
 - Como usuário, desejo ver um loading ao abrir o chat, enquanto as mensagens são careegadas
@@ -31,17 +30,21 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 export default function ChatPage() {
     const [message, setMessage] = React.useState("");
     const [messageList, setMessageList] = React.useState([]);
+    const [showLoad, setShowLoad] = React.useState(false);
 
     React.useEffect(() => {
+        setShowLoad(true);
         supabaseClient
             .from("Message")
             .select("*")
             .then(({ data }) => {
                 setMessageList(data);
+                setShowLoad(false);
             });
     }, []);
 
     function handleDeleteMessage(messageId) {
+        setShowLoad(true);
         supabaseClient
             .from("Message")
             .delete()
@@ -51,11 +54,12 @@ export default function ChatPage() {
                     return message.id !== messageId;
                 });
                 setMessageList(result);
+                setShowLoad(false);
             });
-
     }
 
     function handleSendMessage(newMessageText) {
+        setShowLoad(true);
         const message = {
             from: "josenaldo",
             messageText: newMessageText,
@@ -68,6 +72,7 @@ export default function ChatPage() {
             .then(({ data }) => {
                 setMessageList([...messageList, data[0]]);
                 setMessage("");
+                setShowLoad(false);
             });
     }
 
@@ -103,7 +108,7 @@ export default function ChatPage() {
                         padding: "32px",
                     }}
                 >
-                    <Header />
+                    <Header showLoad={showLoad} />
                     <Box
                         styleSheet={{
                             position: "relative",
@@ -196,7 +201,8 @@ export default function ChatPage() {
     );
 }
 
-function Header() {
+function Header(props) {
+    const showLoad = props.showLoad || false;
     return (
         <>
             <Box
@@ -209,6 +215,16 @@ function Header() {
                 }}
             >
                 <Text variant="heading5">Chat</Text>
+
+                <Image
+                    src="/images/load-chat.svg"
+                    alt="Carregando conversa"
+                    styleSheet={{
+                        opacity: showLoad ? "1" : "0",
+                        transition: "opacity 0.5s",
+                    }}
+                />
+
                 <Button
                     variant="tertiary"
                     colorVariant="neutral"

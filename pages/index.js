@@ -30,6 +30,8 @@ function Photo(props) {
                     marginBottom: "16px",
                     border: '5px solid',
                     borderColor: appConfig.theme.colors.primary[800],
+                    backgroundColor:
+                        appConfig.theme.colors.primary["500"],
                 }}
 
                 src={props.avatarUrl}

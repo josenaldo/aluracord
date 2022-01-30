@@ -119,7 +119,8 @@
 - Paletas do projeto
     - [Primária](https://maketintsandshades.com/#55059A)
     - [Neutra](https://maketintsandshades.com/#444444)
-    - [Loading do projeto](https://loading.io/asset/545799)
+    - [Loading](https://loading.io/asset/546201)
+    - [Loading do chat](https://loading.io/asset/546203)
 - [Otimizador de imagens](https://png2jpg.com/)
 - [Vercel](https://vercel.com/)
 - [React JS](https://pt-br.reactjs.org/)

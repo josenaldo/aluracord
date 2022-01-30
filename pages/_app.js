@@ -42,6 +42,39 @@ function GlobalStyle() {
                 border-radius: 5px;
             }
 
+            .fadeOut {
+                opacity: 0;
+                transition: opacity 1s;
+            }
+            .fadeIn {
+                opacity: 1;
+                transition: opacity 1s;
+            }
+
+            @keyframes fade-in {
+                0% {
+                    opacity: 0;
+                }
+                0% {
+                    opacity: 0.5;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+
+            @keyframes fade-out {
+                0% {
+                    opacity: 0;
+                }
+                0% {
+                    opacity: 0.5;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+
             /* ./App fit Height */
         `}</style>
     );
