@@ -14,24 +14,25 @@ import { v4 as uuidv4 } from "uuid";
 
 export default function ChatPage() {
 
-    const [mensagem, setMensagem] = React.useState("");
-    const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
+    const [message, setMessage] = React.useState("");
+    const [messageList, setMessageList] = React.useState([]);
 
     function handleDeleteMessage(messageId) {
-        const result = listaDeMensagens.filter((mensagem) => {
-            return mensagem.id !== messageId;
+        const result = messageList.filter((message) => {
+            return message.id !== messageId;
         });
-        setListaDeMensagens(result);
+        setMessageList(result);
     }
 
-    function handleNovaMensagem(novaMensagem) {
-        const mensagem = {
+    function dhandleSendMessage(newMessageText) {
+        const message = {
             id: uuidv4(),
             de: "josenaldo",
-            texto: novaMensagem,
+            texto: newMessageText,
+            sendDate: new Date(),
         };
-        setListaDeMensagens([mensagem, ...listaDeMensagens]);
-        setMensagem("");
+        setMessageList([message, ...messageList]);
+        setMessage("");
     }
 
     return (
@@ -80,7 +81,7 @@ export default function ChatPage() {
                             padding: "16px",
                         }}
                     >
-                        <MessageList mensagens={listaDeMensagens} delete={handleDeleteMessage}/>
+                        <MessageList mensagens={messageList} delete={handleDeleteMessage}/>
 
                         <Box
                             as="form"
@@ -92,18 +93,18 @@ export default function ChatPage() {
                             }}
                         >
                             <TextField
-                                value={mensagem}
+                                value={message}
                                 onChange={(event) => {
                                     const valor = event.target.value;
-                                    setMensagem(valor);
+                                    setMessage(valor);
                                 }}
                                 onKeyPress={(event) => {
                                     if (event.key === "Enter") {
                                         event.preventDefault();
-                                        handleNovaMensagem(mensagem);
+                                        dhandleSendMessage(message);
                                     }
                                 }}
-                                placeholder="Insira sua mensagem aqui..."
+                                placeholder="Insira sua message aqui..."
                                 type="textarea"
                                 styleSheet={{
                                     width: "100%",
@@ -122,7 +123,7 @@ export default function ChatPage() {
                                 type="submit"
                                 onClick={(event) => {
                                     event.preventDefault();
-                                    handleNovaMensagem(mensagem);
+                                    dhandleSendMessage(message);
                                     document.querySelector("textarea").focus();
                                 }}
                                 iconName="arrowRight"
@@ -195,11 +196,11 @@ function MessageList(props) {
                 overflow: "auto",
             }}
         >
-            {mensagens.map((mensagem) => {
+            {mensagens.map((message) => {
                 return (
                     <MessageItem
-                        key={mensagem.id}
-                        mensagem={mensagem}
+                        key={message.id}
+                        message={message}
                         delete={props.delete}
                     ></MessageItem>
                 );
@@ -209,11 +210,11 @@ function MessageList(props) {
 }
 
 function MessageItem(props) {
-    const mensagem = props.mensagem;
+    const message = props.message;
     const tag = props.tag || "li";
 
     return (
-        // Mensagem
+        // Message
         <Box
             as={tag}
             styleSheet={{
@@ -227,21 +228,21 @@ function MessageItem(props) {
             }}
         >
             {/* Message Header */}
-            <MessageHeader mensagem={mensagem} delete={props.delete} />
-            {/* Mensagem de texto */}
+            <MessageHeader message={message} delete={props.delete} />
+            {/* Message de texto */}
             <Box
                 styleSheet={{
                     paddingLeft: "40px",
                 }}
             >
-                {mensagem.texto}
+                {message.texto}
             </Box>
         </Box>
     );
 }
 
 function MessageHeader(props) {
-    const mensagem = props.mensagem;
+    const message = props.message;
 
     return (
         <Box
@@ -251,7 +252,7 @@ function MessageHeader(props) {
                 flexDirection: "column",
             }}
         >
-            {/* Remetente da mensagem */}
+            {/* Remetente da message */}
             <Box
                 styleSheet={{
                     width: "100%",
@@ -261,7 +262,7 @@ function MessageHeader(props) {
                     justifyContent: "space-between",
                 }}
             >
-                <MessageSender mensagem={mensagem} />
+                <MessageSender message={message} />
                 <Icon
                     name={"FaTrash"}
                     styleSheet={{
@@ -279,7 +280,7 @@ function MessageHeader(props) {
                         alignItems: "center",
                     }}
                     onClick={(e) => {
-                        props.delete(mensagem.id);
+                        props.delete(message.id);
                     }}
                 />
             </Box>
@@ -288,7 +289,7 @@ function MessageHeader(props) {
 }
 
 function MessageSender(props) {
-    const mensagem = props.mensagem;
+    const message = props.message;
 
     return (
         <Box
@@ -306,7 +307,7 @@ function MessageSender(props) {
                     display: "inline-block",
                     marginRight: "8px",
                 }}
-                src={`https://github.com/${mensagem.de}.png`}
+                src={`https://github.com/${message.de}.png`}
             />
             <Box
                 styleSheet={{
@@ -315,9 +316,9 @@ function MessageSender(props) {
                 }}
             >
                 {/* Remetente */}
-                <Text tag="strong">{mensagem.de}</Text>
+                <Text tag="strong">{message.de}</Text>
 
-                {/* Hora da mensagem */}
+                {/* Hora da message */}
                 <Text
                     styleSheet={{
                         fontSize: "10px",
@@ -327,7 +328,7 @@ function MessageSender(props) {
                     }}
                     tag="span"
                 >
-                    {new Date().toLocaleDateString()}
+                    {new Intl.DateTimeFormat('pt-BR', appConfig.dateFormat).format(message.sendDate)}
                 </Text>
             </Box>
         </Box>
