@@ -9,13 +9,27 @@ import {
 import React from "react";
 import Head from "next/head";
 import appConfig from "../config.json";
-import { v4 as uuidv4 } from "uuid";
+import ScrollableFeed from "react-scrollable-feed";
+import { createClient } from "@supabase/supabase-js";
 
+// Create a single supabase client for interacting with your database
+const SUPABASE_URL = "https://eeewrjggkkqbdtdrfvcu.supabase.co";
+const SUPABASE_ANON_KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzU3MjYzOCwiZXhwIjoxOTU5MTQ4NjM4fQ.3CDCiDIRmD7vU-YviNLhmXj83mk6L-QMjucyKFYjaZE";
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export default function ChatPage() {
-
     const [message, setMessage] = React.useState("");
     const [messageList, setMessageList] = React.useState([]);
+
+    React.useEffect(() => {
+        supabaseClient
+            .from("Message")
+            .select("*")
+            .then(({ data }) => {
+                setMessageList(data);
+            });
+    }, [messageList]);
 
     function handleDeleteMessage(messageId) {
         const result = messageList.filter((message) => {
@@ -26,13 +40,18 @@ export default function ChatPage() {
 
     function handleSendMessage(newMessageText) {
         const message = {
-            id: uuidv4(),
             from: "josenaldo",
-            text: newMessageText,
+            messageText: newMessageText,
             sendDate: new Date(),
         };
-        setMessageList([message, ...messageList]);
-        setMessage("");
+
+        supabaseClient
+            .from("Message")
+            .insert([message])
+            .then(({ data }) => {
+                setMessageList([data[0], ...messageList]);
+                setMessage("");
+            });
     }
 
     return (
@@ -81,7 +100,10 @@ export default function ChatPage() {
                             padding: "16px",
                         }}
                     >
-                        <MessageList messages={messageList} delete={handleDeleteMessage}/>
+                        <MessageList
+                            messages={messageList}
+                            delete={handleDeleteMessage}
+                        />
 
                         <Box
                             as="form"
@@ -183,28 +205,31 @@ function Header() {
 
 function MessageList(props) {
     const messages = props.messages;
+
     return (
         <Box
             as="ul"
             styleSheet={{
                 overflow: "scroll",
                 display: "flex",
-                flexDirection: "column-reverse",
+                flexDirection: "column",
                 flex: 1,
                 color: appConfig.theme.colors.neutrals["000"],
                 marginBottom: "16px",
                 overflow: "auto",
             }}
         >
-            {messages.map((message) => {
-                return (
-                    <MessageItem
-                        key={message.id}
-                        message={message}
-                        delete={props.delete}
-                    ></MessageItem>
-                );
-            })}
+            <ScrollableFeed>
+                {messages.map((message) => {
+                    return (
+                        <MessageItem
+                            key={message.id}
+                            message={message}
+                            delete={props.delete}
+                        ></MessageItem>
+                    );
+                })}
+            </ScrollableFeed>
         </Box>
     );
 }
@@ -236,7 +261,7 @@ function MessageItem(props) {
                     color: appConfig.theme.colors.neutrals["200"],
                 }}
             >
-                {message.text}
+                {message.messageText}
             </Box>
         </Box>
     );
@@ -329,7 +354,10 @@ function MessageSender(props) {
                     }}
                     tag="span"
                 >
-                    {new Intl.DateTimeFormat('pt-BR', appConfig.dateFormat).format(message.sendDate)}
+                    {new Intl.DateTimeFormat(
+                        "pt-BR",
+                        appConfig.dateFormat
+                    ).format(new Date(message.sendDate))}
                 </Text>
             </Box>
         </Box>

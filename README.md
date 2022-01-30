@@ -76,6 +76,7 @@
 - [ ] [API do GitHub](https://api.github.com/users/omariosouto)
 - [ ] [Dev em T](https://www.alura.com.br/dev-em-t)
 - [ ] [Pacote de stickers da Alura](https://www.alura.com.br/artigos/stickers-dev-aluraverso-whatsapp-telegram)
+- [ ] [Os 12 fatores](https://12factor.net/pt_br/)
 
 ### Aula 05
 
@@ -128,6 +129,7 @@
     - [Github](https://github.com/skynexui/components)
     - [Storybook](https://storybook.skynexui.dev/)
 - [Supabase](https://app.supabase.io/#)
+- [SupabaseJS](https://github.com/supabase/supabase-js)
 - [MUI](https://mui.com/pt/)
 - [NPM](https://www.npmjs.com/)
 - [Yarn](https://yarnpkg.com/)
