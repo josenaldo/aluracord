@@ -49,11 +49,18 @@
 - [ ] [Arquivos da aula 03](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
 - [ ] [Template base da página do Chat usado no começo da aula](https://gist.github.com/omariosouto/8517c711f36770b73371185e4aed92d6)
 - [ ] [Código da aula completo com tudo o que fizemos na aula](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
-- [ ] [Transcrição](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula03.md)
+- [ ] [Transcrição](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula03)
 
 #### Links citados na aula 03
 
 - [ ] [Como usar imagens no Next.js?](https://www.youtube.com/watch?v=LQqliNavVYQ)
+
+#### Links usados na aula 03
+
+- [Intl.DateTimeFormat - como formatar datas internacionalizadas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)
+- [Filter](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+- [Como remover itens de listas no react](https://www.robinwieruch.de/react-remove-item-from-list/)
+- [Como estilizar barras de rolagem com o CSS](https://www.digitalocean.com/community/tutorials/css-scrollbars-pt)
 
 ### Aula 04
 
