@@ -29,13 +29,21 @@ export default function ChatPage() {
             .then(({ data }) => {
                 setMessageList(data);
             });
-    }, [messageList]);
+    }, []);
 
     function handleDeleteMessage(messageId) {
-        const result = messageList.filter((message) => {
-            return message.id !== messageId;
-        });
-        setMessageList(result);
+        supabaseClient
+            .from("Message")
+            .delete([message])
+            .then(({ data }) => {
+                setMessageList([data[0], ...messageList]);
+                setMessage("");
+            });
+
+        // const result = messageList.filter((message) => {
+        //     return message.id !== messageId;
+        // });
+        // setMessageList(result);
     }
 
     function handleSendMessage(newMessageText) {
@@ -49,7 +57,7 @@ export default function ChatPage() {
             .from("Message")
             .insert([message])
             .then(({ data }) => {
-                setMessageList([data[0], ...messageList]);
+                setMessageList([...messageList, data[0]]);
                 setMessage("");
             });
     }

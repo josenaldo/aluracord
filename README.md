@@ -128,6 +128,7 @@
     - [Site](https://skynexui.dev/)
     - [Github](https://github.com/skynexui/components)
     - [Storybook](https://storybook.skynexui.dev/)
+- [React Scrollable Feed](https://www.npmjs.com/package/react-scrollable-feed)
 - [Supabase](https://app.supabase.io/#)
 - [SupabaseJS](https://github.com/supabase/supabase-js)
 - [MUI](https://mui.com/pt/)
