@@ -12,7 +12,17 @@ import appConfig from "../config.json";
 import ScrollableFeed from "react-scrollable-feed";
 import { createClient } from "@supabase/supabase-js";
 
-// Create a single supabase client for interacting with your database
+
+/*
+DESAFIOS:
+- Como usuário, desejo ver um loading ao abrir o chat, enquanto as mensagens são careegadas
+- Como usuário, desejo ver um load ao enviar uma mensagem, enquanto ela é enviada
+- Como usuário, desejo ver um load ao remover mensagens, enquanto ela é removida
+- Como usuário, desejo clicar no avatar do usuário e ver um popup com os dados do usuário,
+    como Nome completo, usuário do github, link para twitter (se tiver), bio do github (se houver) e
+    link para o perfil do github.
+*/
+
 const SUPABASE_URL = "https://eeewrjggkkqbdtdrfvcu.supabase.co";
 const SUPABASE_ANON_KEY =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzU3MjYzOCwiZXhwIjoxOTU5MTQ4NjM4fQ.3CDCiDIRmD7vU-YviNLhmXj83mk6L-QMjucyKFYjaZE";
@@ -34,16 +44,15 @@ export default function ChatPage() {
     function handleDeleteMessage(messageId) {
         supabaseClient
             .from("Message")
-            .delete([message])
+            .delete()
+            .match({ id: messageId })
             .then(({ data }) => {
-                setMessageList([data[0], ...messageList]);
-                setMessage("");
+                const result = messageList.filter((message) => {
+                    return message.id !== messageId;
+                });
+                setMessageList(result);
             });
 
-        // const result = messageList.filter((message) => {
-        //     return message.id !== messageId;
-        // });
-        // setMessageList(result);
     }
 
     function handleSendMessage(newMessageText) {
