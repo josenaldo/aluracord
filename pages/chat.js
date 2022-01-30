@@ -1,29 +1,39 @@
-import { Box, Text, TextField, Image, Button } from "@skynexui/components";
+import {
+    Box,
+    Text,
+    TextField,
+    Image,
+    Button,
+    Icon,
+} from "@skynexui/components";
 import React from "react";
 import Head from "next/head";
 import appConfig from "../config.json";
+import { v4 as uuidv4 } from "uuid";
+
 
 export default function ChatPage() {
-    /*
-        Desafio:
-
-        TODO: Por um botão de enviar no campo de texto
-        TODO: Apagar uma mensagem do chat
-            Dica: usar unção filter
-    */
 
     const [mensagem, setMensagem] = React.useState("");
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
 
+    function handleDeleteMessage(messageId) {
+        const result = listaDeMensagens.filter((mensagem) => {
+            return mensagem.id !== messageId;
+        });
+        setListaDeMensagens(result);
+    }
+
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
-            id: listaDeMensagens.length + 1,
+            id: uuidv4(),
             de: "josenaldo",
             texto: novaMensagem,
         };
         setListaDeMensagens([mensagem, ...listaDeMensagens]);
         setMensagem("");
     }
+
     return (
         <>
             <Head>
@@ -70,7 +80,7 @@ export default function ChatPage() {
                             padding: "16px",
                         }}
                     >
-                        <MessageList mensagens={listaDeMensagens} />
+                        <MessageList mensagens={listaDeMensagens} delete={handleDeleteMessage}/>
 
                         <Box
                             as="form"
@@ -110,25 +120,32 @@ export default function ChatPage() {
                             ></TextField>
                             <Button
                                 type="submit"
-                                onClick={event => {
+                                onClick={(event) => {
                                     event.preventDefault();
                                     handleNovaMensagem(mensagem);
-                                    document.querySelector('textarea').focus()
+                                    document.querySelector("textarea").focus();
                                 }}
-
                                 iconName="arrowRight"
                                 styleSheet={{
-                                    color: appConfig.theme.colors.neutrals["100"],
-                                    backgroundColor: appConfig.theme.colors.primary["500"],
+                                    color: appConfig.theme.colors.neutrals[
+                                        "100"
+                                    ],
+                                    backgroundColor:
+                                        appConfig.theme.colors.primary["500"],
                                     transition: "0.5s",
                                     marginBottom: "6px",
                                     focus: {
-                                        backgroundColor: appConfig.theme.colors.primary["600"],
+                                        backgroundColor:
+                                            appConfig.theme.colors.primary[
+                                                "600"
+                                            ],
                                     },
                                     hover: {
-                                        backgroundColor: appConfig.theme.colors.primary["400"],
+                                        backgroundColor:
+                                            appConfig.theme.colors.primary[
+                                                "400"
+                                            ],
                                     },
-
                                 }}
                             />
                         </Box>
@@ -164,12 +181,10 @@ function Header() {
 }
 
 function MessageList(props) {
-    console.log("MessageList", props.mensagens);
-
     const mensagens = props.mensagens;
     return (
         <Box
-            tag="ul"
+            as="ul"
             styleSheet={{
                 overflow: "scroll",
                 display: "flex",
@@ -177,8 +192,7 @@ function MessageList(props) {
                 flex: 1,
                 color: appConfig.theme.colors.neutrals["000"],
                 marginBottom: "16px",
-                overflow: 'auto',
-
+                overflow: "auto",
             }}
         >
             {mensagens.map((mensagem) => {
@@ -186,6 +200,7 @@ function MessageList(props) {
                     <MessageItem
                         key={mensagem.id}
                         mensagem={mensagem}
+                        delete={props.delete}
                     ></MessageItem>
                 );
             })}
@@ -198,37 +213,116 @@ function MessageItem(props) {
     const tag = props.tag || "li";
 
     return (
-        <Text
-            tag={tag}
+        // Mensagem
+        <Box
+            as={tag}
             styleSheet={{
                 borderRadius: "5px",
                 padding: "6px",
                 marginBottom: "12px",
+                marginRight: "10px",
                 hover: {
                     backgroundColor: appConfig.theme.colors.neutrals[700],
                 },
             }}
         >
+            {/* Message Header */}
+            <MessageHeader mensagem={mensagem} delete={props.delete} />
+            {/* Mensagem de texto */}
             <Box
                 styleSheet={{
-                    marginBottom: "8px",
+                    paddingLeft: "40px",
                 }}
             >
-                <Image
+                {mensagem.texto}
+            </Box>
+        </Box>
+    );
+}
+
+function MessageHeader(props) {
+    const mensagem = props.mensagem;
+
+    return (
+        <Box
+            styleSheet={{
+                marginBottom: "8px",
+                display: "block",
+                flexDirection: "column",
+            }}
+        >
+            {/* Remetente da mensagem */}
+            <Box
+                styleSheet={{
+                    width: "100%",
+                    marginBottom: "16px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                }}
+            >
+                <MessageSender mensagem={mensagem} />
+                <Icon
+                    name={"FaTrash"}
                     styleSheet={{
-                        width: "20px",
-                        height: "20px",
-                        borderRadius: "50%",
-                        display: "inline-block",
-                        marginRight: "8px",
+                        marginLeft: "15px",
+                        width: "15px",
+                        height: "15px",
+                        color: appConfig.theme.colors.neutrals["400"],
+                        focus: {
+                            color: appConfig.theme.colors.primary["600"],
+                        },
+                        hover: {
+                            color: appConfig.theme.colors.primary["400"],
+                        },
+                        display: "flex",
+                        alignItems: "center",
                     }}
-                    src={`https://github.com/${mensagem.de}.png`}
+                    onClick={(e) => {
+                        props.delete(mensagem.id);
+                    }}
                 />
+            </Box>
+        </Box>
+    );
+}
+
+function MessageSender(props) {
+    const mensagem = props.mensagem;
+
+    return (
+        <Box
+            styleSheet={{
+                display: "flex",
+                flexDirection: "row",
+            }}
+        >
+            {/* Foto do remetente */}
+            <Image
+                styleSheet={{
+                    width: "32px",
+                    height: "32px",
+                    borderRadius: "50%",
+                    display: "inline-block",
+                    marginRight: "8px",
+                }}
+                src={`https://github.com/${mensagem.de}.png`}
+            />
+            <Box
+                styleSheet={{
+                    display: "flex",
+                    flexDirection: "column",
+                }}
+            >
+                {/* Remetente */}
                 <Text tag="strong">{mensagem.de}</Text>
+
+                {/* Hora da mensagem */}
                 <Text
                     styleSheet={{
                         fontSize: "10px",
                         marginLeft: "8px",
+
                         color: appConfig.theme.colors.neutrals[300],
                     }}
                     tag="span"
@@ -236,7 +330,6 @@ function MessageItem(props) {
                     {new Date().toLocaleDateString()}
                 </Text>
             </Box>
-            {mensagem.texto}
-        </Text>
+        </Box>
     );
 }
