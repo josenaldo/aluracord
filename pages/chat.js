@@ -24,11 +24,11 @@ export default function ChatPage() {
         setMessageList(result);
     }
 
-    function dhandleSendMessage(newMessageText) {
+    function handleSendMessage(newMessageText) {
         const message = {
             id: uuidv4(),
-            de: "josenaldo",
-            texto: newMessageText,
+            from: "josenaldo",
+            text: newMessageText,
             sendDate: new Date(),
         };
         setMessageList([message, ...messageList]);
@@ -81,7 +81,7 @@ export default function ChatPage() {
                             padding: "16px",
                         }}
                     >
-                        <MessageList mensagens={messageList} delete={handleDeleteMessage}/>
+                        <MessageList messages={messageList} delete={handleDeleteMessage}/>
 
                         <Box
                             as="form"
@@ -101,7 +101,7 @@ export default function ChatPage() {
                                 onKeyPress={(event) => {
                                     if (event.key === "Enter") {
                                         event.preventDefault();
-                                        dhandleSendMessage(message);
+                                        handleSendMessage(message);
                                     }
                                 }}
                                 placeholder="Insira sua message aqui..."
@@ -123,7 +123,7 @@ export default function ChatPage() {
                                 type="submit"
                                 onClick={(event) => {
                                     event.preventDefault();
-                                    dhandleSendMessage(message);
+                                    handleSendMessage(message);
                                     document.querySelector("textarea").focus();
                                 }}
                                 iconName="arrowRight"
@@ -182,7 +182,7 @@ function Header() {
 }
 
 function MessageList(props) {
-    const mensagens = props.mensagens;
+    const messages = props.messages;
     return (
         <Box
             as="ul"
@@ -196,7 +196,7 @@ function MessageList(props) {
                 overflow: "auto",
             }}
         >
-            {mensagens.map((message) => {
+            {messages.map((message) => {
                 return (
                     <MessageItem
                         key={message.id}
@@ -233,9 +233,10 @@ function MessageItem(props) {
             <Box
                 styleSheet={{
                     paddingLeft: "40px",
+                    color: appConfig.theme.colors.neutrals["200"],
                 }}
             >
-                {message.texto}
+                {message.text}
             </Box>
         </Box>
     );
@@ -307,7 +308,7 @@ function MessageSender(props) {
                     display: "inline-block",
                     marginRight: "8px",
                 }}
-                src={`https://github.com/${message.de}.png`}
+                src={`https://github.com/${message.from}.png`}
             />
             <Box
                 styleSheet={{
@@ -316,7 +317,7 @@ function MessageSender(props) {
                 }}
             >
                 {/* Remetente */}
-                <Text tag="strong">{message.de}</Text>
+                <Text tag="strong">{message.from}</Text>
 
                 {/* Hora da message */}
                 <Text
