@@ -2,7 +2,6 @@
     "name": "Discórdia",
     "description": "A comunidade de quem quer treta!",
     "theme": {
-        "background-commented": "https://virtualbackgrounds.site/wp-content/uploads/2020/08/the-matrix-digital-rain.jpg",
         "background": "/images/bg.jpg",
         "colors": {
             "primary": {

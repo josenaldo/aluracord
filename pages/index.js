@@ -1,73 +1,29 @@
-import React from 'react';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
+import React from "react";
+import { useRouter } from "next/router";
+import Head from "next/head";
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
+import PropTypes from "prop-types";
+
+
+import Alert from "@mui/material/Alert";
+
 import appConfig from "../config.json";
 
-function Titulo(props) {
-    const Tag = props.tag || "h1";
-    return (
-        <>
-            <Tag>{props.children}</Tag>
-            <style jsx>{`
-                ${Tag} {
-                    color: ${appConfig.theme.colors.primary["500"]};
-                    font-size: 48px;
-                    font-weight: 600;
-                }
-            `}</style>
-        </>
-    );
-}
-
-function Photo(props) {
-    const username = props.children;
-    return (
-        <>
-            <Image
-                styleSheet={{
-                    borderRadius: "50%",
-                    marginBottom: "16px",
-                    border: '5px solid',
-                    borderColor: appConfig.theme.colors.primary[800],
-                    backgroundColor:
-                        appConfig.theme.colors.primary["500"],
-                }}
-
-                src={props.avatarUrl}
-                alt={props.fullname}
-            />
-            <Text
-                variant="body4"
-                styleSheet={{
-                    color: appConfig.theme.colors.neutrals["000"],
-                    backgroundColor:
-                        appConfig.theme.colors.primary["700"],
-                    padding: "10px 15px",
-                    borderRadius: "1000px",
-                    textAlign: "center"
-                }}
-            >
-                {props.fullname || props.login}
-            </Text>
-        </>
-    )
-}
-
 export default function PaginaInicial() {
-    const [username, setUsername] = React.useState("");
-    const [showAvatar, setShowAvatar] = React.useState(false);
-    const [avatarURL, setAvatarURL] = React.useState(false);
-    const [fullname, setFullname] = React.useState("");
-    const [login, setLogin] = React.useState("");
-    const roteamento = useRouter();
+    const [user, setUser] = React.useState(null);
 
     return (
         <>
             <Head>
                 <title>{appConfig.name}</title>
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-                <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+                <link
+                    rel="stylesheet"
+                    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+                />
+                <link
+                    rel="stylesheet"
+                    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                />
             </Head>
 
             <Box
@@ -76,7 +32,7 @@ export default function PaginaInicial() {
                     alignItems: "center",
                     justifyContent: "center",
                     backgroundColor: appConfig.theme.colors.primary[500],
-                    backgroundImage: "url("+ appConfig.theme.background + ")",
+                    backgroundImage: "url(" + appConfig.theme.background + ")",
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundBlendMode: "multiply",
@@ -85,8 +41,7 @@ export default function PaginaInicial() {
                 <Box
                     styleSheet={{
                         display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
+                        justifyContent: "space-evenly",
                         flexDirection: {
                             xs: "column",
                             sm: "row",
@@ -102,111 +57,17 @@ export default function PaginaInicial() {
                 >
                     {/* Formulário */}
                     <Box
-                        as="form"
-                        onSubmit={function(event){
-                            event.preventDefault();
-                            console.log('Alguém submeteu o form')
-                            // Ativando o roteamento
-                            roteamento.push('/chat')
-                        }}
                         styleSheet={{
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
-                            justifyContent: "center",
+                            justifyContent: "space-evenly",
                             width: { xs: "100%", sm: "50%" },
-                            textAlign: "center",
-                            marginBottom: "32px",
                         }}
                     >
-                        <Titulo tag="h2">{appConfig.name}</Titulo>
-                        <Text
-                            variant="body3"
-                            styleSheet={{
-                                marginBottom: "32px",
-                                color: appConfig.theme.colors.primary[700],
-                            }}
-                        >
-                            {appConfig.description}
-                        </Text>
+                        <Title title={appConfig.name} subTitle={appConfig.description} />
 
-                        <TextField
-                            value={username}
-                            onChange={function (event) {
-                                console.log('usuario digitou', event.target.value);
-                                // Onde está o valor
-                                const valor = event.target.value;
-                                // Trocar o valor da variável através do react e avisa quem precisa
-                                setUsername(valor)
-
-                                if(valor.length >= 3) {
-                                    const url = "https://api.github.com/users/" + valor
-                                    fetch(url)
-                                    .then(response => {
-                                        if (!response.ok) {
-                                            console.log(response);
-                                            throw new Error(response.status);
-                                        }
-                                        return response.json();
-                                    })
-                                    .then(data => {
-                                        console.log(data);
-                                        setAvatarURL(data.avatar_url);
-                                        setLogin(data.login);
-                                        setFullname(data.name);
-                                        setShowAvatar(true);
-                                    }).catch(error => {
-                                            console.log(error);
-                                            if(error.message === "403") {
-                                                setAvatarURL('/images/load.svg');
-                                                setLogin('Aguarde');
-                                                setFullname("Github não quer falar com você agora. Volta mais tarde.");
-                                            }else if(error.message  === "404") {
-                                                setAvatarURL('/images/blank.svg');
-                                                setLogin('Não Encontrado');
-                                                setFullname("Nem sei de quem você tá falando.");
-                                            }else {
-                                                setAvatarURL('/images/error.svg');
-                                                setLogin('ERRO');
-                                                setFullname("Pronto. Ferrou com tudo. Tá satisfeito?");
-                                            }
-                                            setShowAvatar(true);
-                                        }
-                                    );
-                                }else{
-                                    setShowAvatar(false)
-                                }
-
-
-                            }}
-                            fullWidth
-                            textFieldColors={{
-                                neutral: {
-                                    textColor:
-                                        appConfig.theme.colors.neutrals[200],
-                                    mainColor:
-                                        appConfig.theme.colors.neutrals[900],
-                                    mainColorHighlight:
-                                        appConfig.theme.colors.primary[500],
-                                    backgroundColor:
-                                        appConfig.theme.colors.neutrals[800],
-                                },
-                            }}
-                        />
-                        <Button
-                            type="submit"
-                            label="Entrar"
-                            fullWidth
-                            buttonColors={{
-                                contrastColor:
-                                    appConfig.theme.colors.neutrals["000"],
-                                mainColor: appConfig.theme.colors.primary["500"],
-                                mainColorLight:
-                                    appConfig.theme.colors.primary["400"],
-                                mainColorStrong:
-                                    appConfig.theme.colors.primary["600"],
-                            }}
-                        />
+                        <LoginForm handleSelectUser={setUser} />
                     </Box>
                     {/* Formulário */}
 
@@ -214,9 +75,10 @@ export default function PaginaInicial() {
                     <Box
                         styleSheet={{
                             display: "flex",
-                            flexDirection: "column",
+                            // flexDirection: "column",
                             alignItems: "center",
                             maxWidth: "200px",
+                            width: "200px",
                             padding: "16px",
                             backgroundColor:
                                 appConfig.theme.colors.primary["600"],
@@ -226,11 +88,254 @@ export default function PaginaInicial() {
                             minHeight: "240px",
                         }}
                     >
-                        {showAvatar ? <Photo avatarUrl={avatarURL} fullname={fullname} login={login}/> : ""}
+                        {user ? <Photo user={user} /> : ""}
                     </Box>
                     {/* Photo Area */}
                 </Box>
             </Box>
+        </>
+    );
+}
+
+function Title(props) {
+    const tag = props.tag || "h1";
+    const title = props.title;
+    const subTitle = props.subTitle;
+    return (
+        <Box>
+            <Text
+                as={tag}
+                styleSheet={{
+                    color: appConfig.theme.colors.primary["500"],
+                    fontSize: "48px",
+                    fontWeight: "600",
+                }}
+            >
+                {title}
+            </Text>
+            <SubTitle>{subTitle}</SubTitle>
+        </Box>
+    );
+}
+
+Title.propTypes = {
+    title: PropTypes.func.isRequired,
+    subTitle: PropTypes.func.isRequired,
+}
+
+function SubTitle(props) {
+    const tag = props.tag || "h2";
+    return (
+        <Text
+            as={tag}
+            styleSheet={{
+                color: appConfig.theme.colors.primary[700],
+            }}
+        >
+            {props.children}
+        </Text>
+    );
+}
+
+function LoginForm(props) {
+    const handleSelectUser = props.handleSelectUser;
+
+    const [errorMessage, setErrorMessage] = React.useState(null);
+    const [warningMessage, setWarningMessage] = React.useState(null);
+
+    const [username, setUsername] = React.useState("");
+    const [user, setUser] = React.useState(null);
+
+    const router = useRouter();
+
+    function searchUser() {
+        if (username.length >= 3) {
+            const url = "https://api.github.com/users/" + username;
+            fetch(url)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(response.status);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    setUser(data);
+                    handleSelectUser(data);
+                    setErrorMessage(null);
+                    setWarningMessage(null);
+                })
+                .catch((error) => {
+                    if (error.message === "403") {
+                        setWarningMessage(
+                            "Github não quer falar com você agora. Volta mais tarde."
+                        );
+                        setUser(null);
+                        handleSelectUser(null);
+                    } else if (error.message === "404") {
+                        setErrorMessage(
+                            "Não faço a mínima ideia de quem seja essa criatura!"
+                        );
+                        setUser(null);
+                        handleSelectUser(null);
+                    } else {
+                        console.log(error);
+                        setErrorMessage(
+                            "MIZERA! VOCÊ ME QUEBROU! TÁ SATISFEITO?"
+                        );
+                        setUser(null);
+                        handleSelectUser(null);
+                    }
+                });
+        } else {
+            setWarningMessage("Usuário precisa ter ao menos 3 caracteres.");
+            setUser(null);
+            handleSelectUser(null);
+        }
+    }
+
+    return (
+        <Box
+            as="form"
+            onSubmit={function (event) {
+                event.preventDefault();
+                searchUser();
+            }}
+            styleSheet={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+                textAlign: "center",
+            }}
+        >
+            <TextField
+                value={username}
+                fullWidth
+                textFieldColors={{
+                    neutral: {
+                        textColor: appConfig.theme.colors.neutrals[200],
+                        mainColor: appConfig.theme.colors.neutrals[900],
+                        mainColorHighlight: appConfig.theme.colors.primary[500],
+                        backgroundColor: appConfig.theme.colors.neutrals[800],
+                    },
+                }}
+                onChange={function (event) {
+                    event.preventDefault();
+                    const valor = event.target.value;
+                    setUsername(valor);
+                }}
+            />
+            <Box
+                styleSheet={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    width: "100%",
+                }}
+            >
+                <Button
+                    type="button"
+                    label="Buscar Usuário"
+                    fullWidth
+                    buttonColors={{
+                        contrastColor: appConfig.theme.colors.neutrals["000"],
+                        mainColor: appConfig.theme.colors.primary["500"],
+                        mainColorLight: appConfig.theme.colors.primary["400"],
+                        mainColorStrong: appConfig.theme.colors.primary["600"],
+                    }}
+                    styleSheet={{
+                        margin: "5px",
+                        display: "block",
+                    }}
+                    onClick={(event) => {
+                        searchUser();
+                    }}
+                />
+
+                <Button
+                    type="button"
+                    label="Entrar"
+                    disabled={!user}
+                    fullWidth
+                    buttonColors={{
+                        contrastColor: appConfig.theme.colors.neutrals["000"],
+                        mainColor: appConfig.theme.colors.primary["500"],
+                        mainColorLight: appConfig.theme.colors.primary["400"],
+                        mainColorStrong: appConfig.theme.colors.primary["600"],
+                    }}
+                    styleSheet={{
+                        margin: "5px",
+                        display: "block",
+                    }}
+                    onClick={(event) => {
+                        router.push(`/chat?username=${user.name}`);
+                    }}
+                />
+            </Box>
+
+            {errorMessage ? (
+                <Alert
+                    severity="error"
+                    onClose={() => {
+                        setErrorMessage(null);
+                    }}
+                    sx={{
+                        marginBottom: "10px",
+                    }}
+                >
+                    {errorMessage}
+                </Alert>
+            ) : (
+                ""
+            )}
+
+            {warningMessage ? (
+                <Alert
+                    severity="warning"
+                    onClose={() => {
+                        setWarningMessage(null);
+                    }}
+                    sx={{
+                        marginBottom: "10px",
+                    }}
+                >
+                    {warningMessage}
+                </Alert>
+            ) : (
+                ""
+            )}
+        </Box>
+    );
+}
+
+function Photo(props) {
+    const user = props.user;
+    return (
+        <>
+            <Image
+                styleSheet={{
+                    borderRadius: "50%",
+                    marginBottom: "16px",
+                    border: "5px solid",
+                    borderColor: appConfig.theme.colors.primary[800],
+                    backgroundColor: appConfig.theme.colors.primary["500"],
+                }}
+                src={user.avatar_url}
+                alt={user.name}
+            />
+            <Text
+                variant="body4"
+                styleSheet={{
+                    color: appConfig.theme.colors.neutrals["000"],
+                    backgroundColor: appConfig.theme.colors.primary["700"],
+                    padding: "10px 15px",
+                    borderRadius: "1000px",
+                    textAlign: "center",
+                }}
+            >
+                {user.name || user.login}
+            </Text>
         </>
     );
 }
