@@ -242,6 +242,7 @@ export default function ChatPage() {
                     </Box>
                 </Box>
             </Box>
+
             <ProfileDialog
                 user={user}
                 open={openProfileDialog}
