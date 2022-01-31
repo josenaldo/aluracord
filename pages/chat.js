@@ -8,10 +8,11 @@ import {
 } from "@skynexui/components";
 import React from "react";
 import Head from "next/head";
-import appConfig from "../config.json";
 import ScrollableFeed from "react-scrollable-feed";
 import { createClient } from "@supabase/supabase-js";
-import  ProfileDialog from "../src/ProfileDialog.js";
+import appConfig from "../config.json";
+import ProfileDialog from "../src/ProfileDialog.js";
+
 
 /*
 DESAFIOS:
@@ -30,7 +31,7 @@ export default function ChatPage() {
     const [messageList, setMessageList] = React.useState([]);
     const [showLoad, setShowLoad] = React.useState(false);
     const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
-    const [selectedUsername, setSelectedUsername] = React.useState(null);
+    const [user, setUser] = React.useState(null);
 
     React.useEffect(() => {
         setShowLoad(true);
@@ -77,14 +78,38 @@ export default function ChatPage() {
     }
 
     function handleOpenProfileDialog(username) {
-        console.log("Abrindo modal: " + username);
-        setOpenProfileDialog(true);
-        setSelectedUsername(username);
+        setShowLoad(true);
+
+        const url = "https://api.github.com/users/" + username;
+        fetch(url)
+            .then((response) => {
+                if (!response.ok) {
+                    console.log(response);
+                    throw new Error(response.status);
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setUser(data);
+                setOpenProfileDialog(true);
+                setShowLoad(false);
+            })
+            .catch((error) => {
+                console.log(error);
+                if (error.message === "403") {
+                    // setFullname("Github não quer falar com você agora. Volta mais tarde.");
+                } else if (error.message === "404") {
+                    // setFullname("Nem sei de quem você tá falando.");
+                } else {
+                    // setFullname("Pronto. Ferrou com tudo. Tá satisfeito?");
+                }
+                setShowLoad(false);
+            });
     }
 
     function handleCloseProfileDialog() {
         setOpenProfileDialog(false);
-        setSelectedUsername(null);
+        setUser(null);
     }
 
     return (
@@ -218,7 +243,7 @@ export default function ChatPage() {
                 </Box>
             </Box>
             <ProfileDialog
-                selectedUsername={selectedUsername}
+                user={user}
                 open={openProfileDialog}
                 onClose={handleCloseProfileDialog}
             />
@@ -339,7 +364,7 @@ function MessageHeader(props) {
         <Box
             styleSheet={{
                 marginBottom: "8px",
-                display: "block",
+                display: "flex",
                 flexDirection: "column",
             }}
         >

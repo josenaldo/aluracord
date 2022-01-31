@@ -1,4 +1,22 @@
 import appConfig from "../config.json";
+import { createTheme } from '@mui/material/styles';
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            light: "#7737ae",
+            main: "#55059a",
+            dark: "#3b036b",
+            contrastText: "#ffffff",
+        },
+        secondary: {
+            light: "#339388",
+            main: "#00796b",
+            dark: "#00544a",
+            contrastText: "#ffffff",
+        },
+    },
+});
 
 function GlobalStyle() {
     return (
