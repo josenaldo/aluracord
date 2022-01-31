@@ -81,10 +81,16 @@
 ### Aula 05
 
 - [ ] [Vídeo da Aula](https://www.alura.com.br/imersao-react/aula05-chat-e-realtime)
+- [ ] [Arquivos da aula 05](https://github.com/alura-challenges/aluracord-matrix/pull/7/files)
+- [ ] Transição
 
 #### Links citados na aula 05
 
-- [ ]
+- [ ] [Stickers do AluraVerso!](https://www.alura.com.br/artigos/stickers-dev-aluraverso-whatsapp-telegram)
+- [ ] [Componente ButtonSendSticker](https://github.com/alura-challenges/aluracord-matrix/blob/aula05/src/components/ButtonSendSticker.js)
+- [ ] [Dicas de programação do DevSoutinho](https://www.youtube.com/playlist?list=PLTcmLKdIkOWkJY8LJXs1GDqBnxCGsExBO)
+- [ ] [Como criar um jogo do ZERO!](https://www.youtube.com/playlist?list=PLTcmLKdIkOWmeNferJ292VYKBXydGeDej)
+- [ ] [DevSoutinho - Dicas de React e Web em geral](https://www.youtube.com/playlist?list=PLTcmLKdIkOWkVld6KvLJbUCPIOjqLg9cr)
 
 ## Lives
 
