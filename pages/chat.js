@@ -11,12 +11,10 @@ import Head from "next/head";
 import appConfig from "../config.json";
 import ScrollableFeed from "react-scrollable-feed";
 import { createClient } from "@supabase/supabase-js";
+import  ProfileDialog from "../src/ProfileDialog.js";
 
 /*
 DESAFIOS:
-- Como usuário, desejo ver um loading ao abrir o chat, enquanto as mensagens são careegadas
-- Como usuário, desejo ver um load ao enviar uma mensagem, enquanto ela é enviada
-- Como usuário, desejo ver um load ao remover mensagens, enquanto ela é removida
 - Como usuário, desejo clicar no avatar do usuário e ver um popup com os dados do usuário,
     como Nome completo, usuário do github, link para twitter (se tiver), bio do github (se houver) e
     link para o perfil do github.
@@ -31,6 +29,8 @@ export default function ChatPage() {
     const [message, setMessage] = React.useState("");
     const [messageList, setMessageList] = React.useState([]);
     const [showLoad, setShowLoad] = React.useState(false);
+    const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
+    const [selectedUsername, setSelectedUsername] = React.useState(null);
 
     React.useEffect(() => {
         setShowLoad(true);
@@ -76,10 +76,29 @@ export default function ChatPage() {
             });
     }
 
+    function handleOpenProfileDialog(username) {
+        console.log("Abrindo modal: " + username);
+        setOpenProfileDialog(true);
+        setSelectedUsername(username);
+    }
+
+    function handleCloseProfileDialog() {
+        setOpenProfileDialog(false);
+        setSelectedUsername(null);
+    }
+
     return (
         <>
             <Head>
                 <title>{appConfig.name} - Chat</title>
+                <link
+                    rel="stylesheet"
+                    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+                />
+                <link
+                    rel="stylesheet"
+                    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                />
             </Head>
             <Box
                 styleSheet={{
@@ -125,6 +144,7 @@ export default function ChatPage() {
                         <MessageList
                             messages={messageList}
                             delete={handleDeleteMessage}
+                            handleOpenProfileDialog={handleOpenProfileDialog}
                         />
 
                         <Box
@@ -197,6 +217,11 @@ export default function ChatPage() {
                     </Box>
                 </Box>
             </Box>
+            <ProfileDialog
+                selectedUsername={selectedUsername}
+                open={openProfileDialog}
+                onClose={handleCloseProfileDialog}
+            />
         </>
     );
 }
@@ -259,6 +284,9 @@ function MessageList(props) {
                             key={message.id}
                             message={message}
                             delete={props.delete}
+                            handleOpenProfileDialog={
+                                props.handleOpenProfileDialog
+                            }
                         ></MessageItem>
                     );
                 })}
@@ -286,7 +314,11 @@ function MessageItem(props) {
             }}
         >
             {/* Message Header */}
-            <MessageHeader message={message} delete={props.delete} />
+            <MessageHeader
+                message={message}
+                delete={props.delete}
+                handleOpenProfileDialog={props.handleOpenProfileDialog}
+            />
             {/* Message de texto */}
             <Box
                 styleSheet={{
@@ -321,7 +353,10 @@ function MessageHeader(props) {
                     justifyContent: "space-between",
                 }}
             >
-                <MessageSender message={message} />
+                <MessageSender
+                    message={message}
+                    handleOpenProfileDialog={props.handleOpenProfileDialog}
+                />
                 <Icon
                     name={"FaTrash"}
                     styleSheet={{
@@ -367,6 +402,9 @@ function MessageSender(props) {
                     marginRight: "8px",
                 }}
                 src={`https://github.com/${message.from}.png`}
+                onClick={(e) => {
+                    props.handleOpenProfileDialog(message.from);
+                }}
             />
             <Box
                 styleSheet={{
