@@ -123,7 +123,7 @@
     - [Loading do chat](https://loading.io/asset/546203)
     - [Material Color tool](https://material.io/resources/color)
     - [Material Color System](https://material.io/design/color/the-color-system.html)
-    - [Material UI Theme Creator](https://bareynol.github.io/mui-theme-creator/)
+    - [Material UI Theme Creator](https://bareynol.github.io/mui-theme-creator)
 - [Otimizador de imagens](https://png2jpg.com/)
 - [Vercel](https://vercel.com/)
 - [React JS](https://pt-br.reactjs.org/)

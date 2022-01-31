@@ -29,7 +29,7 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 export default function ChatPage() {
     const [message, setMessage] = React.useState("");
     const [messageList, setMessageList] = React.useState([]);
-    const [showLoad, setShowLoad] = React.useState(false);
+    const [showLoad, setShowLoad] = React.useState(true);
     const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
     const [user, setUser] = React.useState(null);
 
