@@ -9,22 +9,10 @@ import {
 import React from "react";
 import Head from "next/head";
 import ScrollableFeed from "react-scrollable-feed";
-import { createClient } from "@supabase/supabase-js";
+import { useRouter } from "next/router";
+import { supabase } from "../src/SupabaaseClient.js";
 import appConfig from "../config.json";
 import ProfileDialog from "../src/ProfileDialog.js";
-
-
-/*
-DESAFIOS:
-- Como usuário, desejo clicar no avatar do usuário e ver um popup com os dados do usuário,
-    como Nome completo, usuário do github, link para twitter (se tiver), bio do github (se houver) e
-    link para o perfil do github.
-*/
-
-const SUPABASE_URL = "https://eeewrjggkkqbdtdrfvcu.supabase.co";
-const SUPABASE_ANON_KEY =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzU3MjYzOCwiZXhwIjoxOTU5MTQ4NjM4fQ.3CDCiDIRmD7vU-YviNLhmXj83mk6L-QMjucyKFYjaZE";
-const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export default function ChatPage(props) {
     const [message, setMessage] = React.useState("");
@@ -32,24 +20,44 @@ export default function ChatPage(props) {
     const [showLoad, setShowLoad] = React.useState(true);
     const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
     const [user, setUser] = React.useState(null);
+    const [selectedUser, setSelectedUser] = React.useState(null);
+    const router = useRouter();
 
-    console.log(props);
-    const loggedUser = props.location.state.user;
+    async function checkUser() {
+        const user = supabase.auth.user();
+        console.log(user);
+        if (user === null) {
+            router.push(`/`);
+        }
+        setUser(user);
+    }
+
+    async function signOut() {
+        await supabase.auth.signOut();
+        setUser(null);
+        router.push(`/`);
+    }
 
     React.useEffect(() => {
         setShowLoad(true);
-        supabaseClient
+
+        checkUser();
+
+        console.log("Carregando mensagens");
+        supabase
             .from("Message")
             .select("*")
             .then(({ data }) => {
                 setMessageList(data);
                 setShowLoad(false);
             });
+
+        setShowLoad(false);
     }, []);
 
     function handleDeleteMessage(messageId) {
         setShowLoad(true);
-        supabaseClient
+        supabase
             .from("Message")
             .delete()
             .match({ id: messageId })
@@ -70,7 +78,7 @@ export default function ChatPage(props) {
             sendDate: new Date(),
         };
 
-        supabaseClient
+        supabase
             .from("Message")
             .insert([message])
             .then(({ data }) => {
@@ -82,8 +90,8 @@ export default function ChatPage(props) {
 
     function handleOpenProfileDialog(username) {
         setShowLoad(true);
-
         const url = "https://api.github.com/users/" + username;
+        console.log(url);
         fetch(url)
             .then((response) => {
                 if (!response.ok) {
@@ -93,7 +101,8 @@ export default function ChatPage(props) {
                 return response.json();
             })
             .then((data) => {
-                setUser(data);
+                console.log("dados do github: ", data);
+                setSelectedUser(data);
                 setOpenProfileDialog(true);
                 setShowLoad(false);
             })
@@ -106,13 +115,14 @@ export default function ChatPage(props) {
                 } else {
                     // setFullname("Pronto. Ferrou com tudo. Tá satisfeito?");
                 }
+                setSelectedUser(null);
                 setShowLoad(false);
             });
     }
 
     function handleCloseProfileDialog() {
         setOpenProfileDialog(false);
-        setUser(null);
+        setSelectedUser(null);
     }
 
     return (
@@ -155,7 +165,7 @@ export default function ChatPage(props) {
                         padding: "32px",
                     }}
                 >
-                    <Header showLoad={showLoad} loggedUser={loggedUser}/>
+                    <Header showLoad={showLoad} signOut={signOut} user={user} />
                     <Box
                         styleSheet={{
                             position: "relative",
@@ -247,7 +257,7 @@ export default function ChatPage(props) {
             </Box>
 
             <ProfileDialog
-                user={user}
+                user={selectedUser}
                 open={openProfileDialog}
                 onClose={handleCloseProfileDialog}
             />
@@ -257,7 +267,9 @@ export default function ChatPage(props) {
 
 function Header(props) {
     const showLoad = props.showLoad || false;
-    const loggedUser = props.loggedUser;
+    const user = props.user;
+    const signOut = props.signOut;
+
     return (
         <>
             <Box
@@ -280,15 +292,15 @@ function Header(props) {
                     }}
                 />
 
-                <Text>
-                    {loggedUser.name}
-                </Text>
+                {user ? <Text>{user.user_metadata.name}</Text> : "Não logado"}
 
                 <Button
                     variant="tertiary"
                     colorVariant="neutral"
                     label="Logout"
-                    href="/"
+                    onClick={(event) => {
+                        signOut();
+                    }}
                 />
             </Box>
         </>

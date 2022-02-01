@@ -150,16 +150,13 @@ function LoginForm(props) {
     const router = useRouter();
 
     React.useEffect(() => {
-        /* when the app loads, check to see if the user is signed in */
         checkUser();
-        /* check user on OAuth redirect */
         window.addEventListener("hashchange", function () {
             checkUser();
         });
     }, []);
 
     async function checkUser() {
-        /* if a user is signed in, update local state */
         const user = supabase.auth.user();
         console.log(user);
         setUser(user);
@@ -167,78 +164,16 @@ function LoginForm(props) {
     }
 
     async function signInWithGithub() {
-        /* authenticate with GitHub */
         await supabase.auth.signIn({
             provider: "github",
         });
     }
 
     async function signOut() {
-        /* sign the user out */
         await supabase.auth.signOut();
         setUser(null);
         handleSelectUser(null);
     }
-
-    // function searchUser() {
-    //     if (username.length >= 3) {
-    //         const url = "https://api.github.com/users/" + username;
-    //         fetch(url)
-    //             .then((response) => {
-    //                 if (!response.ok) {
-    //                     throw new Error(response.status);
-    //                 }
-    //                 return response.json();
-    //             })
-    //             .then((data) => {
-    //                 setUser(data);
-    //                 handleSelectUser(data);
-    //                 setErrorMessage(null);
-    //                 setWarningMessage(null);
-    //             })
-    //             .catch((error) => {
-    //                 if (error.message === "403") {
-    //                     setWarningMessage(
-    //                         "Github não quer falar com você agora. Volta mais tarde."
-    //                     );
-    //                     setUser(null);
-    //                     handleSelectUser(null);
-    //                 } else if (error.message === "404") {
-    //                     setErrorMessage(
-    //                         "Não faço a mínima ideia de quem seja essa criatura!"
-    //                     );
-    //                     setUser(null);
-    //                     handleSelectUser(null);
-    //                 } else {
-    //                     console.log(error);
-    //                     setErrorMessage(
-    //                         "MIZERA! VOCÊ ME QUEBROU! TÁ SATISFEITO?"
-    //                     );
-    //                     setUser(null);
-    //                     handleSelectUser(null);
-    //                 }
-    //             });
-    //     } else {
-    //         setWarningMessage("Usuário precisa ter ao menos 3 caracteres.");
-    //         setUser(null);
-    //         handleSelectUser(null);
-    //     }
-    // }
-
-    // async function signInWithGithub() {
-    //     const { user, session, error } = await supabase.auth.signIn({
-    //         // provider can be 'github', 'google', 'gitlab', and more
-    //         provider: "github",
-    //     });
-    //     if (user) {
-    //         setUser(user);
-    //         handleSelectUser(user);
-    //     }
-    // }
-
-    // async function signout() {
-    //     const { error } = await supabase.auth.signOut();
-    // }
 
     return (
         <Box
@@ -256,32 +191,6 @@ function LoginForm(props) {
                 textAlign: "center",
             }}
         >
-            {/* <TextField
-                value={username}
-                fullWidth
-                autoFocus
-                textFieldColors={{
-                    neutral: {
-                        textColor: appConfig.theme.colors.neutrals[200],
-                        mainColor: appConfig.theme.colors.neutrals[900],
-                        mainColorHighlight: appConfig.theme.colors.primary[500],
-                        backgroundColor: appConfig.theme.colors.neutrals[800],
-                    },
-                }}
-                onChange={function (event) {
-                    event.preventDefault();
-                    const valor = event.target.value;
-                    setUsername(valor);
-                }}
-            /> */}
-            {/* <Box
-                styleSheet={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    width: "100%",
-                }}
-            > */}
             {!user ? (
                 <Button
                     type="button"

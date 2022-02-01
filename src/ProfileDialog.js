@@ -58,7 +58,7 @@ export default function ProfileDialog(props) {
                     >
                         <UserAvatar user={user} />
 
-                        <DialogContentText
+                        <Box
                             sx={{
                                 color: appConfig.theme.colors.neutrals["000"],
                                 display: "flex",
@@ -77,7 +77,7 @@ export default function ProfileDialog(props) {
                             {/* Estatisticas do usuário */}
                             <UserStatBox user={user} />
 
-                        </DialogContentText>
+                        </Box>
                     </Box>
                 ) : (
                     <DialogContentText>
@@ -124,15 +124,16 @@ function UserAvatar(props) {
 }
 
 UserAvatar.propTypes = {
-    user: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
 };
 
 function UserBasicDataBox(props) {
     const user = props.user;
     return (
-        <>
+        <Box>
             {/* Nome completo */}
             <Box
+                as="p"
                 sx={{
                     fontSize: "130%",
                     fontWeight: "bold",
@@ -143,6 +144,7 @@ function UserBasicDataBox(props) {
 
             {/* Cidade */}
             <Box
+                as="p"
                 sx={{
                     color: appConfig.theme.colors.neutrals["300"],
                     fontSize: "80%",
@@ -153,6 +155,7 @@ function UserBasicDataBox(props) {
 
             {/* Bio */}
             <Box
+                as="p"
                 sx={{
                     textAlign: "center",
                     paddingX: "20px",
@@ -164,12 +167,12 @@ function UserBasicDataBox(props) {
             >
                 {user.bio}
             </Box>
-        </>
+        </Box>
     );
 }
 
 UserBasicDataBox.propTypes = {
-    user: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
 };
 
 function UserLinkBox(props) {
@@ -208,7 +211,7 @@ function UserLinkBox(props) {
 }
 
 UserLinkBox.propTypes = {
-    user: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
 };
 
 function UserLink(props) {
@@ -230,8 +233,8 @@ function UserLink(props) {
 }
 
 UserLink.propTypes = {
-    href: PropTypes.func.isRequired,
-    icon: PropTypes.bool.isRequired,
+    href: PropTypes.string.isRequired,
+    icon: PropTypes.object.isRequired,
 };
 
 function UserStatBox(props) {
@@ -249,16 +252,14 @@ function UserStatBox(props) {
             }}
         >
             <StatCard title="Repositórios públicos" stat={user.public_repos} />
-            <DividerStatCard />
             <StatCard title="Seguidores" stat={user.followers} />
-            <DividerStatCard />
             <StatCard title="Seguindo" stat={user.following} />
         </Box>
     );
 }
 
 UserStatBox.propTypes = {
-    user: PropTypes.func.isRequired,
+    user: PropTypes.object.isRequired,
 };
 
 function StatCard(props) {
@@ -300,8 +301,8 @@ function StatCard(props) {
 }
 
 StatCard.propTypes = {
-    title: PropTypes.func.isRequired,
-    stat: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    stat: PropTypes.number.isRequired,
 };
 
 function DividerStatCard(props) {
