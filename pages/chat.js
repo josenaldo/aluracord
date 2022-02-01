@@ -26,12 +26,15 @@ const SUPABASE_ANON_KEY =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzU3MjYzOCwiZXhwIjoxOTU5MTQ4NjM4fQ.3CDCiDIRmD7vU-YviNLhmXj83mk6L-QMjucyKFYjaZE";
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-export default function ChatPage() {
+export default function ChatPage(props) {
     const [message, setMessage] = React.useState("");
     const [messageList, setMessageList] = React.useState([]);
     const [showLoad, setShowLoad] = React.useState(true);
     const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
     const [user, setUser] = React.useState(null);
+
+    console.log(props);
+    const loggedUser = props.location.state.user;
 
     React.useEffect(() => {
         setShowLoad(true);
@@ -152,7 +155,7 @@ export default function ChatPage() {
                         padding: "32px",
                     }}
                 >
-                    <Header showLoad={showLoad} />
+                    <Header showLoad={showLoad} loggedUser={loggedUser}/>
                     <Box
                         styleSheet={{
                             position: "relative",
@@ -254,6 +257,7 @@ export default function ChatPage() {
 
 function Header(props) {
     const showLoad = props.showLoad || false;
+    const loggedUser = props.loggedUser;
     return (
         <>
             <Box
@@ -275,6 +279,10 @@ function Header(props) {
                         transition: "opacity 0.5s",
                     }}
                 />
+
+                <Text>
+                    {loggedUser.name}
+                </Text>
 
                 <Button
                     variant="tertiary"

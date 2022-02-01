@@ -76,7 +76,6 @@
 - [ ] [API do GitHub](https://api.github.com/users/omariosouto)
 - [ ] [Dev em T](https://www.alura.com.br/dev-em-t)
 - [ ] [Pacote de stickers da Alura](https://www.alura.com.br/artigos/stickers-dev-aluraverso-whatsapp-telegram)
-- [ ] [Os 12 fatores](https://12factor.net/pt_br/)
 
 ### Aula 05
 
@@ -108,6 +107,8 @@
 - [ ] [Next.JS e React: Curso Intensivo - Masterclass #01 [2021]](https://www.youtube.com/watch?v=PHKaJlAeNLk)
 - [ ] [Next.JS e React: Curso Intensivo: Aplicação Completa - Masterclass #02 [2021]](https://www.youtube.com/watch?v=HJN5rX-3SDM)
 - [ ] [Web Vitals](https://web.dev/vitals/)
+- [ ] [Os 12 fatores](https://12factor.net/pt_br/)
+- [ ] [7 Principles of Rich Web Applications](https://rauchg.com/2014/7-principles-of-rich-web-applications)
 
 ## Documentação do React
 
@@ -117,6 +118,9 @@
     - [ ] [Introdução](https://pt-br.reactjs.org/docs/getting-started.html)
     - [ ] [Principais Conceitos](https://pt-br.reactjs.org/docs/hello-world.html)
 - [ ] [Github do React](https://github.com/facebook/react)
+- [ ] [Como começar a estruturar um projeto React? com NextJS, Styled Components](https://www.youtube.com/watch?v=mJK5oGixSYo&list=PLUZtVUpn6Q5NHHON53nRsqaJu68soTbQb&index=1)
+- [ ] [Lista de vídeos do Mario Souto](https://www.youtube.com/playlist?list=PLUZtVUpn6Q5NHHON53nRsqaJu68soTbQb)
+
 
 ## Ferramentas
 

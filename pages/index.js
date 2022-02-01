@@ -3,8 +3,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
 import PropTypes from "prop-types";
-
-
+import { supabase } from "../src/SupabaaseClient.js";
 import Alert from "@mui/material/Alert";
 
 import appConfig from "../config.json";
@@ -65,7 +64,10 @@ export default function PaginaInicial() {
                             width: { xs: "100%", sm: "50%" },
                         }}
                     >
-                        <Title title={appConfig.name} subTitle={appConfig.description} />
+                        <Title
+                            title={appConfig.name}
+                            subTitle={appConfig.description}
+                        />
 
                         <LoginForm handleSelectUser={setUser} />
                     </Box>
@@ -119,9 +121,9 @@ function Title(props) {
 }
 
 Title.propTypes = {
-    title: PropTypes.func.isRequired,
-    subTitle: PropTypes.func.isRequired,
-}
+    title: PropTypes.string.isRequired,
+    subTitle: PropTypes.string.isRequired,
+};
 
 function SubTitle(props) {
     const tag = props.tag || "h2";
@@ -143,55 +145,100 @@ function LoginForm(props) {
     const [errorMessage, setErrorMessage] = React.useState(null);
     const [warningMessage, setWarningMessage] = React.useState(null);
 
-    const [username, setUsername] = React.useState("");
     const [user, setUser] = React.useState(null);
 
     const router = useRouter();
 
-    function searchUser() {
-        if (username.length >= 3) {
-            const url = "https://api.github.com/users/" + username;
-            fetch(url)
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error(response.status);
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    setUser(data);
-                    handleSelectUser(data);
-                    setErrorMessage(null);
-                    setWarningMessage(null);
-                })
-                .catch((error) => {
-                    if (error.message === "403") {
-                        setWarningMessage(
-                            "Github não quer falar com você agora. Volta mais tarde."
-                        );
-                        setUser(null);
-                        handleSelectUser(null);
-                    } else if (error.message === "404") {
-                        setErrorMessage(
-                            "Não faço a mínima ideia de quem seja essa criatura!"
-                        );
-                        setUser(null);
-                        handleSelectUser(null);
-                    } else {
-                        console.log(error);
-                        setErrorMessage(
-                            "MIZERA! VOCÊ ME QUEBROU! TÁ SATISFEITO?"
-                        );
-                        setUser(null);
-                        handleSelectUser(null);
-                    }
-                });
-        } else {
-            setWarningMessage("Usuário precisa ter ao menos 3 caracteres.");
-            setUser(null);
-            handleSelectUser(null);
-        }
+    React.useEffect(() => {
+        /* when the app loads, check to see if the user is signed in */
+        checkUser();
+        /* check user on OAuth redirect */
+        window.addEventListener("hashchange", function () {
+            checkUser();
+        });
+    }, []);
+
+    async function checkUser() {
+        /* if a user is signed in, update local state */
+        const user = supabase.auth.user();
+        console.log(user);
+        setUser(user);
+        handleSelectUser(user);
     }
+
+    async function signInWithGithub() {
+        /* authenticate with GitHub */
+        await supabase.auth.signIn({
+            provider: "github",
+        });
+    }
+
+    async function signOut() {
+        /* sign the user out */
+        await supabase.auth.signOut();
+        setUser(null);
+        handleSelectUser(null);
+    }
+
+    // function searchUser() {
+    //     if (username.length >= 3) {
+    //         const url = "https://api.github.com/users/" + username;
+    //         fetch(url)
+    //             .then((response) => {
+    //                 if (!response.ok) {
+    //                     throw new Error(response.status);
+    //                 }
+    //                 return response.json();
+    //             })
+    //             .then((data) => {
+    //                 setUser(data);
+    //                 handleSelectUser(data);
+    //                 setErrorMessage(null);
+    //                 setWarningMessage(null);
+    //             })
+    //             .catch((error) => {
+    //                 if (error.message === "403") {
+    //                     setWarningMessage(
+    //                         "Github não quer falar com você agora. Volta mais tarde."
+    //                     );
+    //                     setUser(null);
+    //                     handleSelectUser(null);
+    //                 } else if (error.message === "404") {
+    //                     setErrorMessage(
+    //                         "Não faço a mínima ideia de quem seja essa criatura!"
+    //                     );
+    //                     setUser(null);
+    //                     handleSelectUser(null);
+    //                 } else {
+    //                     console.log(error);
+    //                     setErrorMessage(
+    //                         "MIZERA! VOCÊ ME QUEBROU! TÁ SATISFEITO?"
+    //                     );
+    //                     setUser(null);
+    //                     handleSelectUser(null);
+    //                 }
+    //             });
+    //     } else {
+    //         setWarningMessage("Usuário precisa ter ao menos 3 caracteres.");
+    //         setUser(null);
+    //         handleSelectUser(null);
+    //     }
+    // }
+
+    // async function signInWithGithub() {
+    //     const { user, session, error } = await supabase.auth.signIn({
+    //         // provider can be 'github', 'google', 'gitlab', and more
+    //         provider: "github",
+    //     });
+    //     if (user) {
+    //         setUser(user);
+    //         handleSelectUser(user);
+    //     }
+    // }
+
+    // async function signout() {
+    //     const { error } = await supabase.auth.signOut();
+    // }
 
     return (
         <Box
@@ -209,9 +256,10 @@ function LoginForm(props) {
                 textAlign: "center",
             }}
         >
-            <TextField
+            {/* <TextField
                 value={username}
                 fullWidth
+                autoFocus
                 textFieldColors={{
                     neutral: {
                         textColor: appConfig.theme.colors.neutrals[200],
@@ -225,18 +273,19 @@ function LoginForm(props) {
                     const valor = event.target.value;
                     setUsername(valor);
                 }}
-            />
-            <Box
+            /> */}
+            {/* <Box
                 styleSheet={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     width: "100%",
                 }}
-            >
+            > */}
+            {!user ? (
                 <Button
                     type="button"
-                    label="Buscar Usuário"
+                    label="Logar no Github"
                     fullWidth
                     buttonColors={{
                         contrastColor: appConfig.theme.colors.neutrals["000"],
@@ -249,30 +298,50 @@ function LoginForm(props) {
                         display: "block",
                     }}
                     onClick={(event) => {
-                        searchUser();
+                        signInWithGithub();
                     }}
                 />
+            ) : (
+                <Button
+                    type="button"
+                    label="Sair"
+                    fullWidth
+                    buttonColors={{
+                        contrastColor: appConfig.theme.colors.neutrals["000"],
+                        mainColor: appConfig.theme.colors.primary["500"],
+                        mainColorLight: appConfig.theme.colors.primary["400"],
+                        mainColorStrong: appConfig.theme.colors.primary["600"],
+                    }}
+                    styleSheet={{
+                        margin: "5px",
+                        display: "block",
+                    }}
+                    onClick={(event) => {
+                        signOut();
+                    }}
+                />
+            )}
 
-                <Button
-                    type="button"
-                    label="Entrar"
-                    disabled={!user}
-                    fullWidth
-                    buttonColors={{
-                        contrastColor: appConfig.theme.colors.neutrals["000"],
-                        mainColor: appConfig.theme.colors.primary["500"],
-                        mainColorLight: appConfig.theme.colors.primary["400"],
-                        mainColorStrong: appConfig.theme.colors.primary["600"],
-                    }}
-                    styleSheet={{
-                        margin: "5px",
-                        display: "block",
-                    }}
-                    onClick={(event) => {
-                        router.push(`/chat?username=${user.name}`);
-                    }}
-                />
-            </Box>
+            <Button
+                type="button"
+                label="Entrar no Chat"
+                disabled={!user}
+                fullWidth
+                buttonColors={{
+                    contrastColor: appConfig.theme.colors.neutrals["000"],
+                    mainColor: appConfig.theme.colors.primary["500"],
+                    mainColorLight: appConfig.theme.colors.primary["400"],
+                    mainColorStrong: appConfig.theme.colors.primary["600"],
+                }}
+                styleSheet={{
+                    margin: "5px",
+                    display: "block",
+                }}
+                onClick={(event) => {
+                    router.push(`/chat`);
+                }}
+            />
+            {/* </Box> */}
 
             {errorMessage ? (
                 <Alert
@@ -312,7 +381,13 @@ function LoginForm(props) {
 function Photo(props) {
     const user = props.user;
     return (
-        <>
+        <Box
+            styleSheet={{
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "column",
+            }}
+        >
             <Image
                 styleSheet={{
                     borderRadius: "50%",
@@ -321,8 +396,8 @@ function Photo(props) {
                     borderColor: appConfig.theme.colors.primary[800],
                     backgroundColor: appConfig.theme.colors.primary["500"],
                 }}
-                src={user.avatar_url}
-                alt={user.name}
+                src={user.user_metadata.avatar_url}
+                alt={user.user_metadata.name}
             />
             <Text
                 variant="body4"
@@ -334,8 +409,8 @@ function Photo(props) {
                     textAlign: "center",
                 }}
             >
-                {user.name || user.login}
+                {user.user_metadata.name || user.user_metadata.login}
             </Text>
-        </>
+        </Box>
     );
 }
