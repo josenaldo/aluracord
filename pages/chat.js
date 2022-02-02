@@ -10,9 +10,13 @@ import React from "react";
 import Head from "next/head";
 import ScrollableFeed from "react-scrollable-feed";
 import { useRouter } from "next/router";
+
+import Avatar from "@mui/material/Avatar";
+
 import { supabase } from "../src/SupabaaseClient.js";
 import appConfig from "../config.json";
-import ProfileDialog from "../src/ProfileDialog.js";
+import ProfileDialog from "../src/components/ProfileDialog.js";
+import ButtonSendSticker from "../src/components/ButtonSendSticker.js";
 
 export default function ChatPage(props) {
     const [message, setMessage] = React.useState("");
@@ -281,7 +285,7 @@ function Header(props) {
                     justifyContent: "space-between",
                 }}
             >
-                <Text variant="heading5">Chat</Text>
+                <Text variant="heading5">Discórdia Chat</Text>
 
                 <Image
                     src="/images/load-chat.svg"
@@ -292,19 +296,105 @@ function Header(props) {
                     }}
                 />
 
-                {user ? <Text>{user.user_metadata.name}</Text> : "Não logado"}
-
-                <Button
-                    variant="tertiary"
-                    colorVariant="neutral"
-                    label="Logout"
-                    onClick={(event) => {
-                        signOut();
+                <Box
+                    styleSheet={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
                     }}
-                />
+                >
+                    <Avatar
+                        alt={user.user_metadata.name}
+                        src={user.user_metadata.avatar_url}
+                        sx={{
+                            width: 40,
+                            height: 40,
+                            marginX: "5px",
+                        }}
+                    />
+                    {user ? (
+                        <Text
+                            styleSheet={{
+                                marginX: "5px",
+                            }}
+                        >
+                            {user.user_metadata.user_name}
+                        </Text>
+                    ) : (
+                        "Não logado"
+                    )}
+                    <Button
+                        variant="tertiary"
+                        colorVariant="neutral"
+                        label="Logout"
+                        onClick={(event) => {
+                            signOut();
+                        }}
+                    />
+                </Box>
             </Box>
         </>
     );
+}
+
+function SendMessageBox(props) {
+    <Box
+        as="form"
+        styleSheet={{
+            display: "flex",
+            position: "relative",
+            display: "flex",
+            flexDirection: "row",
+        }}
+    >
+        <TextField
+            value={message}
+            onChange={(event) => {
+                const valor = event.target.value;
+                setMessage(valor);
+            }}
+            onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    handleSendMessage(message);
+                }
+            }}
+            placeholder="Insira sua message aqui..."
+            type="textarea"
+            styleSheet={{
+                width: "100%",
+                border: "0",
+                resize: "none",
+                borderRadius: "5px",
+                padding: "6px 8px",
+                backgroundColor: appConfig.theme.colors.neutrals[800],
+                marginRight: "12px",
+                color: appConfig.theme.colors.neutrals[200],
+                height: "100%",
+            }}
+        ></TextField>
+        <Button
+            type="submit"
+            onClick={(event) => {
+                event.preventDefault();
+                handleSendMessage(message);
+                document.querySelector("textarea").focus();
+            }}
+            iconName="arrowRight"
+            styleSheet={{
+                color: appConfig.theme.colors.neutrals["100"],
+                backgroundColor: appConfig.theme.colors.primary["500"],
+                transition: "0.5s",
+                marginBottom: "6px",
+                focus: {
+                    backgroundColor: appConfig.theme.colors.primary["600"],
+                },
+                hover: {
+                    backgroundColor: appConfig.theme.colors.primary["400"],
+                },
+            }}
+        />
+    </Box>;
 }
 
 function MessageList(props) {
