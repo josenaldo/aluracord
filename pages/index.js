@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { Box, Button, Text, TextField, Image } from "@skynexui/components";
 import PropTypes from "prop-types";
-import { supabase } from "../src/SupabaaseClient.js";
+import { supabase } from "../src/SupabaseClient.js";
 import Alert from "@mui/material/Alert";
 
 import appConfig from "../config.json";
