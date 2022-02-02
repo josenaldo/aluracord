@@ -1,20 +1,27 @@
+import React from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+
 import {
-    Box,
     Text,
     TextField,
     Image,
     Button,
     Icon,
 } from "@skynexui/components";
-import React from "react";
-import Head from "next/head";
+
+import {
+    Box,
+    Grid,
+    Avatar,
+    CircularProgress,
+} from "@mui/material";
+
 import ScrollableFeed from "react-scrollable-feed";
-import { useRouter } from "next/router";
 
-import Avatar from "@mui/material/Avatar";
-
-import { supabase } from "../src/SupabaaseClient.js";
 import appConfig from "../config.json";
+import { supabase } from "../src/SupabaaseClient.js";
+import { eventBus } from "../src/EventBus";
 import ProfileDialog from "../src/components/ProfileDialog.js";
 import ButtonSendSticker from "../src/components/ButtonSendSticker.js";
 
@@ -143,7 +150,7 @@ export default function ChatPage(props) {
                 />
             </Head>
             <Box
-                styleSheet={{
+                sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -156,7 +163,7 @@ export default function ChatPage(props) {
                 }}
             >
                 <Box
-                    styleSheet={{
+                    sx={{
                         display: "flex",
                         flexDirection: "column",
                         flex: 1,
@@ -171,7 +178,7 @@ export default function ChatPage(props) {
                 >
                     <Header showLoad={showLoad} signOut={signOut} user={user} />
                     <Box
-                        styleSheet={{
+                        sx={{
                             position: "relative",
                             display: "flex",
                             flex: 1,
@@ -191,7 +198,7 @@ export default function ChatPage(props) {
 
                         <Box
                             as="form"
-                            styleSheet={{
+                            sx={{
                                 display: "flex",
                                 position: "relative",
                                 display: "flex",
@@ -275,9 +282,88 @@ function Header(props) {
     const signOut = props.signOut;
 
     return (
-        <>
-            <Box
-                styleSheet={{
+        <Box
+            sx={{
+                flexGrow: 1,
+            }}
+        >
+            <Grid container spacing={3}>
+                <Grid
+                    item
+                    xs={4}
+                    sx={{ display: "flex", alignItems: "center" }}
+                >
+                    <Text
+                        variant="heading5"
+                        // styleSheet={{ display: "flex", alignItems: "center" }}
+                    >
+                        Discórdia Chat
+                    </Text>
+                </Grid>
+                <Grid
+                    item
+                    xs={4}
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                    }}
+                >
+                    {showLoad ? <CircularProgress color="secondary" /> : ""}
+                </Grid>
+
+                <Grid
+                    item
+                    xs={4}
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "end",
+                    }}
+                >
+                    {user ? (
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "row",
+                                alignItems: "center",
+                            }}
+                        >
+                            <Avatar
+                                alt={user.user_metadata.name}
+                                src={user.user_metadata.avatar_url}
+                                sx={{
+                                    width: 40,
+                                    height: 40,
+                                    // marginX: "5px",
+                                }}
+                            />
+                            <Text
+                                styleSheet={
+                                    {
+                                        // marginX: "5px",
+                                    }
+                                }
+                            >
+                                {user.user_metadata.user_name}
+                            </Text>
+                            <Button
+                                variant="tertiary"
+                                colorVariant="neutral"
+                                label="Logout"
+                                onClick={(event) => {
+                                    signOut();
+                                }}
+                            />
+                        </Box>
+                    ) : (
+                        "Não logado"
+                    )}
+                </Grid>
+            </Grid>
+
+            {/* <Box
+                sx={{
                     width: "100%",
                     marginBottom: "16px",
                     display: "flex",
@@ -285,62 +371,18 @@ function Header(props) {
                     justifyContent: "space-between",
                 }}
             >
-                <Text variant="heading5">Discórdia Chat</Text>
 
-                <Image
-                    src="/images/load-chat.svg"
-                    alt="Carregando conversa"
-                    styleSheet={{
-                        opacity: showLoad ? "1" : "0",
-                        transition: "opacity 0.5s",
-                    }}
-                />
 
-                <Box
-                    styleSheet={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                    }}
-                >
-                    <Avatar
-                        alt={user.user_metadata.name}
-                        src={user.user_metadata.avatar_url}
-                        sx={{
-                            width: 40,
-                            height: 40,
-                            marginX: "5px",
-                        }}
-                    />
-                    {user ? (
-                        <Text
-                            styleSheet={{
-                                marginX: "5px",
-                            }}
-                        >
-                            {user.user_metadata.user_name}
-                        </Text>
-                    ) : (
-                        "Não logado"
-                    )}
-                    <Button
-                        variant="tertiary"
-                        colorVariant="neutral"
-                        label="Logout"
-                        onClick={(event) => {
-                            signOut();
-                        }}
-                    />
-                </Box>
-            </Box>
-        </>
+
+            </Box> */}
+        </Box>
     );
 }
 
 function SendMessageBox(props) {
     <Box
         as="form"
-        styleSheet={{
+        sx={{
             display: "flex",
             position: "relative",
             display: "flex",
@@ -361,7 +403,7 @@ function SendMessageBox(props) {
             }}
             placeholder="Insira sua message aqui..."
             type="textarea"
-            styleSheet={{
+            sx={{
                 width: "100%",
                 border: "0",
                 resize: "none",
@@ -381,7 +423,7 @@ function SendMessageBox(props) {
                 document.querySelector("textarea").focus();
             }}
             iconName="arrowRight"
-            styleSheet={{
+            sx={{
                 color: appConfig.theme.colors.neutrals["100"],
                 backgroundColor: appConfig.theme.colors.primary["500"],
                 transition: "0.5s",
@@ -403,7 +445,7 @@ function MessageList(props) {
     return (
         <Box
             as="ul"
-            styleSheet={{
+            sx={{
                 overflow: "scroll",
                 display: "flex",
                 flexDirection: "column",
@@ -439,7 +481,7 @@ function MessageItem(props) {
         // Message
         <Box
             as={tag}
-            styleSheet={{
+            sx={{
                 borderRadius: "5px",
                 padding: "6px",
                 marginBottom: "12px",
@@ -457,7 +499,7 @@ function MessageItem(props) {
             />
             {/* Message de texto */}
             <Box
-                styleSheet={{
+                sx={{
                     paddingLeft: "40px",
                     color: appConfig.theme.colors.neutrals["200"],
                 }}
@@ -473,7 +515,7 @@ function MessageHeader(props) {
 
     return (
         <Box
-            styleSheet={{
+            sx={{
                 marginBottom: "8px",
                 display: "flex",
                 flexDirection: "column",
@@ -481,7 +523,7 @@ function MessageHeader(props) {
         >
             {/* Remetente da message */}
             <Box
-                styleSheet={{
+                sx={{
                     width: "100%",
                     marginBottom: "16px",
                     display: "flex",
@@ -523,7 +565,7 @@ function MessageSender(props) {
 
     return (
         <Box
-            styleSheet={{
+            sx={{
                 display: "flex",
                 flexDirection: "row",
             }}
@@ -543,7 +585,7 @@ function MessageSender(props) {
                 }}
             />
             <Box
-                styleSheet={{
+                sx={{
                     display: "flex",
                     flexDirection: "column",
                 }}

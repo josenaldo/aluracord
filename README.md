@@ -95,6 +95,10 @@
 - [ ] [Como criar um jogo do ZERO!](https://www.youtube.com/playlist?list=PLTcmLKdIkOWmeNferJ292VYKBXydGeDej)
 - [ ] [DevSoutinho - Dicas de React e Web em geral](https://www.youtube.com/playlist?list=PLTcmLKdIkOWkVld6KvLJbUCPIOjqLg9cr)
 
+### Links usados na aula 05
+
+- [ ] [Understanding Functional Components vs. Class Components in React](https://www.twilio.com/blog/react-choose-functional-components)
+
 ## Lives
 
 - [x] [Imersão React | Carreira Front-End em 2022](https://www.youtube.com/watch?v=HXkDb5pnMRQ)

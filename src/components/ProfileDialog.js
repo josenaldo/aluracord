@@ -305,14 +305,3 @@ StatCard.propTypes = {
     stat: PropTypes.number.isRequired,
 };
 
-function DividerStatCard(props) {
-    return (
-        <Divider
-            orientation="vertical"
-            flexItem
-            sx={{
-                borderColor: appConfig.theme.colors.neutrals["500"],
-            }}
-        />
-    );
-}
