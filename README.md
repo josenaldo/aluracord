@@ -7,13 +7,14 @@
 
 ### Aula 01
 
-- [x] [Vídeo da aula](https://www.alura.com.br/imersao-react/aula01-react-aluracord)
+- [x] [Página da aula](https://www.alura.com.br/imersao-react/aula01-react-aluracord)
+- [x] [Vídeo da aula](https://www.youtube.com/watch?v=nJWxNe7SVmk)
 - [x] [Arquivos da aula 01](https://github.com/alura-challenges/aluracord-matrix/pull/1/files)
-- [ ] [Transcrição da aula](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula01.md)
+- [x] [Transcrição da aula](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula01.md)
 
 #### Links citados na aula 01
 
-- [ ] [React](https://pt-br.reactjs.org/docs/create-a-new-react-app.html#recommended-toolchains)
+- [ ] [React recommended tool chains](https://pt-br.reactjs.org/docs/create-a-new-react-app.html#recommended-toolchains)
 - [ ] [Mario Souto - Strategy Pattern](https://www.youtube.com/watch?v=S-jqd6WZ7M0)
 - [ ] [Mario Souto - Pegando dados de uma API com React](https://www.youtube.com/watch?v=85vJXFpXLQw)
 - [ ] [Mario Souto - O sistema de rotas do NextJS, principais dúvidas](https://www.youtube.com/watch?v=-kVnp3fg-v4)
@@ -23,13 +24,13 @@
 - [ ] [Flexbox Froggy](https://flexboxfroggy.com/)
 - [ ] [Mario Souto - Storybook na prática](https://www.youtube.com/watch?v=R41_Qedrzik&t=7s)
 - [ ] [Mario Souto - Configurando ambiente JavaScript/NodeJS/Yarn](https://www.youtube.com/watch?v=GIz71YGzwP4)
-- [ ] [Documentação interativa com Storybook do SkynexUI](https://storybook.skynexui.dev/?path=/story/components-box--box-component)
 
 ### Aula 02
 
-- [ ] [Vídeo da aula](https://www.alura.com.br/imersao-react/aula02-react-state-form)
-- [ ] [Arquivos da aula 02](https://github.com/alura-challenges/aluracord-matrix/pull/3/files)
-- [ ] [Transcrição da aula](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula02.md)
+- [x] [Página da aula](https://www.alura.com.br/imersao-react/aula02-react-state-form)
+- [x] [Vídeo da aula](https://www.youtube.com/watch?v=X-hV4GrYsAI)
+- [x] [Arquivos da aula 02](https://github.com/alura-challenges/aluracord-matrix/pull/3/files)
+- [x] [Transcrição da aula](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula02.md)
 
 #### Links citados na aula 02
 
@@ -45,11 +46,12 @@
 
 ### Aula 03
 
-- [ ] [Vídeo da aula](https://www.alura.com.br/imersao-react/aula03-chat-offline)
-- [ ] [Arquivos da aula 03](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
-- [ ] [Template base da página do Chat usado no começo da aula](https://gist.github.com/omariosouto/8517c711f36770b73371185e4aed92d6)
-- [ ] [Código da aula completo com tudo o que fizemos na aula](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
-- [ ] [Transcrição](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula03)
+- [x] [Página da aula 03](https://www.alura.com.br/imersao-react/aula03-chat-offline)
+- [x] [Vídeo da aula 03](https://www.youtube.com/watch?v=7tH0ZWWvHus)
+- [x] [Arquivos da aula 03](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
+- [x] [Transcrição da aula 03](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula03)
+- [x] [Template base da página do Chat usado no começo da aula 03](https://gist.github.com/omariosouto/8517c711f36770b73371185e4aed92d6)
+- [ ] [Código da aula completo com tudo o que fizemos na aula 03](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
 
 #### Links citados na aula 03
 
@@ -64,9 +66,10 @@
 
 ### Aula 04
 
-- [ ] [Vídeo da Aula](https://www.alura.com.br/imersao-react/aula04-supabase-e-ajax)
-- [ ] [Arquivos da aula 04](https://github.com/alura-challenges/aluracord-matrix/pull/5/files)
-- [ ] [Transcrição](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula04.md)
+- [x] [Página da aula 04](https://www.alura.com.br/imersao-react/aula04-supabase-e-ajax)
+- [x] [Vídeo da aula 04](https://www.youtube.com/watch?v=svfXXCV_Ne8)
+- [x] [Arquivos da aula 04](https://github.com/alura-challenges/aluracord-matrix/pull/5/files)
+- [x] [Transcrição da aula 04](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula04.md)
 
 #### Links citados na aula 04
 
@@ -79,9 +82,10 @@
 
 ### Aula 05
 
-- [ ] [Vídeo da Aula](https://www.alura.com.br/imersao-react/aula05-chat-e-realtime)
+- [x] [Página da aula 05](https://www.alura.com.br/imersao-react/aula05-chat-e-realtime)
+- [ ] [Vídeo da aula 05](https://www.youtube.com/watch?v=Fyc91hsvYMA)
 - [ ] [Arquivos da aula 05](https://github.com/alura-challenges/aluracord-matrix/pull/7/files)
-- [ ] Transição
+- [ ] [Transcrição da aula 05](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula05.md)
 
 #### Links citados na aula 05
 
@@ -109,6 +113,8 @@
 - [ ] [Web Vitals](https://web.dev/vitals/)
 - [ ] [Os 12 fatores](https://12factor.net/pt_br/)
 - [ ] [7 Principles of Rich Web Applications](https://rauchg.com/2014/7-principles-of-rich-web-applications)
+- [ ] [Lista de vídeos do Mario Souto](https://www.youtube.com/playlist?list=PLUZtVUpn6Q5NHHON53nRsqaJu68soTbQb)
+- [ ] [Como começar a estruturar um projeto React? com NextJS, Styled Components](https://www.youtube.com/watch?v=mJK5oGixSYo&list=PLUZtVUpn6Q5NHHON53nRsqaJu68soTbQb&index=1)
 
 ## Documentação do React
 
@@ -118,11 +124,8 @@
     - [ ] [Introdução](https://pt-br.reactjs.org/docs/getting-started.html)
     - [ ] [Principais Conceitos](https://pt-br.reactjs.org/docs/hello-world.html)
 - [ ] [Github do React](https://github.com/facebook/react)
-- [ ] [Como começar a estruturar um projeto React? com NextJS, Styled Components](https://www.youtube.com/watch?v=mJK5oGixSYo&list=PLUZtVUpn6Q5NHHON53nRsqaJu68soTbQb&index=1)
-- [ ] [Lista de vídeos do Mario Souto](https://www.youtube.com/playlist?list=PLUZtVUpn6Q5NHHON53nRsqaJu68soTbQb)
 
-
-## Ferramentas
+## Ferramentas, Frameworks e Libs
 
 - [Figma](https://www.figma.com/)
 - [Coolors.co - Gerador de Paletas](https://coolors.co/)
