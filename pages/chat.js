@@ -102,6 +102,7 @@ export default function ChatPage(props) {
 
     function handleOpenProfileDialog(username) {
         eventBus.dispatch(Events.START_LOADING);
+
         const url = "https://api.github.com/users/" + username;
         console.log(url);
         fetch(url)
@@ -287,7 +288,7 @@ function Header(props) {
                 marginBottom: "10px",
             }}
         >
-            <Grid container spacing={3}>
+            <Grid container spacing={3} >
                 <Grid
                     item
                     xs={4}
@@ -307,9 +308,10 @@ function Header(props) {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        height: "50px",
                     }}
                 >
-                    <Loading color="secondary" />
+                    <Loading/>
                 </Grid>
 
                 <Grid
