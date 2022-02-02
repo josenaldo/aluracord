@@ -31,7 +31,6 @@ export default function ChatPage(props) {
 
     const [message, setMessage] = React.useState("");
     const [messageList, setMessageList] = React.useState([]);
-    const [showLoad, setShowLoad] = React.useState(true);
     const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
     const [user, setUser] = React.useState(null);
     const [selectedUser, setSelectedUser] = React.useState(null);
@@ -178,7 +177,7 @@ export default function ChatPage(props) {
                         padding: "32px",
                     }}
                 >
-                    <Header showLoad={showLoad} signOut={signOut} user={user} />
+                    <Header signOut={signOut} user={user} />
                     <Box
                         sx={{
                             position: "relative",
@@ -279,7 +278,6 @@ export default function ChatPage(props) {
 }
 
 function Header(props) {
-    const showLoad = props.showLoad || false;
     const user = props.user;
     const signOut = props.signOut;
 
@@ -311,7 +309,6 @@ function Header(props) {
                         justifyContent: "center",
                     }}
                 >
-                    {/* {showLoad ? <CircularProgress color="secondary" /> : ""} */}
                     <Loading color="secondary" />
                 </Grid>
 
@@ -338,7 +335,7 @@ function Header(props) {
                                 sx={{
                                     width: 40,
                                     height: 40,
-                                    // marginX: "5px",
+                                    marginX: "5px",
                                 }}
                             />
                             <Text
