@@ -10,4 +10,4 @@ const eventBus = {
     },
 };
 
-export default {eventBus};
+export {eventBus};

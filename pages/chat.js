@@ -21,11 +21,14 @@ import ScrollableFeed from "react-scrollable-feed";
 
 import appConfig from "../config.json";
 import { supabase } from "../src/SupabaaseClient.js";
-import { eventBus } from "../src/EventBus";
+import { eventBus } from "../src/EventBus.js";
+import { Events } from "../src/Events.js";
 import ProfileDialog from "../src/components/ProfileDialog.js";
+import Loading from "../src/components/Loading.js";
 import ButtonSendSticker from "../src/components/ButtonSendSticker.js";
 
 export default function ChatPage(props) {
+
     const [message, setMessage] = React.useState("");
     const [messageList, setMessageList] = React.useState([]);
     const [showLoad, setShowLoad] = React.useState(true);
@@ -50,7 +53,7 @@ export default function ChatPage(props) {
     }
 
     React.useEffect(() => {
-        setShowLoad(true);
+        eventBus.dispatch(Events.START_LOADING);
 
         checkUser();
 
@@ -60,14 +63,13 @@ export default function ChatPage(props) {
             .select("*")
             .then(({ data }) => {
                 setMessageList(data);
-                setShowLoad(false);
+                eventBus.dispatch(Events.STOP_LOADING);
             });
 
-        setShowLoad(false);
     }, []);
 
     function handleDeleteMessage(messageId) {
-        setShowLoad(true);
+        eventBus.dispatch(Events.START_LOADING);
         supabase
             .from("Message")
             .delete()
@@ -77,12 +79,12 @@ export default function ChatPage(props) {
                     return message.id !== messageId;
                 });
                 setMessageList(result);
-                setShowLoad(false);
+                eventBus.dispatch(Events.STOP_LOADING);
             });
     }
 
     function handleSendMessage(newMessageText) {
-        setShowLoad(true);
+        eventBus.dispatch(Events.START_LOADING);
         const message = {
             from: "josenaldo",
             messageText: newMessageText,
@@ -95,12 +97,12 @@ export default function ChatPage(props) {
             .then(({ data }) => {
                 setMessageList([...messageList, data[0]]);
                 setMessage("");
-                setShowLoad(false);
+                eventBus.dispatch(Events.STOP_LOADING);
             });
     }
 
     function handleOpenProfileDialog(username) {
-        setShowLoad(true);
+        eventBus.dispatch(Events.START_LOADING);
         const url = "https://api.github.com/users/" + username;
         console.log(url);
         fetch(url)
@@ -115,7 +117,7 @@ export default function ChatPage(props) {
                 console.log("dados do github: ", data);
                 setSelectedUser(data);
                 setOpenProfileDialog(true);
-                setShowLoad(false);
+                eventBus.dispatch(Events.STOP_LOADING);
             })
             .catch((error) => {
                 console.log(error);
@@ -127,7 +129,7 @@ export default function ChatPage(props) {
                     // setFullname("Pronto. Ferrou com tudo. Tá satisfeito?");
                 }
                 setSelectedUser(null);
-                setShowLoad(false);
+                eventBus.dispatch(Events.STOP_LOADING);
             });
     }
 
@@ -284,7 +286,7 @@ function Header(props) {
     return (
         <Box
             sx={{
-                flexGrow: 1,
+                marginBottom: "10px",
             }}
         >
             <Grid container spacing={3}>
@@ -309,7 +311,8 @@ function Header(props) {
                         justifyContent: "center",
                     }}
                 >
-                    {showLoad ? <CircularProgress color="secondary" /> : ""}
+                    {/* {showLoad ? <CircularProgress color="secondary" /> : ""} */}
+                    <Loading color="secondary" />
                 </Grid>
 
                 <Grid
@@ -341,7 +344,7 @@ function Header(props) {
                             <Text
                                 styleSheet={
                                     {
-                                        // marginX: "5px",
+                                        marginX: "5px",
                                     }
                                 }
                             >
