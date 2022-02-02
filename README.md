@@ -98,6 +98,7 @@
 ### Links usados na aula 05
 
 - [ ] [Understanding Functional Components vs. Class Components in React](https://www.twilio.com/blog/react-choose-functional-components)
+- [ ] [Arrow function expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
 ## Lives
 
@@ -124,10 +125,49 @@
 
 - [x] [NextJS - Getting Started](https://nextjs.org/docs/getting-started)
 - [ ] [Tutorial: Introdução ao React](https://pt-br.reactjs.org/tutorial/tutorial.html)
-- [ ] [Getting Started](https://pt-br.reactjs.org/docs/getting-started.html)
-    - [ ] [Introdução](https://pt-br.reactjs.org/docs/getting-started.html)
-    - [ ] [Principais Conceitos](https://pt-br.reactjs.org/docs/hello-world.html)
 - [ ] [Github do React](https://github.com/facebook/react)
+- [ ] Instalação
+    - [ ] [Introdução](https://pt-br.reactjs.org/docs/getting-started.html)
+    - [ ] [Adicione o React a um site](https://pt-br.reactjs.org/docs/add-react-to-a-website.html)
+    - [ ] [Crie um novo React App](https://pt-br.reactjs.org/docs/create-a-new-react-app.html)
+    - [ ] [CDN Links](https://pt-br.reactjs.org/docs/cdn-links.html)
+    - [ ] [Canais de lançamento](https://pt-br.reactjs.org/docs/release-channels.html)
+- [ ] Principais conceitos
+    - [ ] [1. Hello World](https://pt-br.reactjs.org/docs/hello-world.html)
+    - [ ] [2. Introduzindo JSX](https://pt-br.reactjs.org/docs/introducing-jsx.html)
+    - [ ] [3. Renderizando Elementos](https://pt-br.reactjs.org/docs/rendering-elements.html)
+    - [ ] [4. Componentes e Props](https://pt-br.reactjs.org/docs/components-and-props.html)
+    - [ ] [5. State e Ciclo de Vida](https://pt-br.reactjs.org/docs/state-and-lifecycle.html)
+    - [ ] [6. Manipulando eventos](https://pt-br.reactjs.org/docs/handling-events.html)
+    - [ ] [7. Renderização condicional](https://pt-br.reactjs.org/docs/conditional-rendering.html)
+    - [ ] [8. Listas e Chaves](https://pt-br.reactjs.org/docs/lists-and-keys.html)
+    - [ ] [9. Forms](https://pt-br.reactjs.org/docs/forms.html)
+    - [ ] [10. Elevando o State](https://pt-br.reactjs.org/docs/lifting-state-up.html)
+    - [ ] [11. Composição vs Herança](https://pt-br.reactjs.org/docs/composition-vs-inheritance.html)
+    - [ ] [12. Pensando do jeito React](https://pt-br.reactjs.org/docs/thinking-in-react.html)
+- [ ] Guias avançados
+    - [ ] [Acessibilidade](https://pt-br.reactjs.org/docs/accessibility.html)
+    - [ ] [Dividindo o Código (Code-Splitting)](https://pt-br.reactjs.org/docs/code-splitting.html)
+    - [ ] [Context](https://pt-br.reactjs.org/docs/context.html)
+    - [ ] [Error Boundaries](https://pt-br.reactjs.org/docs/error-boundaries.html)
+    - [ ] [Encaminhamento de Refs](https://pt-br.reactjs.org/docs/forwarding-refs.html)
+    - [ ] [Fragmentos](https://pt-br.reactjs.org/docs/fragments.html)
+    - [ ] [Componentes de Alta-ordem](https://pt-br.reactjs.org/docs/higher-order-components.html)
+    - [ ] [Integrando com outras Bibliotecas](https://pt-br.reactjs.org/docs/integrating-with-other-libraries.html)
+    - [ ] [JSX In Depth](https://pt-br.reactjs.org/docs/jsx-in-depth.html)
+    - [ ] [Otimizando o Desempenho](https://pt-br.reactjs.org/docs/optimizing-performance.html)
+    - [ ] [Portals](https://pt-br.reactjs.org/docs/portals.html)
+    - [ ] [Profiler](https://pt-br.reactjs.org/docs/profiler.html)
+    - [ ] [React sem ES6](https://pt-br.reactjs.org/docs/react-without-es6.html)
+    - [ ] [React sem JSX](https://pt-br.reactjs.org/docs/react-without-jsx.html)
+    - [ ] [Reconciliação (Reconciliation)](https://pt-br.reactjs.org/docs/reconciliation.html)
+    - [ ] [Refs e o DOM](https://pt-br.reactjs.org/docs/refs-and-the-dom.html)
+    - [ ] [Render Props](https://pt-br.reactjs.org/docs/render-props.html)
+    - [ ] [Verificação de Tipo Estático](https://pt-br.reactjs.org/docs/static-type-checking.html)
+    - [ ] [Modo Estrito (Strict Mode)](https://pt-br.reactjs.org/docs/strict-mode.html)
+    - [ ] [Checagem de tipos (Typechecking) com PropTypes](https://pt-br.reactjs.org/docs/typechecking-with-proptypes.html)
+    - [ ] [Componentes não controlados](https://pt-br.reactjs.org/docs/uncontrolled-components.html)
+    - [ ] [Componentes Web](https://pt-br.reactjs.org/docs/web-components.html)
 
 ## Ferramentas, Frameworks e Libs
 
