@@ -1,44 +1,42 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Head from "next/head";
-import { Box, Button, Text, TextField, Image } from "@skynexui/components";
 import PropTypes from "prop-types";
-import { supabase } from "../src/SupabaseClient.js";
-import Alert from "@mui/material/Alert";
+
+import {
+    Alert,
+    Card,
+    Box,
+    Typography,
+    Button,
+    Avatar,
+    Chip,
+} from "@mui/material";
 
 import appConfig from "../config.json";
+import { eventBus } from "../src/EventBus.js";
+import { Events } from "../src/Events.js";
+import { supabase } from "../src/SupabaseClient.js";
 
 export default function PaginaInicial() {
     const [user, setUser] = React.useState(null);
 
     return (
         <>
-            <Head>
-                <title>{appConfig.name}</title>
-                <link
-                    rel="stylesheet"
-                    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-                />
-                <link
-                    rel="stylesheet"
-                    href="https://fonts.googleapis.com/icon?family=Material+Icons"
-                />
-            </Head>
-
             <Box
-                styleSheet={{
+                sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    backgroundColor: appConfig.theme.colors.primary[500],
+                    minHeight: "100%",
                     backgroundImage: "url(" + appConfig.theme.background + ")",
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundBlendMode: "multiply",
+                    // backgroundColor: "primary.dark",
                 }}
             >
-                <Box
-                    styleSheet={{
+                <Card
+                    sx={{
                         display: "flex",
                         justifyContent: "space-evenly",
                         flexDirection: {
@@ -47,16 +45,12 @@ export default function PaginaInicial() {
                         },
                         width: "100%",
                         maxWidth: "700px",
-                        borderRadius: "5px",
                         padding: "32px",
-                        margin: "16px",
-                        boxShadow: "0 2px 10px 0 rgb(0 0 0 / 20%)",
-                        backgroundColor: appConfig.theme.colors.neutrals["000"],
                     }}
                 >
                     {/* Formulário */}
                     <Box
-                        styleSheet={{
+                        sx={{
                             display: "flex",
                             flexDirection: "column",
                             alignItems: "center",
@@ -75,15 +69,14 @@ export default function PaginaInicial() {
 
                     {/* Photo Area */}
                     <Box
-                        styleSheet={{
+                        sx={{
                             display: "flex",
-                            // flexDirection: "column",
+                            flexDirection: "column",
                             alignItems: "center",
                             maxWidth: "200px",
                             width: "200px",
                             padding: "16px",
-                            backgroundColor:
-                                appConfig.theme.colors.primary["600"],
+                            backgroundColor: "primary.dark",
                             border: "1px solid",
                             borderRadius: "10px",
                             flex: 1,
@@ -93,7 +86,7 @@ export default function PaginaInicial() {
                         {user ? <Photo user={user} /> : ""}
                     </Box>
                     {/* Photo Area */}
-                </Box>
+                </Card>
             </Box>
         </>
     );
@@ -105,16 +98,18 @@ function Title(props) {
     const subTitle = props.subTitle;
     return (
         <Box>
-            <Text
-                as={tag}
-                styleSheet={{
-                    color: appConfig.theme.colors.primary["500"],
+            <Typography
+                component={tag}
+                sx={{
+                    color: "primary.dark",
                     fontSize: "48px",
                     fontWeight: "600",
+                    marginY: "0",
+                    textAlign: "center",
                 }}
             >
                 {title}
-            </Text>
+            </Typography>
             <SubTitle>{subTitle}</SubTitle>
         </Box>
     );
@@ -128,14 +123,14 @@ Title.propTypes = {
 function SubTitle(props) {
     const tag = props.tag || "h2";
     return (
-        <Text
-            as={tag}
-            styleSheet={{
-                color: appConfig.theme.colors.primary[700],
+        <Typography
+            component={tag}
+            sx={{
+                color: "primary.dark",
             }}
         >
             {props.children}
-        </Text>
+        </Typography>
     );
 }
 
@@ -147,13 +142,17 @@ function LoginForm(props) {
 
     const [user, setUser] = React.useState(null);
 
+    const [loading, setLoading] = React.useState(false);
+
     const router = useRouter();
 
     React.useEffect(() => {
+        eventBus.dispatch(Events.START_LOADING);
         checkUser();
         window.addEventListener("hashchange", function () {
             checkUser();
         });
+        eventBus.dispatch(Events.STOP_LOADING);
     }, []);
 
     async function checkUser() {
@@ -177,80 +176,61 @@ function LoginForm(props) {
 
     return (
         <Box
-            as="form"
-            onSubmit={function (event) {
-                event.preventDefault();
-                searchUser();
-            }}
-            styleSheet={{
+            sx={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
                 width: "100%",
-                textAlign: "center",
             }}
         >
             {!user ? (
                 <Button
                     type="button"
-                    label="Logar no Github"
+                    variant="contained"
                     fullWidth
-                    buttonColors={{
-                        contrastColor: appConfig.theme.colors.neutrals["000"],
-                        mainColor: appConfig.theme.colors.primary["500"],
-                        mainColorLight: appConfig.theme.colors.primary["400"],
-                        mainColorStrong: appConfig.theme.colors.primary["600"],
-                    }}
-                    styleSheet={{
-                        margin: "5px",
-                        display: "block",
-                    }}
                     onClick={(event) => {
                         signInWithGithub();
                     }}
-                />
+                    sx={{
+                        marginY: "5px",
+                        width: "100%",
+                    }}
+                >
+                    Logar no Github
+                </Button>
             ) : (
                 <Button
                     type="button"
-                    label="Sair"
+                    variant="contained"
                     fullWidth
-                    buttonColors={{
-                        contrastColor: appConfig.theme.colors.neutrals["000"],
-                        mainColor: appConfig.theme.colors.primary["500"],
-                        mainColorLight: appConfig.theme.colors.primary["400"],
-                        mainColorStrong: appConfig.theme.colors.primary["600"],
-                    }}
-                    styleSheet={{
-                        margin: "5px",
-                        display: "block",
-                    }}
                     onClick={(event) => {
                         signOut();
                     }}
-                />
+                    sx={{
+                        marginY: "5px",
+                        width: "100%",
+                    }}
+                >
+                    Sair
+                </Button>
             )}
 
             <Button
                 type="button"
-                label="Entrar no Chat"
+                variant="contained"
                 disabled={!user}
                 fullWidth
-                buttonColors={{
-                    contrastColor: appConfig.theme.colors.neutrals["000"],
-                    mainColor: appConfig.theme.colors.primary["500"],
-                    mainColorLight: appConfig.theme.colors.primary["400"],
-                    mainColorStrong: appConfig.theme.colors.primary["600"],
-                }}
-                styleSheet={{
-                    margin: "5px",
-                    display: "block",
-                }}
                 onClick={(event) => {
                     router.push(`/chat`);
                 }}
-            />
-            {/* </Box> */}
+                sx={{
+                    marginY: "5px",
+                    width: "100%",
+                }}
+            >
+                Entrar no Chat
+            </Button>
 
             {errorMessage ? (
                 <Alert
@@ -291,35 +271,26 @@ function Photo(props) {
     const user = props.user;
     return (
         <Box
-            styleSheet={{
+            sx={{
                 display: "flex",
                 alignItems: "center",
                 flexDirection: "column",
             }}
         >
-            <Image
-                styleSheet={{
+            <Avatar
+                sx={{
+                    width: 150,
+                    height: 150,
                     borderRadius: "50%",
                     marginBottom: "16px",
                     border: "5px solid",
-                    borderColor: appConfig.theme.colors.primary[800],
-                    backgroundColor: appConfig.theme.colors.primary["500"],
+                    borderColor: "primary.dark",
+                    backgroundColor: "primary.main",
                 }}
                 src={user.user_metadata.avatar_url}
-                alt={user.user_metadata.name}
+                alt={user.user_metadata.user_name}
             />
-            <Text
-                variant="body4"
-                styleSheet={{
-                    color: appConfig.theme.colors.neutrals["000"],
-                    backgroundColor: appConfig.theme.colors.primary["700"],
-                    padding: "10px 15px",
-                    borderRadius: "1000px",
-                    textAlign: "center",
-                }}
-            >
-                {user.user_metadata.name || user.user_metadata.login}
-            </Text>
+            <Chip label={user.user_metadata.user_name} color="primary" />
         </Box>
     );
 }

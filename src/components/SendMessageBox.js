@@ -31,7 +31,6 @@ export default function SendMessageBox(props) {
             .from("Message")
             .insert([message])
             .then(({ data }) => {
-                // console.log("data" , data);
                 addMessage(data[0]);
                 setMessage("");
                 eventBus.dispatch(Events.STOP_LOADING);

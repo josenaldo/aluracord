@@ -1,13 +1,11 @@
 import React from "react";
 
-import { Box, IconButton, Icon, Avatar, Typography } from "@mui/material";
+import { Box, IconButton, Avatar, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import ScrollableFeed from "react-scrollable-feed";
 
 import appConfig from "../../config.json";
-import { eventBus } from "../EventBus.js";
-import { Events } from "../Events.js";
 
 export default function MessageList(props) {
     const messages = props.messages;

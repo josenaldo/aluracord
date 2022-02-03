@@ -2,9 +2,9 @@ import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { Text, TextField, Image, Button, Icon } from "@skynexui/components";
+import { Text, Image, Button, Icon } from "@skynexui/components";
 
-import { Box, Grid, Avatar, CircularProgress } from "@mui/material";
+import { Box, Grid, Avatar } from "@mui/material";
 
 import appConfig from "../config.json";
 import { supabase } from "../src/SupabaseClient.js";
@@ -25,7 +25,7 @@ export default function ChatPage(props) {
     const router = useRouter();
 
     setMessageList.bind(this);
-    
+
     async function checkUser() {
         const user = supabase.auth.user();
         console.log(user);
@@ -121,28 +121,19 @@ export default function ChatPage(props) {
 
     return (
         <>
-            <Head>
-                <title>{appConfig.name} - Chat</title>
-                <link
-                    rel="stylesheet"
-                    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-                />
-                <link
-                    rel="stylesheet"
-                    href="https://fonts.googleapis.com/icon?family=Material+Icons"
-                />
-            </Head>
+            
             <Box
+                backgroundColor="secondary.light"
                 sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    backgroundColor: appConfig.theme.colors.primary[500],
+                    // backgroundColor: appConfig.theme.colors.primary[500],
                     backgroundImage: "url(" + appConfig.theme.background + ")",
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover",
                     backgroundBlendMode: "multiply",
-                    color: appConfig.theme.colors.neutrals["000"],
+                    // color: appConfig.theme.colors.neutrals["000"],
                 }}
             >
                 <Box
@@ -152,7 +143,7 @@ export default function ChatPage(props) {
                         flex: 1,
                         boxShadow: "0 2px 10px 0 rgb(0 0 0 / 20%)",
                         borderRadius: "5px",
-                        backgroundColor: appConfig.theme.colors.neutrals[700],
+                        backgroundColor: "primary",
                         height: "100%",
                         maxWidth: "95%",
                         maxHeight: "95vh",
@@ -188,7 +179,7 @@ export default function ChatPage(props) {
                             marginTop: "10px",
                         }}
                     >
-                        <SendMessageBox addMessage={addMessage}/>
+                        <SendMessageBox addMessage={addMessage} />
                     </Box>
                 </Box>
             </Box>
