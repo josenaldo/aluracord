@@ -1,6 +1,15 @@
 import React from "react";
 
-import { Box, IconButton, Avatar, Typography } from "@mui/material";
+import {
+    Box,
+    IconButton,
+    Avatar,
+    Typography,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemText,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import ScrollableFeed from "react-scrollable-feed";
@@ -22,7 +31,7 @@ export default function MessageList(props) {
                 display: "flex",
                 flexDirection: "column",
                 flex: 1,
-                color: appConfig.theme.colors.neutrals["000"],
+                // color: appConfig.theme.colors.neutrals["000"],
                 marginBottom: "16px",
                 overflow: "auto",
             }}
@@ -59,7 +68,7 @@ function MessageItem(props) {
                 marginBottom: "12px",
                 marginRight: "10px",
                 hover: {
-                    backgroundColor: appConfig.theme.colors.neutrals[700],
+                    // backgroundColor: appConfig.theme.colors.neutrals[700],
                 },
             }}
         >
@@ -73,7 +82,7 @@ function MessageItem(props) {
             <Box
                 sx={{
                     paddingLeft: "40px",
-                    color: appConfig.theme.colors.neutrals["200"],
+                    // color: appConfig.theme.colors.neutrals["200"],
                 }}
             >
                 {message.messageText}

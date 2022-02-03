@@ -36,12 +36,12 @@ export default function ProfileDialog(props) {
 
     return (
         <Dialog
-            PaperProps={{
-                sx: {
-                    backgroundColor: appConfig.theme.colors.neutrals["900"],
-                    color: appConfig.theme.colors.neutrals["000"],
-                },
-            }}
+            // PaperProps={{
+            //     sx: {
+            //         backgroundColor: "primary.light",
+            //         // color: appConfig.theme.colors.neutrals["000"],
+            //     },
+            // }}
             TransitionComponent={Transition}
             onClose={handleClose}
             open={open}
@@ -60,7 +60,7 @@ export default function ProfileDialog(props) {
 
                         <Box
                             sx={{
-                                color: appConfig.theme.colors.neutrals["000"],
+                                // color: appConfig.theme.colors.neutrals["000"],
                                 display: "flex",
                                 justifyContent: "center",
                                 alignItems: "center",
@@ -116,7 +116,7 @@ function UserAvatar(props) {
                 width: 120,
                 height: 120,
                 border: "5px solid",
-                borderColor: appConfig.theme.colors.neutrals["500"],
+                // borderColor: "neutrals.main",
                 marginBottom: "20px",
             }}
         />
@@ -146,7 +146,7 @@ function UserBasicDataBox(props) {
             <Box
                 as="p"
                 sx={{
-                    color: appConfig.theme.colors.neutrals["300"],
+                    // color: appConfig.theme.colors.neutrals["300"],
                     fontSize: "80%",
                 }}
             >
@@ -161,7 +161,7 @@ function UserBasicDataBox(props) {
                     paddingX: "20px",
                     paddingY: "10px",
                     fontStyle: "italic",
-                    color: appConfig.theme.colors.neutrals["100"],
+                    // color: "neutrals.light",
                     marginY: "10px",
                 }}
             >
@@ -223,7 +223,7 @@ function UserLink(props) {
             target="_blank"
             rel="noopener"
             sx={{
-                color: appConfig.theme.colors.neutrals["100"],
+                // color: appConfig.theme.colors.neutrals["100"],
                 paddingX: "10px",
             }}
         >
@@ -266,8 +266,8 @@ function StatCard(props) {
     return (
         <Card
             sx={{
-                backgroundColor: appConfig.theme.colors.neutrals["800"],
-                color: appConfig.theme.colors.neutrals["000"],
+                // backgroundColor: appConfig.theme.colors.neutrals["800"],
+                // color: appConfig.theme.colors.neutrals["000"],
                 marginX: "10px",
                 width: "120px",
             }}
@@ -275,7 +275,7 @@ function StatCard(props) {
             <CardHeader
                 title={props.title}
                 sx={{
-                    color: appConfig.theme.colors.neutrals["000"],
+                    // color: appConfig.theme.colors.neutrals["000"],
                     textAlign: "center",
                     height: "60px",
                 }}

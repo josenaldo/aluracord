@@ -1,18 +1,12 @@
 import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
 import Head from "next/head";
-import theme from "../src/theme";
 import appConfig from "../config.json";
-import './styles.css'
+import "./styles.css";
 
 export default function CustomApp({ Component, pageProps }) {
     return (
         <>
             <Head>
-                <meta
-                    name="viewport"
-                    content="initial-scale=1, width=device-width"
-                />
                 <meta
                     name="viewport"
                     content="initial-scale=1, width=device-width"
@@ -26,15 +20,13 @@ export default function CustomApp({ Component, pageProps }) {
                     rel="stylesheet"
                     href="https://fonts.googleapis.com/icon?family=Material+Icons"
                 />
-
             </Head>
 
-            <ThemeProvider theme={theme}>
-                {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-                {/* <GlobalStyle /> */}
-                <CssBaseline />
-                <Component {...pageProps} />
-            </ThemeProvider>
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            {/* <GlobalStyle /> */}
+
+            <CssBaseline />
+            <Component {...pageProps} />
         </>
     );
 }

@@ -1,37 +1,6 @@
 {
     "name": "Discórdia",
     "description": "A comunidade de quem quer treta!",
-    "theme": {
-        "background": "/images/bg.jpg",
-        "colors": {
-            "primary": {
-                "050": "#eee6f5",
-                "100": "#ddcdeb",
-                "200": "#bb9bd7",
-                "300": "#9969c2",
-                "400": "#7737ae",
-                "500": "#55059A",
-                "600": "#44047b",
-                "700": "#33035c",
-                "800": "#22023e",
-                "900": "#11011f"
-            },
-            "neutrals": {
-                "000": "#ffffff",
-                "050": "#ececec",
-                "100": "#dadada",
-                "200": "#b4b4b4",
-                "300": "#8f8f8f",
-                "400": "#696969",
-                "500": "#444444",
-                "600": "#363636",
-                "700": "#292929",
-                "800": "#1b1b1b",
-                "900": "#0e0e0e",
-                "999": "#000000"
-            }
-        }
-    },
     "dateFormat": {
         "year": "numeric",
         "month": "numeric",
@@ -39,7 +8,6 @@
         "hour": "numeric",
         "minute": "numeric",
         "second": "numeric",
-
         "hour12": false,
         "timeZone": "America/Sao_Paulo"
     },

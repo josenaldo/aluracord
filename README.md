@@ -86,6 +86,7 @@
 - [ ] [Vídeo da aula 05](https://www.youtube.com/watch?v=Fyc91hsvYMA)
 - [ ] [Arquivos da aula 05](https://github.com/alura-challenges/aluracord-matrix/pull/7/files)
 - [ ] [Transcrição da aula 05](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula05.md)
+- [ ] [Easily toggle between light and dark theme with Material-UI](https://dev.to/thatanjan/easily-toggle-between-light-and-dark-theme-with-material-ui-2728)
 
 #### Links citados na aula 05
 
