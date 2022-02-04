@@ -118,36 +118,33 @@ export default function ChatPage(props) {
     }
 
     return (
-        <>
-            <Layout>
-                <Card
-                    sx={{
-                        display: "grid",
-                        gap: 0,
-                        flex: 1,
-                        height: "100%",
-                        maxWidth: "95%",
-                        maxHeight: "95vh",
-                        padding: "32px",
-                    }}
-                >
-                    {/* <ChatHeader signOut={signOut} user={user} /> */}
-                    <MessageList
-                        sx={{ flexGrow: 3 }}
-                        messages={messageList}
-                        delete={handleDeleteMessage}
-                        handleOpenProfileDialog={handleOpenProfileDialog}
-                    />
-                    <SendMessageBox addMessage={addMessage} />
-                </Card>
-
+        <Layout>
+            <Card
+                sx={{
+                    display: "grid",
+                    gap: 0,
+                    flex: 1,
+                    height: "100%",
+                    maxWidth: "95%",
+                    maxHeight: "95vh",
+                    padding: "32px",
+                }}
+            >
+                {/* <ChatHeader signOut={signOut} user={user} /> */}
+                <MessageList
+                    sx={{ flexGrow: 3 }}
+                    messages={messageList}
+                    delete={handleDeleteMessage}
+                    handleOpenProfileDialog={handleOpenProfileDialog}
+                />
+                <SendMessageBox addMessage={addMessage} />
+            </Card>
 
             <ProfileDialog
                 user={selectedUser}
                 open={openProfileDialog}
                 onClose={handleCloseProfileDialog}
             />
-            </Layout>
-        </>
+        </Layout>
     );
 }

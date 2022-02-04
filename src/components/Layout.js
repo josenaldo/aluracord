@@ -65,24 +65,27 @@ export default function Layout({ children }) {
 
     return (
         <ThemeProvider theme={theme}>
-            <Box sx={{ display: "grid" }}>
-                <ResponsiveAppBar theme={theme} signOut={signOut} user={user} />
+            <Box
+                sx={{
+                    display: "grid",
+                    gridTemplateRows: "64px 1fr",
+                    margin: 0,
+                    padding: 0,
+                    gap: 0,
+                    // gridAutoFlow: "row",
+                }}
+            >
+                <ResponsiveAppBar theme={theme} signOut={signOut} user={user} sx={{gridArea: 'header'}} />
                 <Box
                     sx={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        // backgroundImage: "url(" + appConfig.theme.background + ")",
-                        // backgroundRepeat: "no-repeat",
-                        // backgroundSize: "cover",
-                        // backgroundBlendMode: "multiply",
                     }}
                 >
                     {React.Children.map(children, (child) =>
-                        React.cloneElement(child, {user: user})
+                        React.cloneElement(child, { user: user })
                     )}
-                    {/* {React.cloneElement(children, {user: user})} */}
-                    {/* {children} */}
                 </Box>
             </Box>
         </ThemeProvider>

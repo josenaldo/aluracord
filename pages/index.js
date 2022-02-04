@@ -16,22 +16,24 @@ import appConfig from "../config.json";
 import { eventBus } from "../src/EventBus.js";
 import { Events } from "../src/Events.js";
 import { supabase } from "../src/SupabaseClient.js";
+import Layout from "../src/components/Layout.js";
+
 
 export default function PaginaInicial() {
     const [user, setUser] = React.useState(null);
 
     return (
-        <>
+        <Layout>
             <Box
                 sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     minHeight: "100%",
-                    backgroundImage: "url(" + appConfig.theme.background + ")",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    backgroundBlendMode: "multiply",
+                    // backgroundImage: "url(" + appConfig.theme.background + ")",
+                    // backgroundRepeat: "no-repeat",
+                    // backgroundSize: "cover",
+                    // backgroundBlendMode: "multiply",
                     // backgroundColor: "primary.dark",
                 }}
             >
@@ -88,7 +90,7 @@ export default function PaginaInicial() {
                     {/* Photo Area */}
                 </Card>
             </Box>
-        </>
+        </Layout>
     );
 }
 
