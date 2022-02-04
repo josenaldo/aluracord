@@ -36,10 +36,9 @@ import MessageList from "./MessageList.js";
 import ResponsiveAppBar from "./ResponsiveAppBar.js";
 import { ThemeProvider } from "@mui/material/styles";
 
-
 export default function Layout({ children }) {
-
     const [user, setUser] = React.useState(null);
+    const router = useRouter();
 
     async function checkUser() {
         const user = supabase.auth.user();
@@ -67,7 +66,7 @@ export default function Layout({ children }) {
     return (
         <ThemeProvider theme={theme}>
             <Box sx={{ display: "grid" }}>
-                <ResponsiveAppBar theme={theme} signOut={signOut} user={user}/>
+                <ResponsiveAppBar theme={theme} signOut={signOut} user={user} />
                 <Box
                     sx={{
                         display: "flex",
@@ -79,8 +78,11 @@ export default function Layout({ children }) {
                         // backgroundBlendMode: "multiply",
                     }}
                 >
+                    {React.Children.map(children, (child) =>
+                        React.cloneElement(child, {user: user})
+                    )}
                     {/* {React.cloneElement(children, {user: user})} */}
-                    {children}
+                    {/* {children} */}
                 </Box>
             </Box>
         </ThemeProvider>
