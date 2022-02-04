@@ -24,66 +24,75 @@ export default function PaginaInicial() {
 
     return (
         <Layout>
-            <Box
-                sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minHeight: "100%",
-                }}
-            >
-                <Card
+            <Box sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flex: 1,
+                        height: "100%",
+                        maxWidth: "100%",
+                        maxHeight: "90vh",
+                        padding: "10px",
+                    }}>
+                <Box
                     sx={{
                         display: "flex",
-                        justifyContent: "space-evenly",
-                        flexDirection: {
-                            xs: "column",
-                            sm: "row",
-                        },
-                        width: "100%",
-                        maxWidth: "700px",
-                        padding: "32px",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        minHeight: "100%",
                     }}
                 >
-                    {/* Formulário */}
-                    <Box
+                    <Card
                         sx={{
                             display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
                             justifyContent: "space-evenly",
-                            width: { xs: "100%", sm: "50%" },
+                            flexDirection: {
+                                xs: "column",
+                                sm: "row",
+                            },
+                            width: "100%",
+                            maxWidth: "700px",
+                            padding: "32px",
                         }}
                     >
-                        <Title
-                            title={appConfig.name}
-                            subTitle={appConfig.description}
-                        />
-
-                        <LoginForm handleSelectUser={setUser} />
-                    </Box>
-                    {/* Formulário */}
-
-                    {/* Photo Area */}
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            maxWidth: "200px",
-                            width: "200px",
-                            padding: "16px",
-                            backgroundColor: "primary.dark",
-                            border: "1px solid",
-                            borderRadius: "10px",
-                            flex: 1,
-                            minHeight: "240px",
-                        }}
-                    >
-                        {user ? <Photo user={user} /> : ""}
-                    </Box>
-                    {/* Photo Area */}
-                </Card>
+                        {/* Formulário */}
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                justifyContent: "space-evenly",
+                                width: { xs: "100%", sm: "50%" },
+                            }}
+                        >
+                            <Title
+                                title={appConfig.name}
+                                subTitle={appConfig.description}
+                            />
+                            <LoginForm handleSelectUser={setUser} />
+                        </Box>
+                        {/* Formulário */}
+                        {/* Photo Area */}
+                        <Box
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center",
+                                maxWidth: "200px",
+                                width: "200px",
+                                padding: "16px",
+                                backgroundColor: "primary.dark",
+                                border: "1px solid",
+                                borderRadius: "10px",
+                                flex: 1,
+                                minHeight: "240px",
+                            }}
+                        >
+                            {user ? <Photo user={user} /> : ""}
+                        </Box>
+                        {/* Photo Area */}
+                    </Card>
+                </Box>
             </Box>
         </Layout>
     );

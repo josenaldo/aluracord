@@ -87,6 +87,9 @@ export default function Layout({ children }) {
                         margin: 0,
                         padding: 0,
                         gap: 0,
+                        height: "100%",
+                    maxWidth: "100%",
+                    maxHeight: "100vh",
                     }}
                 >
                     <ResponsiveAppBar
