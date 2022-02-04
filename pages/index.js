@@ -30,11 +30,6 @@ export default function PaginaInicial() {
                     alignItems: "center",
                     justifyContent: "center",
                     minHeight: "100%",
-                    // backgroundImage: "url(" + appConfig.theme.background + ")",
-                    // backgroundRepeat: "no-repeat",
-                    // backgroundSize: "cover",
-                    // backgroundBlendMode: "multiply",
-                    // backgroundColor: "primary.dark",
                 }}
             >
                 <Card
@@ -143,8 +138,6 @@ function LoginForm(props) {
     const [warningMessage, setWarningMessage] = React.useState(null);
 
     const [user, setUser] = React.useState(null);
-
-    const [loading, setLoading] = React.useState(false);
 
     const router = useRouter();
 

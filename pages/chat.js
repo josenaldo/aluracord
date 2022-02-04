@@ -1,32 +1,15 @@
 import React from "react";
-import Head from "next/head";
 import { useRouter } from "next/router";
-
-import { Text } from "@skynexui/components";
 
 import {
     Box,
-    Grid,
-    Avatar,
-    Card,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
-    AppBar,
-    Toolbar,
-    Typography,
-    Button,
-    IconButton,
-    Stack,
+    Paper,
 } from "@mui/material";
 
-import appConfig from "../config.json";
 import { supabase } from "../src/SupabaseClient.js";
 import { eventBus } from "../src/EventBus.js";
 import { Events } from "../src/Events.js";
 import ProfileDialog from "../src/components/ProfileDialog.js";
-import Loading from "../src/components/Loading.js";
 import ButtonSendSticker from "../src/components/ButtonSendSticker.js";
 import SendMessageBox from "../src/components/SendMessageBox.js";
 import ChatHeader from "../src/components/ChatHeader.js";
@@ -37,7 +20,6 @@ export default function ChatPage(props) {
     const [messageList, setMessageList] = React.useState([]);
     const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
     const [selectedUser, setSelectedUser] = React.useState(null);
-    const router = useRouter();
 
     setMessageList.bind(this);
 
@@ -119,32 +101,42 @@ export default function ChatPage(props) {
 
     return (
         <Layout>
-            <Card
-                sx={{
-                    display: "grid",
-                    gap: 0,
-                    flex: 1,
-                    height: "100%",
-                    maxWidth: "95%",
-                    maxHeight: "95vh",
-                    padding: "32px",
-                }}
-            >
-                {/* <ChatHeader signOut={signOut} user={user} /> */}
-                <MessageList
-                    sx={{ flexGrow: 3 }}
-                    messages={messageList}
-                    delete={handleDeleteMessage}
-                    handleOpenProfileDialog={handleOpenProfileDialog}
+            <Box sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flex: 1,
+                        height: "100%",
+                        maxWidth: "100%",
+                        maxHeight: "90vh",
+                        padding: "10px",
+                    }}>
+                <Paper
+                    sx={{
+                        display: "grid",
+                        gap: 0,
+                        flex: 1,
+                        height: "100%",
+                        maxWidth: "95%",
+                        maxHeight: "100%",
+                        // padding: "32px",
+                    }}
+                >
+                    {/* <ChatHeader signOut={signOut} user={user} /> */}
+                    <MessageList
+                        sx={{ flexGrow: 3 }}
+                        messages={messageList}
+                        delete={handleDeleteMessage}
+                        handleOpenProfileDialog={handleOpenProfileDialog}
+                    />
+                    <SendMessageBox addMessage={addMessage} />
+                </Paper>
+                <ProfileDialog
+                    user={selectedUser}
+                    open={openProfileDialog}
+                    onClose={handleCloseProfileDialog}
                 />
-                <SendMessageBox addMessage={addMessage} />
-            </Card>
-
-            <ProfileDialog
-                user={selectedUser}
-                open={openProfileDialog}
-                onClose={handleCloseProfileDialog}
-            />
+            </Box>
         </Layout>
     );
 }

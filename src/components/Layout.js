@@ -25,19 +25,22 @@ import appConfig from "../../config.json";
 import { supabase } from "../SupabaseClient.js";
 import { eventBus } from "../EventBus.js";
 import { Events } from "../Events.js";
-import theme from "../Theme.js";
+import { themeLight, themeDark } from "../Theme.js";
+import CssBaseline from "@mui/material/CssBaseline";
 
 import ProfileDialog from "./ProfileDialog.js";
-import Loading from "./Loading.js";
+
 import ButtonSendSticker from "./ButtonSendSticker.js";
 import SendMessageBox from "./SendMessageBox.js";
 import ChatHeader from "./ChatHeader.js";
 import MessageList from "./MessageList.js";
+
 import ResponsiveAppBar from "./ResponsiveAppBar.js";
 import { ThemeProvider } from "@mui/material/styles";
 
 export default function Layout({ children }) {
     const [user, setUser] = React.useState(null);
+    const [theme, setTheme] = React.useState(themeDark);
     const router = useRouter();
 
     async function checkUser() {
@@ -65,27 +68,45 @@ export default function Layout({ children }) {
 
     return (
         <ThemeProvider theme={theme}>
+            <CssBaseline />
             <Box
                 sx={{
-                    display: "grid",
-                    gridTemplateRows: "64px 1fr",
-                    margin: 0,
+                    flex: 1,
+                    height: "100%",
+                    maxWidth: "100%",
+                    maxHeight: "100vh",
                     padding: 0,
-                    gap: 0,
-                    // gridAutoFlow: "row",
+                    margin: 0,
+                    backgroundColor: "background.default",
                 }}
             >
-                <ResponsiveAppBar theme={theme} signOut={signOut} user={user} sx={{gridArea: 'header'}} />
                 <Box
                     sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
+                        display: "grid",
+                        gridTemplateRows: "64px 1fr",
+                        margin: 0,
+                        padding: 0,
+                        gap: 0,
                     }}
                 >
-                    {React.Children.map(children, (child) =>
-                        React.cloneElement(child, { user: user })
-                    )}
+                    <ResponsiveAppBar
+                        theme={theme}
+                        signOut={signOut}
+                        setTheme={setTheme}
+                        user={user}
+                        sx={{ gridArea: "header" }}
+                    />
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }}
+                    >
+                        {React.Children.map(children, (child) =>
+                            React.cloneElement(child, { user: user })
+                        )}
+                    </Box>
                 </Box>
             </Box>
         </ThemeProvider>

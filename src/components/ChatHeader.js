@@ -14,7 +14,6 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import LogoutIcon from '@mui/icons-material/Logout';
 
-import Loading from "./Loading.js";
 
 export default function ChatHeader(props) {
     const user = props.user;
@@ -44,7 +43,6 @@ export default function ChatHeader(props) {
                                 height: "50px",
                             }}
                         >
-                            <Loading />
                         </Grid>
 
                         <Grid

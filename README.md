@@ -100,6 +100,8 @@
 
 - [ ] [Understanding Functional Components vs. Class Components in React](https://www.twilio.com/blog/react-choose-functional-components)
 - [ ] [Arrow function expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+- [ ] [Passing props to props.children using React.cloneElement and render prop pattern](https://medium.com/@justynazet/passing-props-to-props-children-using-react-cloneelement-and-render-props-pattern-896da70b24f6)
+- [ ] [How to pass data to props.children](https://frontarm.com/james-k-nelson/passing-data-props-children/)
 
 ## Lives
 
@@ -134,11 +136,11 @@
     - [ ] [CDN Links](https://pt-br.reactjs.org/docs/cdn-links.html)
     - [ ] [Canais de lançamento](https://pt-br.reactjs.org/docs/release-channels.html)
 - [ ] Principais conceitos
-    - [ ] [1. Hello World](https://pt-br.reactjs.org/docs/hello-world.html)
-    - [ ] [2. Introduzindo JSX](https://pt-br.reactjs.org/docs/introducing-jsx.html)
-    - [ ] [3. Renderizando Elementos](https://pt-br.reactjs.org/docs/rendering-elements.html)
-    - [ ] [4. Componentes e Props](https://pt-br.reactjs.org/docs/components-and-props.html)
-    - [ ] [5. State e Ciclo de Vida](https://pt-br.reactjs.org/docs/state-and-lifecycle.html)
+    - [x] [1. Hello World](https://pt-br.reactjs.org/docs/hello-world.html)
+    - [x] [2. Introduzindo JSX](https://pt-br.reactjs.org/docs/introducing-jsx.html)
+    - [x] [3. Renderizando Elementos](https://pt-br.reactjs.org/docs/rendering-elements.html)
+    - [x] [4. Componentes e Props](https://pt-br.reactjs.org/docs/components-and-props.html)
+    - [x] [5. State e Ciclo de Vida](https://pt-br.reactjs.org/docs/state-and-lifecycle.html)
     - [ ] [6. Manipulando eventos](https://pt-br.reactjs.org/docs/handling-events.html)
     - [ ] [7. Renderização condicional](https://pt-br.reactjs.org/docs/conditional-rendering.html)
     - [ ] [8. Listas e Chaves](https://pt-br.reactjs.org/docs/lists-and-keys.html)

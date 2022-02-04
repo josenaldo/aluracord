@@ -10,6 +10,8 @@ import {
     ListItemAvatar,
     ListItemText,
 } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import ScrollableFeed from "react-scrollable-feed";
@@ -18,6 +20,48 @@ import appConfig from "../../config.json";
 
 export default function MessageList(props) {
     const messages = props.messages;
+    const palette = useTheme().palette;
+    const isDarkTheme = palette.mode === "dark";
+
+    const darkScroll = {
+        "&::-webkit-scrollbar": {
+            width: "8px",
+        },
+
+        "&::-webkit-scrollbar-track": {
+            bgcolor: `${palette.grey["800"]}`,
+            borderRadius: "10px",
+        },
+
+        "&::-webkit-scrollbar-thumb": {
+            bgcolor: `${palette.grey["700"]}`,
+            borderRadius: "10px",
+        },
+
+        "&::-webkit-scrollbar-thumb:hover": {
+            bgcolor: `${palette.grey["500"]}`,
+        },
+    };
+
+    const lightScroll = {
+        "&::-webkit-scrollbar": {
+            width: "8px",
+        },
+
+        "&::-webkit-scrollbar-track": {
+            bgcolor: `${palette.grey["300"]}`,
+            borderRadius: "10px",
+        },
+
+        "&::-webkit-scrollbar-thumb": {
+            bgcolor: `${palette.grey["400"]}`,
+            borderRadius: "10px",
+        },
+
+        "&::-webkit-scrollbar-thumb:hover": {
+            bgcolor: `${palette.grey["500"]}`,
+        },
+    };
 
     React.useEffect(() => {
         return () => {};
@@ -31,12 +75,11 @@ export default function MessageList(props) {
                 display: "flex",
                 flexDirection: "column",
                 flex: 1,
-                // color: appConfig.theme.colors.neutrals["000"],
-                marginBottom: "16px",
                 overflow: "auto",
+                "& .feedScroll": isDarkTheme ? darkScroll : lightScroll,
             }}
         >
-            <ScrollableFeed>
+            <ScrollableFeed className="feedScroll">
                 {messages.map((message) => {
                     return (
                         <MessageItem

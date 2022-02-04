@@ -19,17 +19,19 @@ import MenuIcon from "@mui/icons-material/Menu";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import Loading from "./Loading.js";
 
 import appConfig from "../../config.json";
+import {themeLight, themeDark} from "../Theme.js";
 
 const ResponsiveAppBar = (props) => {
     const user = props.user;
-    const theme = props.theme;
+    const setTheme = props.setTheme;
     const signOut = props.signOut;
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [darkTheme, setDarkTheme] = React.useState(
-        theme.palette.mode === "dark"
+    const [dark, setDark] = React.useState(
+        true
     );
 
     const handleOpenUserMenu = (event) => {
@@ -41,8 +43,12 @@ const ResponsiveAppBar = (props) => {
     };
 
     const handleChangedarkTheme = (event) => {
-        setDarkTheme(!darkTheme);
-        theme.palette.mode = darkTheme ? "light" : "dark";
+        setDark(!dark);
+        if(!dark){
+            setTheme(themeDark);
+        }else {
+            setTheme(themeLight);
+        }
     };
 
     return (
@@ -62,15 +68,16 @@ const ResponsiveAppBar = (props) => {
                         {appConfig.name}
                     </Typography>
 
-                    <Box sx={{ flexGrow: 0 }}>
-                        <Tooltip title="Abrir menu do usuário">
+                    <Loading color="secondary"/>
+
+                    <Box sx={{ flexGrow: 0}} >
+                        <Tooltip title="Abrir menu do usuário" placement="left">
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
                                 onClick={handleOpenUserMenu}
-                                color="inherit"
                             >
                                 <MenuIcon />
                             </IconButton>
@@ -94,7 +101,7 @@ const ResponsiveAppBar = (props) => {
                         >
                             <MenuItem onClick={(event) => {}}>
                                 <ListItemIcon>
-                                    {darkTheme ? (
+                                    {dark ? (
                                         <DarkModeIcon fontSize="small" />
                                     ) : (
                                         <LightModeIcon fontSize="small" />
@@ -102,7 +109,7 @@ const ResponsiveAppBar = (props) => {
                                 </ListItemIcon>
                                 Tema Dark
                                 <Switch
-                                    checked={darkTheme}
+                                    checked={dark}
                                     onChange={handleChangedarkTheme}
                                     inputProps={{ "aria-label": "controlled" }}
                                 />

@@ -22,10 +22,6 @@ export default function CustomApp({ Component, pageProps }) {
                 />
             </Head>
 
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            {/* <GlobalStyle /> */}
-
-            <CssBaseline />
             <Component {...pageProps} />
         </>
     );
