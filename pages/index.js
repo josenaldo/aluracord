@@ -16,24 +16,27 @@ import appConfig from "../config.json";
 import { eventBus } from "../src/EventBus.js";
 import { Events } from "../src/Events.js";
 import { supabase } from "../src/SupabaseClient.js";
-import Layout from "../src/components/Layout.js";
+import App from "../src/components/App.js";
 
-
-export default function PaginaInicial() {
-    const [user, setUser] = React.useState(null);
+export default function PaginaInicial(props) {
+    const user = props.user;
+    const setUser = props.setUser;
+    const checkUser = props.checkUser;
 
     return (
-        <Layout>
-            <Box sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flex: 1,
-                        height: "100%",
-                        maxWidth: "100%",
-                        maxHeight: "90vh",
-                        padding: "10px",
-                    }}>
+        <App>
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    flex: 1,
+                    height: "100%",
+                    maxWidth: "100%",
+                    maxHeight: "90vh",
+                    padding: "10px",
+                }}
+            >
                 <Box
                     sx={{
                         display: "flex",
@@ -69,7 +72,7 @@ export default function PaginaInicial() {
                                 title={appConfig.name}
                                 subTitle={appConfig.description}
                             />
-                            <LoginForm handleSelectUser={setUser} />
+                            <LoginForm setUser={setUser} user={setUser} checkUser={checkUser} />
                         </Box>
                         {/* Formulário */}
                         {/* Photo Area */}
@@ -94,7 +97,7 @@ export default function PaginaInicial() {
                     </Card>
                 </Box>
             </Box>
-        </Layout>
+        </App>
     );
 }
 
@@ -141,41 +144,40 @@ function SubTitle(props) {
 }
 
 function LoginForm(props) {
-    const handleSelectUser = props.handleSelectUser;
-
     const [errorMessage, setErrorMessage] = React.useState(null);
     const [warningMessage, setWarningMessage] = React.useState(null);
 
-    const [user, setUser] = React.useState(null);
+    const user = props.user;
+    const setUser = props.setUser;
+    const checkUser = props.checkUser;
+
 
     const router = useRouter();
 
-    React.useEffect(() => {
-        eventBus.dispatch(Events.START_LOADING);
-        checkUser();
-        window.addEventListener("hashchange", function () {
-            checkUser();
-        });
-        eventBus.dispatch(Events.STOP_LOADING);
-    }, []);
-
-    async function checkUser() {
-        const user = supabase.auth.user();
-        console.log(user);
-        setUser(user);
-        handleSelectUser(user);
-    }
-
     async function signInWithGithub() {
-        await supabase.auth.signIn({
-            provider: "github",
-        });
+        // await supabase.auth.signIn({
+        //     provider: "github",
+        // });
+
+        try {
+            // setLoading(true);
+            const { error } = await supabase.auth.signIn({
+                provider: "github",
+            });
+            if (error) throw error;
+
+            checkUser();
+
+        } catch (error) {
+            alert(error.error_description || error.message);
+        } finally {
+            // setLoading(false);
+        }
     }
 
     async function signOut() {
         await supabase.auth.signOut();
         setUser(null);
-        handleSelectUser(null);
     }
 
     return (

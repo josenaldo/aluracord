@@ -38,19 +38,19 @@ import MessageList from "./MessageList.js";
 import ResponsiveAppBar from "./ResponsiveAppBar.js";
 import { ThemeProvider } from "@mui/material/styles";
 
-export default function Layout({ children }) {
+export default function App({ children }) {
     const [user, setUser] = React.useState(null);
     const [theme, setTheme] = React.useState(themeDark);
     const router = useRouter();
 
-    async function checkUser() {
+    const checkUser = () => {
         const user = supabase.auth.user();
         console.log(user);
-        if (user === null) {
+        if (user === null && router.pathname !== "/") {
             router.push(`/`);
         }
         setUser(user);
-    }
+    };
 
     async function signOut() {
         await supabase.auth.signOut();
@@ -66,6 +66,7 @@ export default function Layout({ children }) {
         eventBus.dispatch(Events.STOP_LOADING);
     }, []);
 
+    console.log("checkUser", checkUser);
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -88,8 +89,8 @@ export default function Layout({ children }) {
                         padding: 0,
                         gap: 0,
                         height: "100%",
-                    maxWidth: "100%",
-                    maxHeight: "100vh",
+                        maxWidth: "100%",
+                        maxHeight: "100vh",
                     }}
                 >
                     <ResponsiveAppBar
@@ -107,7 +108,11 @@ export default function Layout({ children }) {
                         }}
                     >
                         {React.Children.map(children, (child) =>
-                            React.cloneElement(child, { user: user })
+                            React.cloneElement(child, {
+                                user: user,
+                                setUser: setUser,
+                                checkUser: checkUser,
+                            })
                         )}
                     </Box>
                 </Box>

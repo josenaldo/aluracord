@@ -14,7 +14,7 @@ import ButtonSendSticker from "../src/components/ButtonSendSticker.js";
 import SendMessageBox from "../src/components/SendMessageBox.js";
 import ChatHeader from "../src/components/ChatHeader.js";
 import MessageList from "../src/components/MessageList.js";
-import Layout from "../src/components/Layout.js";
+import App from "../src/components/App.js";
 
 export default function ChatPage(props) {
     const [messageList, setMessageList] = React.useState([]);
@@ -100,7 +100,7 @@ export default function ChatPage(props) {
     }
 
     return (
-        <Layout>
+        <App>
             <Box sx={{
                         display: "flex",
                         alignItems: "center",
@@ -137,6 +137,6 @@ export default function ChatPage(props) {
                     onClose={handleCloseProfileDialog}
                 />
             </Box>
-        </Layout>
+        </App>
     );
 }
