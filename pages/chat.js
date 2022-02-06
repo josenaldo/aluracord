@@ -1,10 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-import {
-    Box,
-    Paper,
-} from "@mui/material";
+import { Box, Paper } from "@mui/material";
 
 import { supabase } from "../src/SupabaseClient.js";
 import { eventBus } from "../src/EventBus.js";
@@ -100,43 +97,43 @@ export default function ChatPage(props) {
     }
 
     return (
-        <App>
-            <Box sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        flex: 1,
-                        height: "100%",
-                        maxWidth: "100%",
-                        maxHeight: "90vh",
-                        padding: "10px",
-                    }}>
-                <Paper
-                    sx={{
-                        display: "grid",
-                        gap: 0,
-                        flex: 1,
-                        height: "100%",
-                        maxWidth: "95%",
-                        maxHeight: "100%",
-                        // padding: "32px",
-                    }}
-                >
-                    {/* <ChatHeader signOut={signOut} user={user} /> */}
-                    <MessageList
-                        sx={{ flexGrow: 3 }}
-                        messages={messageList}
-                        delete={handleDeleteMessage}
-                        handleOpenProfileDialog={handleOpenProfileDialog}
-                    />
-                    <SendMessageBox addMessage={addMessage} />
-                </Paper>
-                <ProfileDialog
-                    user={selectedUser}
-                    open={openProfileDialog}
-                    onClose={handleCloseProfileDialog}
+        <Box
+            sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flex: 1,
+                height: "100%",
+                maxWidth: "100%",
+                maxHeight: "90vh",
+                padding: "10px",
+            }}
+        >
+            <Paper
+                sx={{
+                    display: "grid",
+                    gap: 0,
+                    flex: 1,
+                    height: "100%",
+                    maxWidth: "95%",
+                    maxHeight: "100%",
+                    // padding: "32px",
+                }}
+            >
+                {/* <ChatHeader signOut={signOut} user={user} /> */}
+                <MessageList
+                    sx={{ flexGrow: 3 }}
+                    messages={messageList}
+                    delete={handleDeleteMessage}
+                    handleOpenProfileDialog={handleOpenProfileDialog}
                 />
-            </Box>
-        </App>
+                <SendMessageBox addMessage={addMessage} />
+            </Paper>
+            <ProfileDialog
+                user={selectedUser}
+                open={openProfileDialog}
+                onClose={handleCloseProfileDialog}
+            />
+        </Box>
     );
 }

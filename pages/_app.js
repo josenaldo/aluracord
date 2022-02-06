@@ -2,6 +2,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Head from "next/head";
 import appConfig from "../config.json";
 import "./styles.css";
+import App from "../src/components/App.js";
 
 export default function CustomApp({ Component, pageProps }) {
     return (
@@ -22,7 +23,9 @@ export default function CustomApp({ Component, pageProps }) {
                 />
             </Head>
 
-            <Component {...pageProps} />
+            <App>
+                <Component {...pageProps} />
+            </App>
         </>
     );
 }

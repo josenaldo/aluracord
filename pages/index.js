@@ -24,80 +24,82 @@ export default function PaginaInicial(props) {
     const checkUser = props.checkUser;
 
     return (
-        <App>
+        <Box
+            sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flex: 1,
+                height: "100%",
+                maxWidth: "100%",
+                maxHeight: "90vh",
+                padding: "10px",
+            }}
+        >
             <Box
                 sx={{
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                    flex: 1,
-                    height: "100%",
-                    maxWidth: "100%",
-                    maxHeight: "90vh",
-                    padding: "10px",
+                    minHeight: "100%",
                 }}
             >
-                <Box
+                <Card
                     sx={{
                         display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        minHeight: "100%",
+                        justifyContent: "space-evenly",
+                        flexDirection: {
+                            xs: "column",
+                            sm: "row",
+                        },
+                        width: "100%",
+                        maxWidth: "700px",
+                        padding: "32px",
                     }}
                 >
-                    <Card
+                    {/* Formulário */}
+                    <Box
                         sx={{
                             display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
                             justifyContent: "space-evenly",
-                            flexDirection: {
-                                xs: "column",
-                                sm: "row",
-                            },
-                            width: "100%",
-                            maxWidth: "700px",
-                            padding: "32px",
+                            width: { xs: "100%", sm: "50%" },
                         }}
                     >
-                        {/* Formulário */}
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                justifyContent: "space-evenly",
-                                width: { xs: "100%", sm: "50%" },
-                            }}
-                        >
-                            <Title
-                                title={appConfig.name}
-                                subTitle={appConfig.description}
-                            />
-                            <LoginForm setUser={setUser} user={setUser} checkUser={checkUser} />
-                        </Box>
-                        {/* Formulário */}
-                        {/* Photo Area */}
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                maxWidth: "200px",
-                                width: "200px",
-                                padding: "16px",
-                                backgroundColor: "primary.dark",
-                                border: "1px solid",
-                                borderRadius: "10px",
-                                flex: 1,
-                                minHeight: "240px",
-                            }}
-                        >
-                            {user ? <Photo user={user} /> : ""}
-                        </Box>
-                        {/* Photo Area */}
-                    </Card>
-                </Box>
+                        <Title
+                            title={appConfig.name}
+                            subTitle={appConfig.description}
+                        />
+                        <LoginForm
+                            setUser={setUser}
+                            user={setUser}
+                            checkUser={checkUser}
+                        />
+                    </Box>
+                    {/* Formulário */}
+                    {/* Photo Area */}
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            maxWidth: "200px",
+                            width: "200px",
+                            padding: "16px",
+                            backgroundColor: "primary.dark",
+                            border: "1px solid",
+                            borderRadius: "10px",
+                            flex: 1,
+                            minHeight: "240px",
+                        }}
+                    >
+                        {user ? <Photo user={user} /> : ""}
+                    </Box>
+                    {/* Photo Area */}
+                </Card>
             </Box>
-        </App>
+        </Box>
     );
 }
 
@@ -110,7 +112,6 @@ function Title(props) {
             <Typography
                 component={tag}
                 sx={{
-                    color: "primary.dark",
                     fontSize: "48px",
                     fontWeight: "600",
                     marginY: "0",
@@ -135,7 +136,7 @@ function SubTitle(props) {
         <Typography
             component={tag}
             sx={{
-                color: "primary.dark",
+                textAlign: "center",
             }}
         >
             {props.children}
@@ -150,7 +151,6 @@ function LoginForm(props) {
     const user = props.user;
     const setUser = props.setUser;
     const checkUser = props.checkUser;
-
 
     const router = useRouter();
 
@@ -167,7 +167,6 @@ function LoginForm(props) {
             if (error) throw error;
 
             checkUser();
-
         } catch (error) {
             alert(error.error_description || error.message);
         } finally {
