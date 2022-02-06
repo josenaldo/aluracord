@@ -2,7 +2,6 @@ import React from "react";
 
 import { Box, CircularProgress } from "@mui/material";
 
-import appConfig from "../../config.json";
 import {eventBus} from "../EventBus.js";
 import {Events} from "../Events.js";
 

@@ -1,27 +1,14 @@
 import React from "react";
-import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 
-import {
-    Alert,
-    Card,
-    Box,
-    Typography,
-    Button,
-    Avatar,
-    Chip,
-} from "@mui/material";
+import { Card, Box, Typography, Avatar, Chip } from "@mui/material";
 
+import { useAuth } from "../src/contexts/Auth";
 import appConfig from "../config.json";
-import { eventBus } from "../src/EventBus.js";
-import { Events } from "../src/Events.js";
-import { supabase } from "../src/SupabaseClient.js";
-import App from "../src/components/App.js";
+import LoginForm from "../src/components/LoginForm";
 
 export default function PaginaInicial(props) {
-    const user = props.user;
-    const setUser = props.setUser;
-    const checkUser = props.checkUser;
+    const { user } = useAuth();
 
     return (
         <Box
@@ -36,69 +23,56 @@ export default function PaginaInicial(props) {
                 padding: "10px",
             }}
         >
-            <Box
+            <Card
                 sx={{
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minHeight: "100%",
+                    justifyContent: "space-evenly",
+                    flexDirection: {
+                        xs: "column",
+                        sm: "row",
+                    },
+                    width: "100%",
+                    maxWidth: "700px",
+                    padding: "32px",
                 }}
             >
-                <Card
+                {/* Formulário */}
+                <Box
                     sx={{
                         display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
                         justifyContent: "space-evenly",
-                        flexDirection: {
-                            xs: "column",
-                            sm: "row",
-                        },
-                        width: "100%",
-                        maxWidth: "700px",
-                        padding: "32px",
+                        width: { xs: "100%", sm: "50%" },
                     }}
                 >
-                    {/* Formulário */}
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "space-evenly",
-                            width: { xs: "100%", sm: "50%" },
-                        }}
-                    >
-                        <Title
-                            title={appConfig.name}
-                            subTitle={appConfig.description}
-                        />
-                        <LoginForm
-                            setUser={setUser}
-                            user={setUser}
-                            checkUser={checkUser}
-                        />
-                    </Box>
-                    {/* Formulário */}
-                    {/* Photo Area */}
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            maxWidth: "200px",
-                            width: "200px",
-                            padding: "16px",
-                            backgroundColor: "primary.dark",
-                            border: "1px solid",
-                            borderRadius: "10px",
-                            flex: 1,
-                            minHeight: "240px",
-                        }}
-                    >
-                        {user ? <Photo user={user} /> : ""}
-                    </Box>
-                    {/* Photo Area */}
-                </Card>
-            </Box>
+                    <Title
+                        title={appConfig.name}
+                        subTitle={appConfig.description}
+                    />
+                    <LoginForm />
+                </Box>
+                {/* Formulário */}
+                {/* Photo Area */}
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        maxWidth: "200px",
+                        width: "200px",
+                        padding: "16px",
+                        backgroundColor: "primary.dark",
+                        border: "1px solid",
+                        borderRadius: "10px",
+                        flex: 1,
+                        minHeight: "240px",
+                    }}
+                >
+                    {user ? <Photo user={user} /> : ""}
+                </Box>
+                {/* Photo Area */}
+            </Card>
         </Box>
     );
 }
@@ -141,134 +115,6 @@ function SubTitle(props) {
         >
             {props.children}
         </Typography>
-    );
-}
-
-function LoginForm(props) {
-    const [errorMessage, setErrorMessage] = React.useState(null);
-    const [warningMessage, setWarningMessage] = React.useState(null);
-
-    const user = props.user;
-    const setUser = props.setUser;
-    const checkUser = props.checkUser;
-
-    const router = useRouter();
-
-    async function signInWithGithub() {
-        // await supabase.auth.signIn({
-        //     provider: "github",
-        // });
-
-        try {
-            // setLoading(true);
-            const { error } = await supabase.auth.signIn({
-                provider: "github",
-            });
-            if (error) throw error;
-
-            checkUser();
-        } catch (error) {
-            alert(error.error_description || error.message);
-        } finally {
-            // setLoading(false);
-        }
-    }
-
-    async function signOut() {
-        await supabase.auth.signOut();
-        setUser(null);
-    }
-
-    return (
-        <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "100%",
-            }}
-        >
-            {!user ? (
-                <Button
-                    type="button"
-                    variant="contained"
-                    fullWidth
-                    onClick={(event) => {
-                        signInWithGithub();
-                    }}
-                    sx={{
-                        marginY: "5px",
-                        width: "100%",
-                    }}
-                >
-                    Logar no Github
-                </Button>
-            ) : (
-                <Button
-                    type="button"
-                    variant="contained"
-                    fullWidth
-                    onClick={(event) => {
-                        signOut();
-                    }}
-                    sx={{
-                        marginY: "5px",
-                        width: "100%",
-                    }}
-                >
-                    Sair
-                </Button>
-            )}
-
-            <Button
-                type="button"
-                variant="contained"
-                disabled={!user}
-                fullWidth
-                onClick={(event) => {
-                    router.push(`/chat`);
-                }}
-                sx={{
-                    marginY: "5px",
-                    width: "100%",
-                }}
-            >
-                Entrar no Chat
-            </Button>
-
-            {errorMessage ? (
-                <Alert
-                    severity="error"
-                    onClose={() => {
-                        setErrorMessage(null);
-                    }}
-                    sx={{
-                        marginBottom: "10px",
-                    }}
-                >
-                    {errorMessage}
-                </Alert>
-            ) : (
-                ""
-            )}
-
-            {warningMessage ? (
-                <Alert
-                    severity="warning"
-                    onClose={() => {
-                        setWarningMessage(null);
-                    }}
-                    sx={{
-                        marginBottom: "10px",
-                    }}
-                >
-                    {warningMessage}
-                </Alert>
-            ) : (
-                ""
-            )}
-        </Box>
     );
 }
 

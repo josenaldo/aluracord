@@ -23,11 +23,13 @@ import Loading from "./Loading.js";
 
 import appConfig from "../../config.json";
 import {themeLight, themeDark} from "../Theme.js";
+import { useAuth } from "../contexts/Auth";
+
 
 const ResponsiveAppBar = (props) => {
-    const user = props.user;
+    const { signOut, user } = useAuth();
+
     const setTheme = props.setTheme;
-    const signOut = props.signOut;
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
     const [dark, setDark] = React.useState(
@@ -54,7 +56,7 @@ const ResponsiveAppBar = (props) => {
     return (
         <AppBar position="relative">
             <Container maxWidth="xl">
-                <Toolbar disableGutters>
+                <Toolbar disableGutters >
                     <Typography
                         variant="h6"
                         noWrap
