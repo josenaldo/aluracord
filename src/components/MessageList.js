@@ -101,7 +101,11 @@ function MessageItem(props) {
     const message = props.message;
     const tag = props.tag || "li";
     const deleteMessage = props.delete;
-    const { user } = useAuth();
+    const { user, isCurrentUser } = useAuth();
+
+    const palette = useTheme().palette;
+    const isDarkTheme = palette.mode === "dark";
+
     const arrowLeft = {
         right: "100%",
         top: 5,
@@ -127,9 +131,9 @@ function MessageItem(props) {
         borderLeftColor: "transparent",
     };
 
-    function isCurrentUser(message) {
-        return message.from === user.user_metadata.user_name;
-    }
+    // function isCurrentUser(message) {
+    //     return message.from === user.user_metadata.user_name;
+    // }
 
     return (
         // Message
@@ -138,7 +142,7 @@ function MessageItem(props) {
             sx={{
                 marginBottom: "20px",
                 display: "flex",
-                flexDirection: isCurrentUser(message) ? "row-reverse" : "row",
+                flexDirection: isCurrentUser(message.from) ? "row-reverse" : "row",
                 // gridTemplateColumns: "1fr 6fr",
                 margin: "20px",
                 hover: {
@@ -154,7 +158,7 @@ function MessageItem(props) {
                 sx={{
                     width: "auto",
                     display: "flex",
-                    flexDirection: isCurrentUser(message)
+                    flexDirection: isCurrentUser(message.from)
                         ? "row-reverse"
                         : "row",
                     // alignItems: "center",
@@ -166,62 +170,58 @@ function MessageItem(props) {
                     delete={props.delete}
                     handleOpenProfileDialog={props.handleOpenProfileDialog}
                 />
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        width: "auto",
-                        bgcolor: "secondary.light",
-                        color: "secondary.dark",
-                        borderRadius: "5px",
-                        padding: "10px 20px",
-                    }}
-                >
-                    <Typography
-                        variant="body1"
-                        sx={{
-                            color: "inherit",
-                            paddding: "10px",
-                            whiteSpace: "pre-line",
-                            width: "auto",
-                        }}
-                    >
-                        {message.messageText}
-                    </Typography>
-                    {/* Hora da message */}
+                <Box sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                }}>
                     <Box
                         sx={{
                             display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            flexDirection: isCurrentUser(message)
-                                ? "row-reverse"
-                                : "row",
+                            flexDirection: "column",
+                            width: "auto",
+                            color: "chat.chatBubble.contrastText",
+                            bgcolor: isCurrentUser(message.from)
+                                ? "chat.chatBubble.user"
+                                : "chat.chatBubble.other",
+                            borderRadius: "5px",
+                            padding: "10px 20px",
                         }}
                     >
                         <Typography
-                            sx={{
-                                fontSize: "10px",
-                                marginLeft: "8px",
-                                fontWeight: "bold",
-                                color: "grey.A400",
-                            }}
                             variant="body1"
-                        >
-                            {new Intl.DateTimeFormat(
-                                "pt-BR",
-                                appConfig.dateFormat
-                            ).format(new Date(message.sendDate))}
-                        </Typography>
-                        <IconButton
-                            aria-label="delete message"
-                            onClick={(e) => {
-                                deleteMessage(message.id);
+                            sx={{
+                                color: "inherit",
+                                paddding: "10px",
+                                whiteSpace: "pre-line",
+                                width: "auto",
                             }}
                         >
-                            <DeleteIcon />
-                        </IconButton>
+                            {message.messageText}
+                        </Typography>
+                        {/* Hora da message */}
+                        <Box
+                            sx={{
+                                width: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between",
+                                flexDirection: isCurrentUser(message.from)
+                                    ? "row-reverse"
+                                    : "row",
+                            }}
+                        >
+                            <IconButton
+                                aria-label="delete message"
+                                onClick={(e) => {
+                                    deleteMessage(message.id);
+                                }}
+                            >
+                                <DeleteIcon />
+                            </IconButton>
+                        </Box>
                     </Box>
+                    <MessageDate message={message}/>
+
                 </Box>
             </Box>
         </Box>
@@ -283,5 +283,32 @@ function MessageSender(props) {
                 <Typography tag="strong">@{message.from}</Typography>
             </Box>
         </Box>
+    );
+}
+
+function MessageDate(props) {
+    const message = props.message;
+    const { isCurrentUser } = useAuth();
+
+    return (
+        <Typography
+            sx={{
+                fontSize: "10px",
+                marginLeft: "8px",
+                fontWeight: "bold",
+                display: "block",
+                marginTop: "5px",
+                marginLeft: isCurrentUser(message.from) ? "2px" : "0",
+                marginRight: isCurrentUser(message.from) ? "0" : "2px",
+                padding: 0,
+                textAlign: isCurrentUser(message.from) ? "left" : "right",
+                color: "chat.sendDate",
+            }}
+            variant="body1"
+        >
+            {new Intl.DateTimeFormat("pt-BR", appConfig.dateFormat).format(
+                new Date(message.sendDate)
+            )}
+        </Typography>
     );
 }

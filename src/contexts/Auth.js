@@ -40,6 +40,7 @@ export function AuthProvider({ children }) {
             }),
         signOut: () => supabase.auth.signOut(),
         user,
+        isCurrentUser: (username) => username === user.user_metadata.user_name,
     };
 
     return (

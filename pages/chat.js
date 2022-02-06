@@ -115,6 +115,7 @@ export default function ChatPage(props) {
                     maxWidth: "95%",
                     maxHeight: "100%",
                     padding: 0,
+                    bgcolor: "chat.background",
                 }}
             >
                 {/* <ChatHeader signOut={signOut} user={user} /> */}
