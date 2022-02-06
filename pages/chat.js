@@ -1,17 +1,13 @@
 import React from "react";
-import { useRouter } from "next/router";
 
 import { Box, Paper } from "@mui/material";
-
 import { supabase } from "../src/SupabaseClient.js";
 import { eventBus } from "../src/EventBus.js";
 import { Events } from "../src/Events.js";
 import ProfileDialog from "../src/components/ProfileDialog.js";
 import ButtonSendSticker from "../src/components/ButtonSendSticker.js";
 import SendMessageBox from "../src/components/SendMessageBox.js";
-import ChatHeader from "../src/components/ChatHeader.js";
 import MessageList from "../src/components/MessageList.js";
-import App from "../src/components/App.js";
 
 export default function ChatPage(props) {
     const [messageList, setMessageList] = React.useState([]);
@@ -112,12 +108,13 @@ export default function ChatPage(props) {
             <Paper
                 sx={{
                     display: "grid",
+                    gridTemplateRows: "1fr minmax(84px, auto)",
                     gap: 0,
                     flex: 1,
                     height: "100%",
                     maxWidth: "95%",
                     maxHeight: "100%",
-                    // padding: "32px",
+                    padding: 0,
                 }}
             >
                 {/* <ChatHeader signOut={signOut} user={user} /> */}

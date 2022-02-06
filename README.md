@@ -95,6 +95,7 @@
 -   [ ] [Dicas de programação do DevSoutinho](https://www.youtube.com/playlist?list=PLTcmLKdIkOWkJY8LJXs1GDqBnxCGsExBO)
 -   [ ] [Como criar um jogo do ZERO!](https://www.youtube.com/playlist?list=PLTcmLKdIkOWmeNferJ292VYKBXydGeDej)
 -   [ ] [DevSoutinho - Dicas de React e Web em geral](https://www.youtube.com/playlist?list=PLTcmLKdIkOWkVld6KvLJbUCPIOjqLg9cr)
+-   [ ] [Conceitos básicos de Grid Layout](https://developer.mozilla.org/pt-BR/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout)
 
 ### Links usados na aula 05
 

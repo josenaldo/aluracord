@@ -2,7 +2,7 @@ import React from "react";
 import {
     Box,
     Grid,
-    OutlinedInput,
+    TextField,
     Button,
     IconButton,
     InputAdornment,
@@ -13,8 +13,12 @@ import appConfig from "../../config.json";
 import { eventBus } from "../EventBus.js";
 import { Events } from "../Events.js";
 import { supabase } from "../SupabaseClient.js";
+import { useAuth } from "../contexts/Auth";
+
 
 export default function SendMessageBox(props) {
+    const { user } = useAuth();
+
     const [message, setMessage] = React.useState("  ");
     const addMessage = props.addMessage;
 
@@ -22,7 +26,7 @@ export default function SendMessageBox(props) {
         eventBus.dispatch(Events.START_LOADING);
 
         const message = {
-            from: "josenaldo",
+            from: user.user_metadata.user_name,
             messageText: newMessageText,
             sendDate: new Date(),
         };
@@ -45,30 +49,30 @@ export default function SendMessageBox(props) {
                 position: "relative",
                 display: "flex",
                 flexDirection: "row",
+                padding: "10px",
             }}
         >
-            <OutlinedInput
+            <TextField
                 id="senMesssageText"
                 value={message}
-                required
                 multiline
                 maxRows={4}
                 fullWidth
                 placeholder="Insira sua message aqui..."
-                variant="standard"
+                variant="filled"
                 sx={{}}
                 onChange={(event) => {
                     const valor = event.target.value;
                     setMessage(valor);
                 }}
                 onKeyPress={(event) => {
-                    if (event.key === "Enter") {
+                    if (event.key === "Enter" && event.shiftKey) {
                         event.preventDefault();
                         handleSendMessage(message);
                     }
                 }}
                 // endAdornment={<InputAdornment position="end"></InputAdornment>}
-            ></OutlinedInput>
+            ></TextField>
 
             <IconButton
                 aria-label="send message"
