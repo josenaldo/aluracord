@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CloseIcon from "@mui/icons-material/Close";
 import ScrollableFeed from "react-scrollable-feed";
 
 import { useAuth } from "../contexts/Auth";
@@ -142,7 +143,9 @@ function MessageItem(props) {
             sx={{
                 marginBottom: "20px",
                 display: "flex",
-                flexDirection: isCurrentUser(message.from) ? "row-reverse" : "row",
+                flexDirection: isCurrentUser(message.from)
+                    ? "row-reverse"
+                    : "row",
                 // gridTemplateColumns: "1fr 6fr",
                 margin: "20px",
                 hover: {
@@ -170,58 +173,67 @@ function MessageItem(props) {
                     delete={props.delete}
                     handleOpenProfileDialog={props.handleOpenProfileDialog}
                 />
-                <Box sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                }}>
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                    }}
+                >
                     <Box
                         sx={{
                             display: "flex",
-                            flexDirection: "column",
-                            width: "auto",
+                            flexDirection: isCurrentUser(message.from)
+                                ? "row-reverse"
+                                : "row",
+                            alignItems: "flex-start",
+                            // width: "auto",
                             color: "chat.chatBubble.contrastText",
                             bgcolor: isCurrentUser(message.from)
                                 ? "chat.chatBubble.user"
                                 : "chat.chatBubble.other",
                             borderRadius: "5px",
-                            padding: "10px 20px",
+                            // padding: "10px 20px",
                         }}
                     >
-                        <Typography
-                            variant="body1"
+                        <Box
                             sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                flexGrow: 1,
                                 color: "inherit",
                                 paddding: "10px",
                                 whiteSpace: "pre-line",
                                 width: "auto",
+                                height: "100%",
+                                paddingY: "10px",
+                                paddingLeft: isCurrentUser(message.from)
+                                    ? "0px"
+                                    : "20px",
+                                paddingRight: isCurrentUser(message.from)
+                                    ? "20px"
+                                    : "0px",
                             }}
                         >
-                            {message.messageText}
-                        </Typography>
-                        {/* Hora da message */}
-                        <Box
-                            sx={{
-                                width: "100%",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
-                                flexDirection: isCurrentUser(message.from)
-                                    ? "row-reverse"
-                                    : "row",
-                            }}
-                        >
-                            <IconButton
-                                aria-label="delete message"
-                                onClick={(e) => {
-                                    deleteMessage(message.id);
-                                }}
-                            >
-                                <DeleteIcon />
-                            </IconButton>
+                            <Typography variant="body1">
+                                {message.messageText}
+                            </Typography>
                         </Box>
+                        {/* Hora da message */}
+                        <IconButton
+                            aria-label="delete message"
+                            sx={{
+                                color: isCurrentUser(message.from)
+                                    ? "chat.chatBubble.deleteButtonUser"
+                                    : "chat.chatBubble.deleteButtonOther",
+                            }}
+                            onClick={(e) => {
+                                deleteMessage(message.id);
+                            }}
+                        >
+                            <CloseIcon fontSize="small" />
+                        </IconButton>
                     </Box>
-                    <MessageDate message={message}/>
-
+                    <MessageDate message={message} />
                 </Box>
             </Box>
         </Box>
@@ -256,6 +268,7 @@ function MessageSender(props) {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
+                color: "chat.sender.username",
             }}
         >
             {/* Foto do remetente */}
@@ -271,17 +284,8 @@ function MessageSender(props) {
                     props.handleOpenProfileDialog(message.from);
                 }}
             />
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    fontWeight: "bold",
-                }}
-            >
-                {/* Remetente */}
-                <Typography tag="strong">@{message.from}</Typography>
-            </Box>
+            {/* Remetente */}
+            <Typography tag="strong">@{message.from}</Typography>
         </Box>
     );
 }

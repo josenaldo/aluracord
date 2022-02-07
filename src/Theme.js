@@ -24,10 +24,16 @@ const themeDark = createTheme({
             background: blueGrey[800],
             chatBubble: {
                 user: teal[900],
+                deleteButtonUser: teal[700],
                 other: blueGrey[900],
+                deleteButtonOther: blueGrey[700],
                 contrastText: "#ffffff",
             },
+            sender:{
+                username: blueGrey[100],
+            },
             sendDate: blueGrey[600],
+
 
         }
     },
@@ -54,8 +60,13 @@ const themeLight = createTheme({
             background: blueGrey[50],
             chatBubble: {
                 user: teal[300],
+                deleteButtonUser: teal[500],
                 other: blueGrey[300],
+                deleteButtonOther: blueGrey[500],
                 contrastText: grey[800],
+            },
+            sender:{
+                username: blueGrey[900],
             },
             sendDate: blueGrey[100],
 
