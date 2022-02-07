@@ -77,6 +77,7 @@ export default function MessageList(props) {
                 flex: 1,
                 overflow: "auto",
                 padding: 0,
+                margin: 0,
                 "& .feedScroll": isDarkTheme ? darkScroll : lightScroll,
             }}
         >
@@ -108,33 +109,38 @@ function MessageItem(props) {
     const isDarkTheme = palette.mode === "dark";
 
     const arrowLeft = {
-        right: "100%",
-        top: 5,
-        borderTopWidth: 0,
-        borderTopColor: "transparent",
-        borderRightWidth: 10,
-        borderRightColor: "rgb(32,166,181)",
-        borderBottomWidth: 10,
-        borderBottomColor: "transparent",
-        borderLeftWidth: 0,
-        borderLeftColor: "transparent",
-    };
-    const arrowRight = {
-        left: "100%",
-        top: 5,
-        borderTopWidth: 10,
-        borderTopColor: "rgb(32,166,181)",
-        borderRightWidth: 10,
-        borderRightColor: "transparent",
-        borderBottomWidth: 0,
-        borderBottomColor: "transparent",
-        borderLeftWidth: 0,
-        borderLeftColor: "transparent",
+        ":before": {
+            content: `""`,
+            width: "5px",
+            height: "5px",
+            position: "absolute",
+            borderLeft: "10px solid",
+            borderLeftColor: "chat.chatBubble.user",
+            borderRight: "10px solid transparent",
+            borderTop: "10px solid",
+            borderTopColor: "chat.chatBubble.user",
+            borderBottom: "10px solid transparent",
+            right: "-20px",
+            top: "16px",
+        },
     };
 
-    // function isCurrentUser(message) {
-    //     return message.from === user.user_metadata.user_name;
-    // }
+    const arrowRight = {
+        ":before": {
+            content: `""`,
+            width: "5px",
+            height: "5px",
+            position: "absolute",
+            borderLeft: "10px solid transparent",
+            borderRight: "10px solid",
+            borderRightColor: "chat.chatBubble.other",
+            borderTop: "10px solid",
+            borderTopColor: "chat.chatBubble.other",
+            borderBottom: "10px solid transparent",
+            left: "-20px",
+            top: "16px",
+        },
+    };
 
     return (
         // Message
@@ -147,7 +153,7 @@ function MessageItem(props) {
                     ? "row-reverse"
                     : "row",
                 // gridTemplateColumns: "1fr 6fr",
-                margin: "20px",
+                marginX: "10px",
                 hover: {
                     backgroundColor: "grey.A200",
                 },
@@ -168,15 +174,28 @@ function MessageItem(props) {
                     justifyContent: "center",
                 }}
             >
-                <MessageHeader
-                    message={message}
-                    delete={props.delete}
-                    handleOpenProfileDialog={props.handleOpenProfileDialog}
+                <Avatar
+                    alt={message.from}
+                    src={`https://github.com/${message.from}.png`}
+                    sx={{
+                        width: 32,
+                        height: 32,
+                        marginLeft: isCurrentUser(message.from)
+                            ? "22px"
+                            : "0px",
+                        marginRight: isCurrentUser(message.from)
+                            ? "0px"
+                            : "22px",
+                    }}
+                    onClick={(e) => {
+                        props.handleOpenProfileDialog(message.from);
+                    }}
                 />
                 <Box
                     sx={{
                         display: "flex",
                         flexDirection: "column",
+                        position: "relative",
                     }}
                 >
                     <Box
@@ -186,19 +205,19 @@ function MessageItem(props) {
                                 ? "row-reverse"
                                 : "row",
                             alignItems: "flex-start",
-                            // width: "auto",
                             color: "chat.chatBubble.contrastText",
                             bgcolor: isCurrentUser(message.from)
                                 ? "chat.chatBubble.user"
                                 : "chat.chatBubble.other",
                             borderRadius: "5px",
-                            // padding: "10px 20px",
+                            "& .bubble": isCurrentUser(message.from) ? arrowLeft : arrowRight,
                         }}
                     >
                         <Box
+                            className="bubble"
                             sx={{
                                 display: "flex",
-                                alignItems: "center",
+                                flexDirection: "column",
                                 flexGrow: 1,
                                 color: "inherit",
                                 paddding: "10px",
@@ -214,6 +233,19 @@ function MessageItem(props) {
                                     : "0px",
                             }}
                         >
+                            {!isCurrentUser(message.from) ? (
+                                <Typography
+                                    sx={{
+                                        fontWeight: "bold",
+                                        marginBottom: "2px",
+                                    }}
+                                >
+                                    @{message.from}
+                                </Typography>
+                            ) : (
+                                ""
+                            )}
+
                             <Typography variant="body1">
                                 {message.messageText}
                             </Typography>
@@ -250,10 +282,22 @@ function MessageHeader(props) {
                 display: "block",
             }}
         >
-            <MessageSender
+            <Avatar
+                alt={message.from}
+                src={`https://github.com/${message.from}.png`}
+                sx={{
+                    width: 32,
+                    height: 32,
+                    marginX: "8px",
+                }}
+                onClick={(e) => {
+                    props.handleOpenProfileDialog(message.from);
+                }}
+            />
+            {/* <MessageSender
                 message={message}
                 handleOpenProfileDialog={props.handleOpenProfileDialog}
-            />
+            /> */}
         </Box>
     );
 }
@@ -285,7 +329,7 @@ function MessageSender(props) {
                 }}
             />
             {/* Remetente */}
-            <Typography tag="strong">@{message.from}</Typography>
+            {/* <Typography tag="strong">@{message.from}</Typography> */}
         </Box>
     );
 }
