@@ -22,9 +22,8 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import Loading from "./Loading.js";
 
 import appConfig from "../../config.json";
-import {themeLight, themeDark} from "../Theme.js";
+import { themeLight, themeDark } from "../Theme.js";
 import { useAuth } from "../contexts/Auth";
-
 
 const ResponsiveAppBar = (props) => {
     const { signOut, user } = useAuth();
@@ -32,9 +31,7 @@ const ResponsiveAppBar = (props) => {
     const setTheme = props.setTheme;
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-    const [dark, setDark] = React.useState(
-        true
-    );
+    const [dark, setDark] = React.useState(true);
 
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
@@ -46,17 +43,22 @@ const ResponsiveAppBar = (props) => {
 
     const handleChangedarkTheme = (event) => {
         setDark(!dark);
-        if(!dark){
+        if (!dark) {
             setTheme(themeDark);
-        }else {
+        } else {
             setTheme(themeLight);
         }
     };
 
+    function handleSignOut() {
+        setAnchorElUser(null);
+        signOut();
+    }
+
     return (
         <AppBar position="relative">
             <Container maxWidth="xl">
-                <Toolbar disableGutters >
+                <Toolbar disableGutters>
                     <Typography
                         variant="h6"
                         noWrap
@@ -70,9 +72,9 @@ const ResponsiveAppBar = (props) => {
                         {appConfig.name}
                     </Typography>
 
-                    <Loading color="secondary"/>
+                    <Loading color="secondary" />
 
-                    <Box sx={{ flexGrow: 0}} >
+                    <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Abrir menu do usuário" placement="left">
                             <IconButton
                                 size="large"
@@ -135,11 +137,7 @@ const ResponsiveAppBar = (props) => {
                             )}
                             <Divider />
                             {user ? (
-                                <MenuItem
-                                    onClick={(event) => {
-                                        signOut();
-                                    }}
-                                >
+                                <MenuItem onClick={handleSignOut}>
                                     <ListItemIcon>
                                         <LogoutIcon fontSize="small" />
                                     </ListItemIcon>
@@ -151,7 +149,6 @@ const ResponsiveAppBar = (props) => {
                         </Menu>
                     </Box>
                 </Toolbar>
-
             </Container>
         </AppBar>
     );

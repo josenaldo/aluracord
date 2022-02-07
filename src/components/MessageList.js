@@ -5,13 +5,8 @@ import {
     IconButton,
     Avatar,
     Typography,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
 import ScrollableFeed from "react-scrollable-feed";
 
@@ -63,10 +58,6 @@ export default function MessageList(props) {
         },
     };
 
-    React.useEffect(() => {
-        return () => {};
-    }, []);
-
     return (
         <Box
             as="ul"
@@ -103,10 +94,9 @@ function MessageItem(props) {
     const message = props.message;
     const tag = props.tag || "li";
     const deleteMessage = props.delete;
-    const { user, isCurrentUser } = useAuth();
+    const { isCurrentUser } = useAuth();
 
     const palette = useTheme().palette;
-    const isDarkTheme = palette.mode === "dark";
 
     const arrowLeft = {
         ":before": {
@@ -152,7 +142,6 @@ function MessageItem(props) {
                 flexDirection: isCurrentUser(message.from)
                     ? "row-reverse"
                     : "row",
-                // gridTemplateColumns: "1fr 6fr",
                 marginX: "10px",
                 hover: {
                     backgroundColor: "grey.A200",
@@ -170,7 +159,6 @@ function MessageItem(props) {
                     flexDirection: isCurrentUser(message.from)
                         ? "row-reverse"
                         : "row",
-                    // alignItems: "center",
                     justifyContent: "center",
                 }}
             >
@@ -268,68 +256,6 @@ function MessageItem(props) {
                     <MessageDate message={message} />
                 </Box>
             </Box>
-        </Box>
-    );
-}
-
-function MessageHeader(props) {
-    const message = props.message;
-
-    return (
-        <Box
-            sx={{
-                marginX: "10px",
-                display: "block",
-            }}
-        >
-            <Avatar
-                alt={message.from}
-                src={`https://github.com/${message.from}.png`}
-                sx={{
-                    width: 32,
-                    height: 32,
-                    marginX: "8px",
-                }}
-                onClick={(e) => {
-                    props.handleOpenProfileDialog(message.from);
-                }}
-            />
-            {/* <MessageSender
-                message={message}
-                handleOpenProfileDialog={props.handleOpenProfileDialog}
-            /> */}
-        </Box>
-    );
-}
-
-function MessageSender(props) {
-    const message = props.message;
-
-    return (
-        <Box
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "chat.sender.username",
-            }}
-        >
-            {/* Foto do remetente */}
-            <Avatar
-                alt={message.from}
-                src={`https://github.com/${message.from}.png`}
-                sx={{
-                    width: 32,
-                    height: 32,
-                    marginX: "8px",
-                }}
-                onClick={(e) => {
-                    props.handleOpenProfileDialog(message.from);
-                }}
-            />
-            {/* Remetente */}
-            {/* <Typography tag="strong">@{message.from}</Typography> */}
         </Box>
     );
 }

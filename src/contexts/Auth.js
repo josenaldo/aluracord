@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { supabase } from "../SupabaseClient";
-
+import { useRouter } from "next/router";
 
 const AuthContext = React.createContext();
 
@@ -9,6 +9,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+    const router = useRouter();
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
 
@@ -19,11 +20,20 @@ export function AuthProvider({ children }) {
         setUser(session?.user ?? null);
         setLoading(false);
 
+        if (!session && router.pathname !== "/") {
+            console.log("Redirecionando 1");
+            router.push("/");
+        }
+
         // Listen for changes on auth state (logged in, signed out, etc.)
         const { data: listener } = supabase.auth.onAuthStateChange(
             async (event, session) => {
                 setUser(session?.user ?? null);
                 setLoading(false);
+                if (!session) {
+                    console.log("Redirecionando 2");
+                    router.push("/");
+                }
             }
         );
 
@@ -39,13 +49,14 @@ export function AuthProvider({ children }) {
                 provider: "github",
             }),
         signOut: () => supabase.auth.signOut(),
+        isCurrentUser: (username) => username === user?.user_metadata.user_name,
         user,
-        isCurrentUser: (username) => username === user.user_metadata.user_name,
     };
 
     return (
         <AuthContext.Provider value={value}>
-            {!loading && children}
+            {loading ? "Carregando" : children}
+            {/* {!loading && children} */}
         </AuthContext.Provider>
     );
 }

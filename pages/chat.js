@@ -8,11 +8,13 @@ import ProfileDialog from "../src/components/ProfileDialog.js";
 import ButtonSendSticker from "../src/components/ButtonSendSticker.js";
 import SendMessageBox from "../src/components/SendMessageBox.js";
 import MessageList from "../src/components/MessageList.js";
+import { useAuth } from "../src/contexts/Auth";
 
 export default function ChatPage(props) {
     const [messageList, setMessageList] = React.useState([]);
     const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
     const [selectedUser, setSelectedUser] = React.useState(null);
+    const { user } = useAuth();
 
     setMessageList.bind(this);
 
@@ -24,14 +26,17 @@ export default function ChatPage(props) {
         eventBus.dispatch(Events.START_LOADING);
 
         console.log("Carregando mensagens");
-
-        supabase
-            .from("Message")
-            .select("*")
-            .then(({ data }) => {
-                setMessageList(data);
-                eventBus.dispatch(Events.STOP_LOADING);
-            });
+        if (user) {
+            supabase
+                .from("Message")
+                .select("*")
+                .then(({ data }) => {
+                    setMessageList(data);
+                    eventBus.dispatch(Events.STOP_LOADING);
+                });
+        }else {
+            eventBus.dispatch(Events.STOP_LOADING);
+        }
 
         return () => {
             eventBus.remove(Events.SEND_MESSAGE);
