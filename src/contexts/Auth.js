@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { supabase } from "../SupabaseClient";
 import { useRouter } from "next/router";
+import LoadingApp from "../components/LoadingApp";
 
 const AuthContext = React.createContext();
 
@@ -55,8 +56,11 @@ export function AuthProvider({ children }) {
 
     return (
         <AuthContext.Provider value={value}>
-            {loading ? "Carregando" : children}
-            {/* {!loading && children} */}
+            {loading ? (
+                <LoadingApp message="Carregando a aplicação..." />
+            ) : (
+                children
+            )}
         </AuthContext.Provider>
     );
 }

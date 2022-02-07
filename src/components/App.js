@@ -11,14 +11,16 @@ import { ThemeProvider } from "@mui/material/styles";
 
 import { AuthProvider } from "../contexts/Auth";
 
+import LoadingApp from "./LoadingApp";
+
 export default function App({ children }) {
     const [theme, setTheme] = React.useState(themeDark);
 
     return (
-        <AuthProvider>
-            <ProtectRoute>
-                <ThemeProvider theme={theme}>
-                    <CssBaseline />
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <AuthProvider>
+                <ProtectRoute>
                     <Box
                         sx={{
                             flex: 1,
@@ -58,8 +60,8 @@ export default function App({ children }) {
                             </Box>
                         </Box>
                     </Box>
-                </ThemeProvider>
-            </ProtectRoute>
-        </AuthProvider>
+                </ProtectRoute>
+            </AuthProvider>
+        </ThemeProvider>
     );
 }
