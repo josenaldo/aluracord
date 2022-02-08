@@ -43,14 +43,18 @@ export default function ButtonSendSticker(props) {
                         position: "absolute",
                         backgroundColor: "chat.sticker.box.background",
                         width: {
-                            xs: "300px",
-                            sm: "600px",
+                            // xs: "220px",
+                            xs: "80vw",
+                            sm: "70vw",
                         },
-                        height: "400px",
-                        right: "30px",
-                        bottom: "30px",
-                        left: "20px",
-                        padding: "10px",
+                        height: {
+                            xs: "400px",
+                            sm: "600px",
+                            },
+                        bottom: "56px",
+                        zIndex: "10000",
+                        left: "5px",
+                        padding: "10px 0 10px",
                         boxShadow:
                             "rgba(4, 4, 5, 0.15) 0px 0px 0px 1px, rgba(0, 0, 0, 0.24) 0px 8px 16px 0px",
                         "& .stickFeed": scroll,
@@ -77,7 +81,7 @@ export default function ButtonSendSticker(props) {
                                     }
                                 }}
                                 sx={{
-                                    padding: "5px",
+                                    padding: "10px",
                                     borderRadius: "5px",
                                     "&:hover": {
                                         backgroundColor: "chat.sticker.imageList.hover",
@@ -100,43 +104,6 @@ export default function ButtonSendSticker(props) {
                             </ImageListItem>
                         ))}
                     </ImageList>
-                    {/* <Box
-                        tag="ul"
-                        sx={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            justifyContent: "space-between",
-                            flex: 1,
-                            paddingTop: "16px",
-                            overflow: "scroll",
-                        }}
-                    >
-                        {appConfig.stickers.map((sticker) => (
-                            <Typography
-                                onClick={() => {
-                                    // console.log('[DENTRO DO COMPONENTE] Clicou no sticker:', sticker);
-                                    if (Boolean(props.onStickerClick)) {
-                                        props.onStickerClick(sticker);
-                                    }
-                                }}
-                                tag="li"
-                                key={sticker}
-                                sx={{
-                                    width: "50%",
-                                    borderRadius: "5px",
-                                    padding: "10px",
-                                    focus: {
-                                        backgroundColor: "grey[600]",
-                                    },
-                                    hover: {
-                                        backgroundColor: "grey[600]",
-                                    },
-                                }}
-                            >
-                                <Image src={sticker} />
-                            </Typography>
-                        ))}
-                    </Box> */}
                 </Box>
             )}
         </Box>
