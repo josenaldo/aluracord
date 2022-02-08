@@ -25,9 +25,8 @@ export default function ButtonSendSticker(props) {
             }}
         >
             <IconButton
-                aria-label="add to shopping cart"
                 sx={{
-                    color: "chat.sticker.button",
+                    // color: "chat.sticker.button",
                 }}
                 onClick={() => setOpenState(!isOpen)}
             >

@@ -17,29 +17,15 @@ import { useAuth } from "../contexts/Auth";
 import ButtonSendSticker  from "./ButtonSendSticker";
 
 
-export default function SendMessageBox(props) {
+export default function SendMessageBox({sendMessage}) {
     const { user } = useAuth();
 
     const [message, setMessage] = React.useState("  ");
-    const addMessage = props.addMessage;
 
-    function handleSendMessage(newMessageText) {
-        eventBus.dispatch(Events.START_LOADING);
-
-        const message = {
-            from: user.user_metadata.user_name,
-            messageText: newMessageText,
-            sendDate: new Date(),
-        };
-
-        supabase
-            .from("Message")
-            .insert([message])
-            .then(({ data }) => {
-                addMessage(data[0]);
-                setMessage("");
-                eventBus.dispatch(Events.STOP_LOADING);
-            });
+    function handleSendMessage() {
+        sendMessage(message);
+        document.querySelector("textarea").focus();
+        setMessage("");
     }
 
     return (
@@ -47,13 +33,14 @@ export default function SendMessageBox(props) {
             as="form"
             sx={{
                 display: "flex",
-                position: "relative",
-                display: "flex",
                 flexDirection: "row",
+                alignItems: "center",
+                position: "relative",
                 padding: "10px",
             }}
         >
             <ButtonSendSticker />
+
             <TextField
                 id="senMesssageText"
                 value={message}
@@ -70,22 +57,26 @@ export default function SendMessageBox(props) {
                 onKeyPress={(event) => {
                     if (event.key === "Enter" && event.shiftKey) {
                         event.preventDefault();
-                        handleSendMessage(message);
+                        handleSendMessage();
                     }
                 }}
                 // endAdornment={<InputAdornment position="end"></InputAdornment>}
             ></TextField>
 
+            <ButtonSendMessage handleSendMessage={handleSendMessage}/>
+        </Box>
+    );
+}
+
+function ButtonSendMessage({handleSendMessage}) {
+    return (
+        <Box>
             <IconButton
                 aria-label="send message"
-                onClick={(event) => {
-                    event.preventDefault();
-                    handleSendMessage(message);
-                    document.querySelector("textarea").focus();
-                }}
-                edge="end"
+                onClick={handleSendMessage}
+                // edge="end"
             >
-                <SendIcon />
+                <SendIcon fontSize="large" />
             </IconButton>
         </Box>
     );

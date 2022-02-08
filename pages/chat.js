@@ -11,16 +11,25 @@ import MessageList from "../src/components/MessageList.js";
 import { useAuth } from "../src/contexts/Auth";
 
 export default function ChatPage(props) {
-    const [messageList, setMessageList] = React.useState([]);
     const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
     const [selectedUser, setSelectedUser] = React.useState(null);
     const { user } = useAuth();
+    const [messageList, setMessageList] = React.useState([
+        // {
+        //     id: 1,
+        //     from: "josenaldo",
+        //     messageText: "Olá mundo",
+        //     sendDate: new Date(),
+        // },
+        // {
+        //     id: 2,
+        //     from: "josenaldo",
+        //     messageText: ":sticker: https://www.alura.com.br/imersao-react-4/assets/figurinhas/Figurinha_1.png",
+        //     sendDate: new Date(),
+        // }
+    ]);
 
     setMessageList.bind(this);
-
-    function addMessage(message) {
-        setMessageList([...messageList, message]);
-    }
 
     React.useEffect(() => {
         eventBus.dispatch(Events.START_LOADING);
@@ -42,6 +51,28 @@ export default function ChatPage(props) {
             eventBus.remove(Events.SEND_MESSAGE);
         };
     }, []);
+
+    function handleSendMessage(newMessageText) {
+        eventBus.dispatch(Events.START_LOADING);
+
+        const message = {
+            from: user.user_metadata.user_name,
+            messageText: newMessageText,
+            sendDate: new Date(),
+        };
+
+        supabase
+            .from("Message")
+            .insert([message])
+            .then(({ data }) => {
+                setMessageList([...messageList, message]);
+                eventBus.dispatch(Events.STOP_LOADING);
+            });
+    }
+
+    function addMessage(message) {
+        setMessageList([...messageList, message]);
+    }
 
     function handleDeleteMessage(messageId) {
         eventBus.dispatch(Events.START_LOADING);
@@ -130,7 +161,7 @@ export default function ChatPage(props) {
                     delete={handleDeleteMessage}
                     handleOpenProfileDialog={handleOpenProfileDialog}
                 />
-                <SendMessageBox addMessage={addMessage} />
+                <SendMessageBox sendMessage={handleSendMessage}/>
             </Paper>
             <ProfileDialog
                 user={selectedUser}

@@ -1,11 +1,6 @@
 import React from "react";
 
-import {
-    Box,
-    IconButton,
-    Avatar,
-    Typography,
-} from "@mui/material";
+import { Box, IconButton, Avatar, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import CloseIcon from "@mui/icons-material/Close";
 import ScrollableFeed from "react-scrollable-feed";
@@ -16,7 +11,7 @@ import appConfig from "../../config.json";
 export default function MessageList(props) {
     const messages = props.messages;
     const palette = useTheme().palette;
-    const scroll =  useTheme().scroll;
+    const scroll = useTheme().scroll;
 
     return (
         <Box
@@ -27,7 +22,7 @@ export default function MessageList(props) {
                 flexDirection: "column",
                 flex: 1,
                 overflow: "auto",
-                padding: 0,
+                padding: "10px 0 10px 10px",
                 margin: 0,
                 "& .feedScroll": scroll,
             }}
@@ -97,7 +92,6 @@ function MessageItem(props) {
         <Box
             as={tag}
             sx={{
-                marginBottom: "20px",
                 display: "flex",
                 flexDirection: isCurrentUser(message.from)
                     ? "row-reverse"
@@ -158,7 +152,9 @@ function MessageItem(props) {
                                 ? "chat.chatBubble.user"
                                 : "chat.chatBubble.other",
                             borderRadius: "5px",
-                            "& .bubble": isCurrentUser(message.from) ? arrowLeft : arrowRight,
+                            "& .bubble": isCurrentUser(message.from)
+                                ? arrowLeft
+                                : arrowRight,
                         }}
                     >
                         <Box
@@ -194,9 +190,10 @@ function MessageItem(props) {
                                 ""
                             )}
 
-                            <Typography variant="body1">
+                            {/* <Typography variant="body1">
                                 {message.messageText}
-                            </Typography>
+                            </Typography> */}
+                            <MessageText content={message.messageText} />
                         </Box>
                         {/* Hora da message */}
                         <IconButton
@@ -244,5 +241,16 @@ function MessageDate(props) {
                 new Date(message.sendDate)
             )}
         </Typography>
+    );
+}
+
+function MessageText({ content }) {
+    return content.startsWith(":sticker:") ? (
+        <Box as="img" src={content.slice(10).trim()} alt="Sticker" sx={{
+            maxWidth: "200px",
+            maxHeight: "200px",
+        }}/>
+    ) : (
+        <Typography variant="body1">{content}</Typography>
     );
 }
