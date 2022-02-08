@@ -28,6 +28,11 @@ export default function SendMessageBox({sendMessage}) {
         setMessage("");
     }
 
+    function handleSendSticker(sticker) {
+        sendMessage(`:sticker: ${sticker}` );
+        document.querySelector("textarea").focus();
+    }
+
     return (
         <Box
             as="form"
@@ -39,7 +44,7 @@ export default function SendMessageBox({sendMessage}) {
                 padding: "10px",
             }}
         >
-            <ButtonSendSticker />
+            <ButtonSendSticker onStickerClick={handleSendSticker}/>
 
             <TextField
                 id="senMesssageText"

@@ -65,7 +65,7 @@ export default function ChatPage(props) {
             .from("Message")
             .insert([message])
             .then(({ data }) => {
-                setMessageList([...messageList, message]);
+                setMessageList([...messageList, data[0]]);
                 eventBus.dispatch(Events.STOP_LOADING);
             });
     }

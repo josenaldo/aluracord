@@ -74,7 +74,7 @@ export default function ButtonSendSticker(props) {
                             <ImageListItem
                                 key={sticker}
                                 onClick={() => {
-                                    console.log('[DENTRO DO COMPONENTE] Clicou no sticker:', sticker);
+                                    // console.log('[DENTRO DO COMPONENTE] Clicou no sticker:', sticker);
                                     if (Boolean(props.onStickerClick)) {
                                         props.onStickerClick(sticker);
                                     }
