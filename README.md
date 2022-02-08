@@ -51,7 +51,7 @@
 -   [x] [Arquivos da aula 03](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
 -   [x] [Transcrição da aula 03](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula03)
 -   [x] [Template base da página do Chat usado no começo da aula 03](https://gist.github.com/omariosouto/8517c711f36770b73371185e4aed92d6)
--   [ ] [Código da aula completo com tudo o que fizemos na aula 03](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
+-   [x] [Código da aula completo com tudo o que fizemos na aula 03](https://github.com/alura-challenges/aluracord-matrix/pull/4/files)
 
 #### Links citados na aula 03
 
@@ -59,10 +59,10 @@
 
 #### Links usados na aula 03
 
--   [Intl.DateTimeFormat - como formatar datas internacionalizadas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)
--   [Filter](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
--   [Como remover itens de listas no react](https://www.robinwieruch.de/react-remove-item-from-list/)
--   [Como estilizar barras de rolagem com o CSS](https://www.digitalocean.com/community/tutorials/css-scrollbars-pt)
+-   [x] [Intl.DateTimeFormat - como formatar datas internacionalizadas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat)
+-   [x] [Filter](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+-   [x] [Como remover itens de listas no react](https://www.robinwieruch.de/react-remove-item-from-list/)
+-   [x] [Como estilizar barras de rolagem com o CSS](https://www.digitalocean.com/community/tutorials/css-scrollbars-pt)
 
 ### Aula 04
 
@@ -76,22 +76,21 @@
 -   [ ] [Mario Souto - Latência](https://www.youtube.com/watch?v=x4eyf5L5caY)
 -   [ ] [Mario Souto - Como fazer AJAX](https://medium.com/@omariosouto/entendendo-como-fazer-ajax-com-a-fetchapi-977ff20da3c6)
 -   [ ] [Http Status Dogs](https://httpstatusdogs.com/)
--   [ ] [API do GitHub](https://api.github.com/users/omariosouto)
+-   [x] [API do GitHub](https://api.github.com/users/omariosouto)
 -   [ ] [Dev em T](https://www.alura.com.br/dev-em-t)
--   [ ] [Pacote de stickers da Alura](https://www.alura.com.br/artigos/stickers-dev-aluraverso-whatsapp-telegram)
+-   [x] [Pacote de stickers da Alura](https://www.alura.com.br/artigos/stickers-dev-aluraverso-whatsapp-telegram)
 
 ### Aula 05
 
 -   [x] [Página da aula 05](https://www.alura.com.br/imersao-react/aula05-chat-e-realtime)
--   [ ] [Vídeo da aula 05](https://www.youtube.com/watch?v=Fyc91hsvYMA)
--   [ ] [Arquivos da aula 05](https://github.com/alura-challenges/aluracord-matrix/pull/7/files)
--   [ ] [Transcrição da aula 05](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula05.md)
--   [ ] [Easily toggle between light and dark theme with Material-UI](https://dev.to/thatanjan/easily-toggle-between-light-and-dark-theme-with-material-ui-2728)
+-   [x] [Vídeo da aula 05](https://www.youtube.com/watch?v=Fyc91hsvYMA)
+-   [x] [Arquivos da aula 05](https://github.com/alura-challenges/aluracord-matrix/pull/7/files)
+-   [x] [Transcrição da aula 05](https://github.com/neforodrigo/imersao_react_2022/blob/main/imersao_react_aula05.md)
+-   [x] [Componente ButtonSendSticker](https://github.com/alura-challenges/aluracord-matrix/blob/aula05/src/components/ButtonSendSticker.js)
 
 #### Links citados na aula 05
 
--   [ ] [Stickers do AluraVerso!](https://www.alura.com.br/artigos/stickers-dev-aluraverso-whatsapp-telegram)
--   [ ] [Componente ButtonSendSticker](https://github.com/alura-challenges/aluracord-matrix/blob/aula05/src/components/ButtonSendSticker.js)
+-   [x] [Stickers do AluraVerso!](https://www.alura.com.br/artigos/stickers-dev-aluraverso-whatsapp-telegram)
 -   [ ] [Dicas de programação do DevSoutinho](https://www.youtube.com/playlist?list=PLTcmLKdIkOWkJY8LJXs1GDqBnxCGsExBO)
 -   [ ] [Como criar um jogo do ZERO!](https://www.youtube.com/playlist?list=PLTcmLKdIkOWmeNferJ292VYKBXydGeDej)
 -   [ ] [DevSoutinho - Dicas de React e Web em geral](https://www.youtube.com/playlist?list=PLTcmLKdIkOWkVld6KvLJbUCPIOjqLg9cr)
@@ -99,6 +98,7 @@
 
 ### Links usados na aula 05
 
+-   [ ] [Easily toggle between light and dark theme with Material-UI](https://dev.to/thatanjan/easily-toggle-between-light-and-dark-theme-with-material-ui-2728)
 -   [ ] [Understanding Functional Components vs. Class Components in React](https://www.twilio.com/blog/react-choose-functional-components)
 -   [ ] [Arrow function expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 -   [ ] [Passing props to props.children using React.cloneElement and render prop pattern](https://medium.com/@justynazet/passing-props-to-props-children-using-react-cloneelement-and-render-props-pattern-896da70b24f6)
@@ -109,7 +109,7 @@
 -   [x] [Imersão React | Carreira Front-End em 2022](https://www.youtube.com/watch?v=HXkDb5pnMRQ)
 -   [x] [Imersão React | CSS em JavaScript](https://www.youtube.com/watch?v=f_i3pEna5xU)
 -   [x] [Imersão React | Mergulhando em TypeScript e React](https://www.youtube.com/watch?v=-ofs-sbJZC8)
--   [ ] [Imersão React | Projetos em destaque e encerramento](https://www.youtube.com/watch?v=eiORX8iLEj4)
+-   [x] [Imersão React | Projetos em destaque e encerramento](https://www.youtube.com/watch?v=eiORX8iLEj4)
 
 ## Extras
 
