@@ -4,30 +4,25 @@ import { Box, Paper } from "@mui/material";
 import { supabase } from "../src/SupabaseClient.js";
 import { eventBus } from "../src/EventBus.js";
 import { Events } from "../src/Events.js";
+import { useAuth } from "../src/contexts/Auth";
 import ProfileDialog from "../src/components/ProfileDialog.js";
-import ButtonSendSticker from "../src/components/ButtonSendSticker.js";
 import SendMessageBox from "../src/components/SendMessageBox.js";
 import MessageList from "../src/components/MessageList.js";
-import { useAuth } from "../src/contexts/Auth";
+
+function getMessagesInRealTime(addMessageCallback) {
+    return supabase
+        .from("Message")
+        .on("INSERT", (response) => {
+            addMessageCallback(response.new);
+        })
+        .subscribe();
+}
 
 export default function ChatPage(props) {
     const [openProfileDialog, setOpenProfileDialog] = React.useState(false);
     const [selectedUser, setSelectedUser] = React.useState(null);
     const { user } = useAuth();
-    const [messageList, setMessageList] = React.useState([
-        // {
-        //     id: 1,
-        //     from: "josenaldo",
-        //     messageText: "Olá mundo",
-        //     sendDate: new Date(),
-        // },
-        // {
-        //     id: 2,
-        //     from: "josenaldo",
-        //     messageText: ":sticker: https://www.alura.com.br/imersao-react-4/assets/figurinhas/Figurinha_1.png",
-        //     sendDate: new Date(),
-        // }
-    ]);
+    const [messageList, setMessageList] = React.useState([]);
 
     setMessageList.bind(this);
 
@@ -43,9 +38,16 @@ export default function ChatPage(props) {
                     setMessageList(data);
                     eventBus.dispatch(Events.STOP_LOADING);
                 });
-        }else {
+        } else {
             eventBus.dispatch(Events.STOP_LOADING);
         }
+
+        getMessagesInRealTime((newMessage) => {
+            setMessageList((currentMessageList) => {
+                return [...currentMessageList, newMessage];
+            });
+            eventBus.dispatch(Events.STOP_LOADING);
+        });
 
         return () => {
             eventBus.remove(Events.SEND_MESSAGE);
@@ -65,12 +67,11 @@ export default function ChatPage(props) {
             .from("Message")
             .insert([message])
             .then(({ data }) => {
-                setMessageList([...messageList, data[0]]);
-                eventBus.dispatch(Events.STOP_LOADING);
             });
     }
 
     function addMessage(message) {
+        console.log(messageList);
         setMessageList([...messageList, message]);
     }
 
@@ -161,7 +162,7 @@ export default function ChatPage(props) {
                     delete={handleDeleteMessage}
                     handleOpenProfileDialog={handleOpenProfileDialog}
                 />
-                <SendMessageBox sendMessage={handleSendMessage}/>
+                <SendMessageBox sendMessage={handleSendMessage} />
             </Paper>
             <ProfileDialog
                 user={selectedUser}
