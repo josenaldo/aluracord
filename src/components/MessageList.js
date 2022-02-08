@@ -16,47 +16,7 @@ import appConfig from "../../config.json";
 export default function MessageList(props) {
     const messages = props.messages;
     const palette = useTheme().palette;
-    const isDarkTheme = palette.mode === "dark";
-
-    const darkScroll = {
-        "&::-webkit-scrollbar": {
-            width: "8px",
-        },
-
-        "&::-webkit-scrollbar-track": {
-            bgcolor: `${palette.grey["800"]}`,
-            borderRadius: "10px",
-        },
-
-        "&::-webkit-scrollbar-thumb": {
-            bgcolor: `${palette.grey["700"]}`,
-            borderRadius: "10px",
-        },
-
-        "&::-webkit-scrollbar-thumb:hover": {
-            bgcolor: `${palette.grey["500"]}`,
-        },
-    };
-
-    const lightScroll = {
-        "&::-webkit-scrollbar": {
-            width: "8px",
-        },
-
-        "&::-webkit-scrollbar-track": {
-            bgcolor: `${palette.grey["300"]}`,
-            borderRadius: "10px",
-        },
-
-        "&::-webkit-scrollbar-thumb": {
-            bgcolor: `${palette.grey["400"]}`,
-            borderRadius: "10px",
-        },
-
-        "&::-webkit-scrollbar-thumb:hover": {
-            bgcolor: `${palette.grey["500"]}`,
-        },
-    };
+    const scroll =  useTheme().scroll;
 
     return (
         <Box
@@ -69,7 +29,7 @@ export default function MessageList(props) {
                 overflow: "auto",
                 padding: 0,
                 margin: 0,
-                "& .feedScroll": isDarkTheme ? darkScroll : lightScroll,
+                "& .feedScroll": scroll,
             }}
         >
             <ScrollableFeed className="feedScroll">

@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import {deepPurple, teal, grey, blueGrey} from "@mui/material/colors";
+import { deepPurple, teal, grey, blueGrey } from "@mui/material/colors";
 
 const themeDark = createTheme({
     palette: {
@@ -29,13 +29,45 @@ const themeDark = createTheme({
                 deleteButtonOther: blueGrey[700],
                 contrastText: "#ffffff",
             },
-            sender:{
+            sender: {
                 username: blueGrey[100],
             },
             sendDate: blueGrey[600],
+            sticker: {
+                button: {
+                    closed: blueGrey[100],
+                    open: blueGrey[100],
+                },
+                box: {
+                    background: blueGrey[700],
+                },
+                title: blueGrey[200],
+                imageList: {
+                    hover: blueGrey[800],
+                    focus: blueGrey[500],
+                    active: blueGrey[600],
+                },
+            },
+        },
+    },
+    scroll: {
+        "&::-webkit-scrollbar": {
+            width: "8px",
+        },
 
+        "&::-webkit-scrollbar-track": {
+            bgcolor: `${grey[800]}`,
+            borderRadius: "10px",
+        },
 
-        }
+        "&::-webkit-scrollbar-thumb": {
+            bgcolor: `${grey[700]}`,
+            borderRadius: "10px",
+        },
+
+        "&::-webkit-scrollbar-thumb:hover": {
+            bgcolor: `${grey[500]}`,
+        },
     },
 });
 
@@ -65,13 +97,46 @@ const themeLight = createTheme({
                 deleteButtonOther: blueGrey[500],
                 contrastText: grey[800],
             },
-            sender:{
+            sender: {
                 username: blueGrey[900],
             },
-            sendDate: blueGrey[100],
-
+            sendDate: blueGrey[200],
+            sticker: {
+                button: {
+                    closed: blueGrey[100],
+                    open: blueGrey[100],
+                },
+                box: {
+                    background: blueGrey[50],
+                },
+                title: blueGrey[700],
+                imageList: {
+                    hover: blueGrey[200],
+                    focus: blueGrey[300],
+                    active: blueGrey[100],
+                },
+            },
         },
     },
+    scroll: {
+        "&::-webkit-scrollbar": {
+            width: "8px",
+        },
+
+        "&::-webkit-scrollbar-track": {
+            bgcolor: `${grey[300]}`,
+            borderRadius: "10px",
+        },
+
+        "&::-webkit-scrollbar-thumb": {
+            bgcolor: `${grey[400]}`,
+            borderRadius: "10px",
+        },
+
+        "&::-webkit-scrollbar-thumb:hover": {
+            bgcolor: `${grey[500]}`,
+        },
+    }
 });
 
 export { themeLight, themeDark };

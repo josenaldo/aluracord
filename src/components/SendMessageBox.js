@@ -8,12 +8,13 @@ import {
     InputAdornment,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-
-import appConfig from "../../config.json";
-import { eventBus } from "../EventBus.js";
-import { Events } from "../Events.js";
-import { supabase } from "../SupabaseClient.js";
+2
+import { eventBus } from "../EventBus";
+import { Events } from "../Events";
+import { supabase } from "../SupabaseClient";
 import { useAuth } from "../contexts/Auth";
+
+import ButtonSendSticker  from "./ButtonSendSticker";
 
 
 export default function SendMessageBox(props) {
@@ -52,6 +53,7 @@ export default function SendMessageBox(props) {
                 padding: "10px",
             }}
         >
+            <ButtonSendSticker />
             <TextField
                 id="senMesssageText"
                 value={message}

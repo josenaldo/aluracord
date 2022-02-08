@@ -1,69 +1,108 @@
 import React from "react";
-import { Box, Button, Text, Image } from "@skynexui/components";
+import {
+    Box,
+    Grid,
+    Typography,
+    Button,
+    IconButton,
+    InputAdornment,
+    ImageList,
+    ImageListItem,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+
+import EmojiEmotionsIcon from "@mui/icons-material/EmojiEmotions";
 import appConfig from "../../config.json";
 
 export default function ButtonSendSticker(props) {
     const [isOpen, setOpenState] = React.useState("");
+    const scroll = useTheme().scroll;
 
     return (
         <Box
-            styleSheet={{
+            sx={{
                 position: "relative",
             }}
         >
-            <Button
-                styleSheet={{
-                    borderRadius: "50%",
-                    padding: "0 3px 0 0",
-                    minWidth: "50px",
-                    minHeight: "50px",
-                    fontSize: "20px",
-                    marginBottom: "8px",
-                    lineHeight: "0",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: appConfig.theme.colors.neutrals[300],
-                    filter: isOpen ? "grayscale(0)" : "grayscale(1)",
-                    hover: {
-                        filter: "grayscale(0)",
-                    },
+            <IconButton
+                aria-label="add to shopping cart"
+                sx={{
+                    color: "chat.sticker.button",
                 }}
-                label="😋"
                 onClick={() => setOpenState(!isOpen)}
-            />
+            >
+                <EmojiEmotionsIcon fontSize="large" />
+            </IconButton>
+
             {isOpen && (
                 <Box
-                    styleSheet={{
+                    sx={{
                         display: "flex",
                         flexDirection: "column",
                         borderRadius: "5px",
                         position: "absolute",
-                        backgroundColor: appConfig.theme.colors.neutrals[800],
+                        backgroundColor: "chat.sticker.box.background",
                         width: {
-                            xs: "200px",
-                            sm: "290px",
+                            xs: "300px",
+                            sm: "600px",
                         },
-                        height: "300px",
+                        height: "400px",
                         right: "30px",
                         bottom: "30px",
-                        padding: "16px",
+                        left: "20px",
+                        padding: "10px",
                         boxShadow:
                             "rgba(4, 4, 5, 0.15) 0px 0px 0px 1px, rgba(0, 0, 0, 0.24) 0px 8px 16px 0px",
+                        "& .stickFeed": scroll,
                     }}
                     onClick={() => setOpenState(false)}
                 >
-                    <Text
-                        styleSheet={{
-                            color: appConfig.theme.colors.neutrals["000"],
+                    <Typography
+                        variant="h5"
+                        sx={{
+                            color: "chat.sticker.title",
                             fontWeight: "bold",
                         }}
                     >
                         Stickers
-                    </Text>
-                    <Box
+                    </Typography>
+                    <ImageList className="stickFeed" cols={3} gap={10}>
+                        {appConfig.stickers.map((sticker) => (
+                            <ImageListItem
+                                key={sticker}
+                                onClick={() => {
+                                    console.log('[DENTRO DO COMPONENTE] Clicou no sticker:', sticker);
+                                    if (Boolean(props.onStickerClick)) {
+                                        props.onStickerClick(sticker);
+                                    }
+                                }}
+                                sx={{
+                                    padding: "5px",
+                                    borderRadius: "5px",
+                                    "&:hover": {
+                                        backgroundColor: "chat.sticker.imageList.hover",
+                                    },
+                                    "&:focus": {
+                                        backgroundColor: "chat.sticker.imageList.focus",
+                                    },
+                                    "&:active": {
+                                        backgroundColor: "chat.sticker.imageList.active",
+                                    },
+
+                                }}
+                            >
+                                <img
+                                    src={`${sticker}?w=164&h=164&fit=crop&auto=format`}
+                                    srcSet={`${sticker}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                                    // alt={item.title}
+                                    loading="lazy"
+                                />
+                            </ImageListItem>
+                        ))}
+                    </ImageList>
+                    {/* <Box
                         tag="ul"
-                        styleSheet={{
+                        sx={{
                             display: "flex",
                             flexWrap: "wrap",
                             justifyContent: "space-between",
@@ -73,7 +112,7 @@ export default function ButtonSendSticker(props) {
                         }}
                     >
                         {appConfig.stickers.map((sticker) => (
-                            <Text
+                            <Typography
                                 onClick={() => {
                                     // console.log('[DENTRO DO COMPONENTE] Clicou no sticker:', sticker);
                                     if (Boolean(props.onStickerClick)) {
@@ -82,26 +121,22 @@ export default function ButtonSendSticker(props) {
                                 }}
                                 tag="li"
                                 key={sticker}
-                                styleSheet={{
+                                sx={{
                                     width: "50%",
                                     borderRadius: "5px",
                                     padding: "10px",
                                     focus: {
-                                        backgroundColor:
-                                            appConfig.theme.colors
-                                                .neutrals[600],
+                                        backgroundColor: "grey[600]",
                                     },
                                     hover: {
-                                        backgroundColor:
-                                            appConfig.theme.colors
-                                                .neutrals[600],
+                                        backgroundColor: "grey[600]",
                                     },
                                 }}
                             >
                                 <Image src={sticker} />
-                            </Text>
+                            </Typography>
                         ))}
-                    </Box>
+                    </Box> */}
                 </Box>
             )}
         </Box>
