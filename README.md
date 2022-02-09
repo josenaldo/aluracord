@@ -14,9 +14,10 @@
 
 #### Links citados na aula 01
 
--   [ ] [React recommended tool chains](https://pt-br.reactjs.org/docs/create-a-new-react-app.html#recommended-toolchains)
--   [ ] [Mario Souto - Strategy Pattern](https://www.youtube.com/watch?v=S-jqd6WZ7M0)
--   [ ] [Mario Souto - Pegando dados de uma API com React](https://www.youtube.com/watch?v=85vJXFpXLQw)
+-   [x] [Mario Souto - Strategy Pattern](https://www.youtube.com/watch?v=S-jqd6WZ7M0)
+-   [x] [Mario Souto - Latência](https://www.youtube.com/watch?v=x4eyf5L5caY)
+-   [x] [Você PRECISA ENTENDER o conteúdo DESSE | Callbacks, Sincrono, Assíncrono e Event Loop no JavaScript](https://www.youtube.com/watch?v=6lbBaM18X3g)
+-   [x] [Mario Souto - Pegando dados de uma API com React](https://www.youtube.com/watch?v=85vJXFpXLQw)
 -   [ ] [Mario Souto - O sistema de rotas do NextJS, principais dúvidas](https://www.youtube.com/watch?v=-kVnp3fg-v4)
 -   [ ] [Mario Souto - Linter](https://www.youtube.com/watch?v=yMRSDdifGW8)
 -   [ ] [Mario Souto - Centralizar conteúdo na tela](https://www.youtube.com/watch?v=Cu-HP-gvggg)
@@ -37,7 +38,6 @@
 -   [ ] [Nextjs Custom App](https://nextjs.org/docs/advanced-features/custom-app)
 -   [ ] [Aprender forEach e map - Mario Souto](https://www.youtube.com/watch?v=JbzcLKiTThk)
 -   [ ] [Mario Souto - Validando Formulários com React](https://www.youtube.com/watch?v=cMq6k7ymv2s)
--   [x] [Como fazer AJAX? E pegar os dados da API do GitHub](https://www.youtube.com/watch?v=85vJXFpXLQw)
 -   [ ] [Entendendo como fazer AJAX com a FetchAPI](https://medium.com/@omariosouto/entendendo-como-fazer-ajax-com-a-fetchapi-977ff20da3c6)
 -   [ ] [Usando a função Fetch](https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API/Using_Fetch)
 -   [ ] [Mario Souto - Github Pro + Eslint](https://www.youtube.com/watch?v=yMRSDdifGW8&t=2s)
@@ -73,7 +73,6 @@
 
 #### Links citados na aula 04
 
--   [ ] [Mario Souto - Latência](https://www.youtube.com/watch?v=x4eyf5L5caY)
 -   [ ] [Mario Souto - Como fazer AJAX](https://medium.com/@omariosouto/entendendo-como-fazer-ajax-com-a-fetchapi-977ff20da3c6)
 -   [ ] [Http Status Dogs](https://httpstatusdogs.com/)
 -   [x] [API do GitHub](https://api.github.com/users/omariosouto)
