@@ -146,6 +146,10 @@
 -   [Yarn](https://yarnpkg.com/)
 -   [Storybook.js.org](https://storybook.js.org/)
 -   [Youtube Downloader](https://yt5s.com/)
+-   [SWR - React Hooks for Data Fetching](https://swr.vercel.app/)
+-   [Gray Matter](https://github.com/jonschlinkert/gray-matter)
+-   [Remark](https://github.com/remarkjs/remark)
+-   [date-fns Modern JavaScript date utility library](https://date-fns.org/)
 
 ### Extensões do Chrome
 
