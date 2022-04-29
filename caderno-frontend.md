@@ -7,11 +7,13 @@
 -   [ ] [Princípios para Escrever JavaScript de forma Consistente e Idiomática](https://github.com/rwaldron/idiomatic.js/tree/master/translations/pt_BR)
 -   [ ] [Google JavaScript Style Guide](https://google.github.io/styleguide/javascriptguide.xml)
 -   [ ] [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+    -   [ ] [Airbnb JavaScript Style Guide - PT-BR](https://github.com/armoucar/javascript-style-guide#airbnb-javascript-style-guide-)
 
 ### Guia de estilo React
 
 -   [ ] [React Styleguidist](https://react-styleguidist.js.org/)
 -   [ ] [Airbnb React Style Guide](https://github.com/airbnb/javascript/tree/master/react)
+    -   [ ] [Airbnb React/JSX Style Guide - PT-BR](https://github.com/ronal2do/airbnb-react-styleguide)
 -   [ ] [Airbnb CSS-in-JavaScript Style Guide](https://github.com/airbnb/javascript/tree/master/css-in-javascript)
 
 ## Livros
@@ -28,6 +30,7 @@
 ## Artigos
 
 -   [ ] [Versionamento Semântico 2.0.0](https://semver.org/lang/pt-BR/)
+-   [x] [Do a barrel export](https://medium.com/@klauskpm/do-a-barrel-export-aa5b79b76b05)
 
 ## Cursos
 
@@ -95,8 +98,8 @@
     -   [x] [Introdução](https://pt-br.reactjs.org/docs/getting-started.html)
     -   [x] [Adicione o React a um site](https://pt-br.reactjs.org/docs/add-react-to-a-website.html)
     -   [x] [Crie um novo React App](https://pt-br.reactjs.org/docs/create-a-new-react-app.html)
-    -   [ ] [CDN Links](https://pt-br.reactjs.org/docs/cdn-links.html)
-    -   [ ] [Canais de lançamento](https://pt-br.reactjs.org/docs/release-channels.html)
+    -   [x] [CDN Links](https://pt-br.reactjs.org/docs/cdn-links.html)
+    -   [x] [Canais de lançamento](https://pt-br.reactjs.org/docs/release-channels.html)
 -   [ ] **Principais conceitos**
     -   [x] [1. Hello World](https://pt-br.reactjs.org/docs/hello-world.html)
     -   [x] [2. Introduzindo JSX](https://pt-br.reactjs.org/docs/introducing-jsx.html)
